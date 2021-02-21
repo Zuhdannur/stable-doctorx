@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Modules\Crm\Models\Traits\Attribute;
+
+/**
+ * trait for MsRadeemAttributes
+ */
+trait MsRadeemAttributes
+{
+    /**
+     * @return string
+     */
+
+    public function getEditButtonAttribute()
+    {
+        return '<a href="'.route('admin.crm.point.edit', $this).'" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a> &nbsp;';
+    }
+
+    /**
+     * @return string
+     */
+    public function getDeleteButtonAttribute()
+    {
+        return '<a href="'.route('admin.crm.point.destroy', $this).'"
+			 data-method="delete"
+			 data-trans-button-cancel="'.__('buttons.general.cancel').'"
+			 data-trans-button-confirm="'.__('buttons.general.crud.delete').'"
+			 data-trans-title="'.__('strings.backend.general.are_you_sure').'"
+			 class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="'.__('buttons.general.crud.delete').'"><i class="fa fa-trash"></i></a> &nbsp;';
+    }    
+}

@@ -1,0 +1,188 @@
+<!doctype html>
+<!--[if lte IE 9]>     <html lang="en" class="no-focus lt-ie10 lt-ie10-msg"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en" class="no-focus"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+        <title>{{ app_name() . ' | ' . __('labels.frontend.auth.register_box_title') }}</title>
+
+        <meta name="description" content="{{ app_name() . ' | ' . __('labels.frontend.auth.register_box_title') }}">
+        <meta name="author" content="pixelcave">
+        <meta name="robots" content="noindex, nofollow">
+
+        <!-- Open Graph Meta -->
+        <meta property="og:title" content="{{ app_name() . ' | ' . __('labels.frontend.auth.register_box_title') }}">
+        <meta property="og:site_name" content="{{ app_name() . ' | ' . __('labels.frontend.auth.register_box_title') }}">
+        <meta property="og:description" content="{{ app_name() . ' | ' . __('labels.frontend.auth.register_box_title') }}">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="">
+        <meta property="og:image" content="">
+
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="{{ Storage::url('favicon.png') }}">
+        <link rel="icon" type="image/png" sizes="192x192" href="{{ Storage::url('favicon.png') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ Storage::url('favicon.png') }}">
+        <!-- END Icons -->
+
+        <!-- Stylesheets -->
+        <link href="{{ asset('assets/css/codebase.min.css') }}" rel="stylesheet">
+
+        <link rel="stylesheet" id="css-theme" href="{{ asset('assets/css/themes/flat.min.css') }}">
+        <!-- END Stylesheets -->
+    </head>
+    <body>
+        <div id="page-container" class="main-content-boxed">
+            <!-- Main Container -->
+            <main id="main-container">
+                <!-- Page Content -->
+                <div class="bg-image" style="background-image: url({{ asset('media/photos/photo34@2x.jpg') }});">
+                    <div class="row mx-0 bg-black-op">
+                        <div class="hero-static col-md-6 col-xl-8 d-none d-md-flex align-items-md-end">
+                            <div class="p-30 invisible" data-toggle="appear">
+                                <p class="font-size-h3 font-w600 text-white mb-5">
+                                    {{ app_name() }}
+                                </p>
+                                <p class="font-size-h5 text-white">
+                                    <i class="fa fa-angles-right"></i> {{ config('app.version') }}
+                                </p>
+                                <p class="font-italic text-white-op">
+                                    Copyright &copy; <span class="js-year-copy"></span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="hero-static col-md-6 col-xl-4 d-flex align-items-center bg-white">
+                            <div class="content content-full">
+                                <!-- Header -->
+                                <div class="px-30">
+                                    <a class="link-effect font-w700" href="{{ route('frontend.index') }}">
+                                        <i class="fa fa-medkit text-success"></i>
+                                        <span class="font-size-xl text-primary-dark">{{ app_name() }}</span>
+                                        <span class="font-size-xl">{{ config('app.version') }}</span>
+                                    </a>
+                                    <h1 class="h5 font-w700 mt-30 mb-10">@lang('labels.frontend.auth.register_box_title')</h1>
+                                </div>
+                                <!-- END Header -->
+                                <!-- Sign Up Form -->
+                                <form class="js-validation-signup px-30" action="{{ route('frontend.auth.register.post') }}" method="post" autocomplete="off">
+                                    @csrf
+                                    <div class="form-group {{ $errors->has('first_name') ? ' is-invalid' : '' }} row">
+                                        <div class="col-12">
+                                            <div class="form-material floating">
+                                                <input type="text" class="form-control" id="first_name" name="first_name" autocomplete="off" value="{{ old('first_name') }}">
+                                                <label for="first_name">{{ __('validation.attributes.frontend.first_name') }}</label>
+                                            </div>
+                                            @if ($errors->has('first_name'))
+                                                <div id="first_name-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('first_name') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group {{ $errors->has('last_name') ? ' is-invalid' : '' }} row">
+                                        <div class="col-12">
+                                            <div class="form-material floating">
+                                                <input type="text" class="form-control" id="last_name" name="last_name" autocomplete="off" value="{{ old('last_name') }}">
+                                                <label for="last_name">{{ __('validation.attributes.frontend.last_name') }}</label>
+                                            </div>
+                                            @if ($errors->has('last_name'))
+                                                <div id="last_name-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('last_name') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group {{ $errors->has('username') ? ' is-invalid' : '' }} row">
+                                        <div class="col-12">
+                                            <div class="form-material floating">
+                                                <input type="text" class="form-control" id="username" name="username" autocomplete="off" value="{{ old('username') }}">
+                                                <label for="signup-username">{{ __('validation.attributes.frontend.username') }}</label>
+                                            </div>
+                                            @if ($errors->has('username'))
+                                                <div id="username-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('username') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group {{ $errors->has('email') ? ' is-invalid' : '' }} row">
+                                        <div class="col-12">
+                                            <div class="form-material floating">
+                                                <input type="email" class="form-control" id="email" name="email" autocomplete="off" value="{{ old('email') }}">
+                                                <label for="email">{{ __('validation.attributes.frontend.email') }}</label>
+                                            </div>
+                                            @if ($errors->has('email'))
+                                                <div id="email-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('email') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group {{ $errors->has('password') ? ' is-invalid' : '' }} row">
+                                        <div class="col-12">
+                                            <div class="form-material floating">
+                                                <input type="password" class="form-control" id="password" name="password" autocomplete="off">
+                                                <label for="password">{{ __('validation.attributes.frontend.password') }}</label>
+                                            </div>
+                                            @if ($errors->has('password'))
+                                                <div id="password-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('password') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group {{ $errors->has('password_confirmation') ? ' is-invalid' : '' }} row">
+                                        <div class="col-12">
+                                            <div class="form-material floating">
+                                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+                                                <label for="password_confirmation">{{ __('validation.attributes.frontend.password_confirmation') }}</label>
+                                            </div>
+                                            @if ($errors->has('password_confirmation'))
+                                                <div id="password_confirmation-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('password_confirmation') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    @if(config('access.captcha.registration'))
+                                        <div class="row">
+                                            <div class="col">
+                                                {!! Captcha::display() !!}
+                                                {{ html()->hidden('captcha_status', 'true') }}
+                                            </div><!--col-->
+                                        </div><!--row-->
+                                    @endif
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-sm btn-hero btn-alt-success">
+                                            <i class="fa fa-plus mr-10"></i> {{ __('labels.frontend.auth.register_button') }}
+                                        </button>
+                                        <a class="link-effect text-muted mr-10 mb-5 d-inline-block pull-right" href="{{ route('frontend.auth.login') }}">
+                                            <i class="fa fa-user text-muted mr-5"></i> @lang('navs.frontend.login')
+                                        </a>
+                                        <div class="mt-30">
+                                            {!! $socialiteLinks !!}
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- END Sign Up Form -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Page Content -->
+            </main>
+            <!-- END Main Container -->
+        </div>
+        <!-- END Page Container -->
+
+        <!-- JS -->
+        <script src="{{ asset('assets/js/core/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/js/core/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/js/core/jquery.slimscroll.min.js') }}"></script>
+        <script src="{{ asset('assets/js/core/jquery.scrollLock.min.js') }}"></script>
+        <script src="{{ asset('assets/js/core/jquery.appear.min.js') }}"></script>
+        <script src="{{ asset('assets/js/core/jquery.countTo.min.js') }}"></script>
+        <script src="{{ asset('assets/js/core/js.cookie.min.js') }}"></script>
+        <script src="{{ asset('assets/js/codebase.js') }}"></script>
+        <script src="{{ asset('assets/js/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/js/plugins/jquery-validation/localization/messages_id.js') }}"></script>
+        <script src="{{ URL::asset('assets/js/plugins/jquery-validation/additional-methods.min.js') }}"></script>
+        <!-- Page JS Code -->
+        <script src="{{ asset('assets/js/pages/op_auth_signup.js') }}"></script>
+
+        @push('after-scripts')
+            @if(config('access.captcha.registration'))
+                {!! Captcha::script() !!}
+            @endif
+        @endpush
+    </body>
+</html>

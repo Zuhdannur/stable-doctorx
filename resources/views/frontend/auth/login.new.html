@@ -1,0 +1,155 @@
+<!doctype html>
+<!--[if lte IE 9]>     <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="no-focus lt-ie10 lt-ie10-msg"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="no-focus"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>{{ app_name() . ' | ' . __('labels.frontend.auth.login_box_title') }}</title>
+
+        <meta name="description" content="{{ app_name() . ' | ' . __('labels.frontend.auth.login_box_title') }}">
+        <meta name="author" content="{{ app_name() . ' | ' . __('labels.frontend.auth.login_box_title') }}">
+        <meta name="robots" content="noindex, nofollow">
+
+        <!-- Open Graph Meta -->
+        <meta property="og:title" content="{{ app_name() . ' | ' . __('labels.frontend.auth.login_box_title') }}">
+        <meta property="og:site_name" content="{{ app_name() . ' | ' . __('labels.frontend.auth.login_box_title') }}">
+        <meta property="og:description" content="{{ app_name() . ' | ' . __('labels.frontend.auth.login_box_title') }}">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="">
+        <meta property="og:image" content="">
+
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="{{ Storage::url('favicon.png') }}">
+        <link rel="icon" type="image/png" sizes="192x192" href="{{ Storage::url('favicon.png') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ Storage::url('favicon.png') }}">
+        <!-- END Icons -->
+
+        <!-- Scripts -->
+        <script src="{{ asset('assets/js/core/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/js/core/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/js/core/jquery.slimscroll.min.js') }}"></script>
+        <script src="{{ asset('assets/js/core/jquery.scrollLock.min.js') }}"></script>
+        <script src="{{ asset('assets/js/core/jquery.appear.min.js') }}"></script>
+        <script src="{{ asset('assets/js/core/jquery.countTo.min.js') }}"></script>
+        <script src="{{ asset('assets/js/core/js.cookie.min.js') }}"></script>
+        <script src="{{ asset('assets/js/codebase.js') }}"></script>
+        <script src="{{ asset('assets/js/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
+        <script src="{{ URL::asset('assets/js/plugins/jquery-validation/localization/messages_id.js') }}"></script>
+        <script src="{{ URL::asset('assets/js/plugins/jquery-validation/additional-methods.min.js') }}"></script>
+        <script src="{{ asset('assets/js/pages/op_auth_signin.js') }}"></script>
+
+        <!-- Stylesheets -->
+        <!-- Codebase framework -->
+        <link href="{{ asset('assets/css/codebase.min.css') }}" rel="stylesheet">
+
+        <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
+        <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
+        <!-- END Stylesheets -->
+    </head>
+    <body>
+        <div id="page-container" class="main-content-boxed">
+            <!-- Main Container -->
+            <main id="main-container">
+                <!-- Page Content -->
+                <div class="bg-image" style="background-image: url('media/photos/photo34@2x.jpg');">
+                    <div class="row mx-0 bg-black-op">
+                        <div class="hero-static col-md-6 col-xl-8 d-none d-md-flex align-items-md-end">
+                            <div class="p-30 invisible" data-toggle="appear">
+                                <p class="font-size-h3 font-w600 text-white">
+                                    {{ app_name() }}
+                                </p>
+                                <p class="font-italic text-white-op">
+                                    Copyright &copy; <span class="js-year-copy"></span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="hero-static col-md-6 col-xl-4 d-flex align-items-center bg-white invisible" data-toggle="appear" data-class="animated fadeInRight">
+                            <div class="content content-full">
+                                <!-- Header -->
+                                <div class="px-30 py-10">
+                                    <a class="link-effect font-w700" href="{{ route('frontend.index') }}">
+                                        <i class="fa fa-medkit text-success"></i>
+                                        <span class="font-size-xl text-primary-dark">{{ app_name() }}</span>
+                                        <span class="font-size-xl">{{ config('app.version') }}</span>
+                                    </a>
+                                    <h1 class="h5 font-w700 mt-30 mb-10">Masukan Username dan Password.</h1>
+                                </div>
+                                <!-- END Header -->
+                                <!-- Sign In Form -->
+                                <form class="js-validation-signin px-30" method="POST" action="{{ route('frontend.auth.login.post') }}">
+                                    @csrf
+                                    <div class="form-group {{ $errors->has('username') ? ' is-invalid' : '' }} row">
+                                        <div class="col-12">
+                                            <div class="form-material floating">
+                                                <input type="text" class="form-control" id="username" name="username" value="{{ old('username') }}" autofocus>
+                                                <label for="username">{{ __('Username') }}</label>
+                                            </div>
+                                            @if ($errors->has('username'))
+                                                <div id="username-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('username') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group {{ $errors->has('password') ? ' is-invalid' : '' }} row">
+                                        <div class="col-12">
+                                            <div class="form-material floating">
+                                                <input type="password" class="form-control" id="password" name="password">
+                                                <label for="password">{{ __('Password') }}</label>
+                                            </div>
+                                            @if ($errors->has('password'))
+                                                <div id="username-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('password') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-12">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="login-remember-me" name="remember">
+                                                <label class="custom-control-label" for="login-remember-me">{{ __('labels.frontend.auth.remember_me') }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-sm btn-hero btn-alt-primary">
+                                            <i class="si si-login mr-10"></i> {{ __('labels.frontend.auth.login_button') }}
+                                        </button>
+                                        <div class="mt-30">
+                                            @if(config('access.registration'))
+                                            <a class="link-effect text-muted mr-10 mb-5 d-inline-block" href="{{ route('frontend.auth.register') }}">
+                                                <i class="fa fa-plus mr-5"></i> @lang('navs.frontend.register')
+                                            </a>
+                                            @endif
+                                            <a class="link-effect text-muted mr-10 mb-5 d-inline-block" href="{{ route('frontend.auth.password.reset') }}">
+                                                <i class="fa fa-warning mr-5"></i> @lang('labels.frontend.passwords.forgot_password')
+                                            </a>
+                                        </div>
+                                        <div class="mt-30">
+                                            {!! $socialiteLinks !!}
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- END Sign In Form -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Page Content -->
+            </main>
+            <!-- END Main Container -->
+        </div>
+        <!-- END Page Container -->
+        <script>
+            $(document).ready(function () {
+
+                $("form").submit(function () {
+                    $("button").attr("disabled", true);
+
+                });
+            });
+        </script>
+    </body>
+</html>

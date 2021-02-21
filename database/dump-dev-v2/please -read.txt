@@ -1,0 +1,4 @@
+dump all sql, delete table migration on you're db, export migrtions sql
+
+run artisan migrate
+run seed , CallFinance and CallCrm
