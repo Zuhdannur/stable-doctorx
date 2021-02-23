@@ -1,0 +1,27 @@
+.select2-result-repository {
+  padding-top: 4px;
+  padding-bottom: 3px
+}
+
+.select2-result-repository__title {
+  color: black;
+  font-weight: 700;
+  word-wrap: break-word;
+  line-height: 1.1;
+  margin-bottom: 4px
+  color: #CDCDCD;
+}
+
+.select2-result-repository__description {
+  font-size: 13px;
+  color: #4e4b4b;
+  margin-top: 4px
+}
+
+.select2-results__option--highlighted .select2-result-repository__title {
+  color: white
+}
+
+.select2-results__option--highlighted .select2-result-repository__description {
+  color: white
+}
