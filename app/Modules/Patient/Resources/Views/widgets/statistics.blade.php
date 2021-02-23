@@ -1,4 +1,4 @@
-<div class="row"> 
+<div class="row">
     <div class="col-sm-6">
         <div class="block block-rounded block-bordered">
             <div class="block-header block-header-default">

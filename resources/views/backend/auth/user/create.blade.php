@@ -12,7 +12,6 @@
     </div>
     <div class="block-content">
         {{ html()->form('POST', route('admin.auth.user.store'))->class('form-horizontal')->open() }}
-
             <div class="row mt-4 mb-4">
                     <div class="col">
                         <div class="form-group row">
@@ -129,7 +128,6 @@
                                     <!-- {{ json_encode($roles->groupBy('group')) }} -->
                                     <div class="row no-gutters items-push">
                                     @foreach($roles as $role)
-
                                     @php
                                         $dataPermisson = array();
                                         //die(json_encode($role->abilities));
@@ -233,7 +231,6 @@
     {{ html()->form()->close() }}
     </div>
 </div>
-
 @endsection
 
 @push('js')
@@ -244,3 +241,5 @@
         });
     </script>
 @endpush
+
+@endsection

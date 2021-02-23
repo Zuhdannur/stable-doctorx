@@ -8,7 +8,6 @@
     <meta name="description" content="@yield('meta_description', app_name())">
     <meta name="author" content="@yield('meta_author', app_name())">
     @yield('meta')
-
     <!-- Icons -->
     <link rel="shortcut icon" type="image/png" href="{{ asset(setting()->get('favicon')) }}" />
     <link rel="icon" type="image/png" sizes="192x192" href="{{ asset(setting()->get('favicon')) }}">
@@ -20,9 +19,9 @@
     <link rel="stylesheet" href="{{ URL::asset('js/plugins/fullcalendar/fullcalendar.min.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700">
 
-    <link rel="stylesheet" id="css-theme" href="{{ asset('css/all.css') }}">
-    <link rel="stylesheet" id="css-main" href="{{ asset('css/codebase.css') }}">
-    <link rel="stylesheet" id="css-theme" href="{{ asset('css/themes/corporate.css') }}">
+    <link rel="stylesheet" id="css-theme" href="{{ mix('/css/all.css') }}">
+    <link rel="stylesheet" id="css-main" href="{{ mix('/css/codebase.css') }}">
+    <link rel="stylesheet" id="css-theme" href="{{ mix('/css/themes/corporate.css') }}">
     <style>
         .switch-input {
             display: none;
@@ -114,14 +113,13 @@
     @yield('css_after')
 
     <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
 
     <!-- Codebase Core JS -->
-    <script src="{{ asset('js') }}/codebase.app.js"></script>
+    <script src="{{ mix('js/codebase.app.js') }}"></script>
 
     <!-- Laravel Scaffolding JS -->
-    <script src="{{ asset('js/all.js') }}"></script>
+    <script src="{{ mix('js/all.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script type="text/javascript">
             $(function() {
@@ -153,7 +151,6 @@
         <!-- END Header -->
 
         <!-- Main Container -->
-
 
         <main id="main-container">
             {!! Breadcrumbs::render() !!}

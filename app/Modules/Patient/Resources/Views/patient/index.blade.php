@@ -31,16 +31,16 @@
                     <th class="text-center" style="width: 100px;">@lang('labels.general.actions')</th>
                 </tr>
             </thead>
-           
+
         </table>
     </div>
 </div>
 
 <!-- Statistics -->
-    @widget('\App\Modules\Patient\Widgets\Statistics') 
+    @widget('\App\Modules\Patient\Widgets\Statistics')
 <!-- END Patients -->
 <script>
-    jQuery(function(){ 
+    jQuery(function(){
         var dt = $('#table').DataTable({
             processing: true,
             serverSide: true,
@@ -56,7 +56,7 @@
                     data: 'DT_RowIndex',
                     name: 'id',
                     width: "5%",
-                    orderable: false, 
+                    orderable: false,
                     searchable: false
                 },
                 {
@@ -89,7 +89,7 @@
                     name: 'action',
                     width: "8%",
                     className: 'text-right',
-                    orderable: false, 
+                    orderable: false,
                     searchable: false
                 }
             ]

@@ -26,7 +26,6 @@
                 </li>
             </ul>
         </li>
-
         <li class="{{ active_class(Active::checkUriPattern('admin/accounting/settings*'), 'open') }}">
             <a class="nav-submenu {{ active_class(Active::checkUriPattern('admin/accounting/settings*')) }}" data-toggle="nav-submenu" href="#">Setting</a>
             <ul>

@@ -33,8 +33,8 @@
         @yield('css_before')
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700">
 
-        <link rel="stylesheet" id="css-theme" href="{{ asset('/css/all.css') }}">
-        <link rel="stylesheet" id="css-main" href="{{ asset('/css/codebase.css') }}">
+        <link rel="stylesheet" id="css-theme" href="{{ mix('/css/all.css') }}">
+        <link rel="stylesheet" id="css-main" href="{{ mix('/css/codebase.css') }}">
         <style>
             .switch-input {
                 display: none;
@@ -129,10 +129,10 @@
         <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
 
         <!-- Codebase Core JS -->
-        <script src="{{ asset('js/codebase.app.js') }}"></script>
+        <script src="{{ mix('js/codebase.app.js') }}"></script>
 
         <!-- Laravel Scaffolding JS-->
-        <script src="{{ asset('js/all.js') }}"></script>
+        <script src="{{ mix('js/all.js') }}"></script>
         <script type="text/javascript">
             $.ajaxSetup({
                 headers: {
@@ -159,7 +159,6 @@
                                 <!-- END Close Sidebar -->
 
                                 <!-- Logo -->
-
                                 <div class="content-header-item">
                                     <a class="link-effect font-w700" href="#">
                                         <i class="fa fa-medkit text-success"></i>

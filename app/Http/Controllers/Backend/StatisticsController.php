@@ -50,7 +50,7 @@ class StatisticsController extends Controller
                 'start_date' => \Carbon\Carbon::now()->startOfMonth()->format('Y-m-d'),
                 'end_date' => \Carbon\Carbon::now()->format('Y-m-d'),
             );
-    
+
             $date = array(
                 'date_1' => \Carbon\Carbon::now()->startOfMonth()->format('d/m/Y'),
                 'date_2' => \Carbon\Carbon::now()->format('d/m/Y'),
@@ -84,7 +84,7 @@ class StatisticsController extends Controller
                 'start_date' => \Carbon\Carbon::now()->startOfMonth()->format('Y-m-d'),
                 'end_date' => \Carbon\Carbon::now()->format('Y-m-d'),
             );
-    
+
             $date = array(
                 'date_1' => \Carbon\Carbon::now()->startOfMonth()->format('d/m/Y'),
                 'date_2' => \Carbon\Carbon::now()->format('d/m/Y'),
@@ -152,7 +152,7 @@ class StatisticsController extends Controller
                 'start_date' => \Carbon\Carbon::now()->startOfMonth()->format('Y-m-d'),
                 'end_date' => \Carbon\Carbon::now()->format('Y-m-d'),
             );
-    
+
             $date = array(
                 'date_1' => \Carbon\Carbon::now()->startOfMonth()->format('d/m/Y'),
                 'date_2' => \Carbon\Carbon::now()->format('d/m/Y'),
@@ -170,7 +170,6 @@ class StatisticsController extends Controller
                 'date_2' => $request->date_2,
             );
         }
-
         return view('backend.statistics.membership')
             ->withDateWidget($date_widget)
             ->withFilter($filter)

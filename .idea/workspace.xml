@@ -3,6 +3,7 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+<<<<<<< HEAD
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -249,6 +250,10 @@
       <change beforePath="$PROJECT_DIR$/resources/views/vendor/pagination/simple-bootstrap-4.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/pagination/simple-bootstrap-4.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/vendor/pagination/simple-default.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/pagination/simple-default.blade.php" afterDir="false" />
     </list>
+=======
+  <component name="ChangeListManager">
+    <list default="true" id="401c3ca8-3480-4d23-bc61-a884725b54a7" name="Default Changelist" comment="" />
+>>>>>>> a74d62a1591d20394ed2c279a0ce3715bc2bd43b
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -258,9 +263,12 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
+<<<<<<< HEAD
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+=======
+>>>>>>> a74d62a1591d20394ed2c279a0ce3715bc2bd43b
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
@@ -424,7 +432,11 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../doctorx" />
+>>>>>>> a74d62a1591d20394ed2c279a0ce3715bc2bd43b
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -449,15 +461,19 @@
       <updated>1613920169922</updated>
       <workItem from="1613920171002" duration="654000" />
       <workItem from="1613920863515" duration="2042000" />
+<<<<<<< HEAD
       <workItem from="1614040849316" duration="1380000" />
       <workItem from="1614084473558" duration="833000" />
       <workItem from="1614087453791" duration="174000" />
+=======
+>>>>>>> a74d62a1591d20394ed2c279a0ce3715bc2bd43b
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+<<<<<<< HEAD
   <component name="Vcs.Log.Tabs.Properties">
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
@@ -472,5 +488,16 @@
     </state>
     <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738/1366.0.1360.738@0.0.1366.738" timestamp="1613927383496" />
     <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1614087620235" />
+=======
+  <component name="WindowStateProjectService">
+    <state x="463" y="124" key="FileChooserDialogImpl" timestamp="1613923206560">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738/1366.0.1360.738@0.0.1366.738" timestamp="1613923206560" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1613921937199">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738/1366.0.1360.738@0.0.1366.738" timestamp="1613921937199" />
+>>>>>>> a74d62a1591d20394ed2c279a0ce3715bc2bd43b
   </component>
 </project>

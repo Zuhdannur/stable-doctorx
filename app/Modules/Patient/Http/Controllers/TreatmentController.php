@@ -121,6 +121,7 @@ class TreatmentController extends Controller
         $room = Room::whereHas('group', function ($query) {
                     $query->where('room_groups.type', '=', 'TREATMENT');
                 })->get();
+//        $patientList = Patient::where('id_klinik',Auth()->user()->klinik->id_klinik)->get();
         $patientList = Patient::where('id_klinik',Auth()->user()->klinik->id_klinik)->get();
         $patientflag = PatientFlag::all();
 

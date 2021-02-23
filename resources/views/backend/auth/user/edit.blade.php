@@ -12,7 +12,6 @@
     </div>
     <div class="block-content">
         {{ html()->modelForm($user, 'PATCH', route('admin.auth.user.update', $user->id))->class('form-horizontal')->open() }}
-
             <div class="row mt-4 mb-4">
                 <div class="col">
                     <div class="form-group row">
@@ -48,7 +47,6 @@
                                     <!-- {{ json_encode($roles->groupBy('group')) }} -->
                                     <div class="row no-gutters items-push">
                                     @foreach($roles as $role)
-
                                     @php
                                         $dataPermisson = array();
                                         //die(json_encode($role->abilities));
@@ -137,10 +135,6 @@
                             </div>
 
                         </div><!--form-group-->
-                    <div class="form-group row">
-                        {{ html()->label(__('labels.backend.access.users.table.other_module'))->class('col-md-2 form-control-label') }}
-                        <a class="btn btn-sm btn-success" href="{{ route('modul.edit',$user->id) }}">Lihat Akses</a>
-                    </div>
                 </div><!--col-->
             </div><!--row-->
 

@@ -28,7 +28,6 @@
                             <td>{{ ($key+1) }}</td>
                             <td class="font-w600">{{ ucwords($role->name) }}</td>
                             <td>
-
                                 @if($role->name == 'superadmin')
                                     <span class="badge badge-primary">
                                         @lang('labels.general.all')
@@ -42,7 +41,6 @@
                                         <span class="badge badge-warning">@lang('labels.general.none')</span>
                                     @endif
                                 @endif
-
                             </td>
                             <td>{{ $role->users->where('id_klinik',Auth()->user()->klinik->id_klinik)->count() }}</td>
                             <td>{!! $role->action_buttons !!}</td>

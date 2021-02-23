@@ -180,7 +180,6 @@ class UserRepository extends BaseRepository
         if (! isset($data['abilities']) || ! count($data['abilities'])) {
             $data['abilities'] = [];
         }
-
         return DB::transaction(function () use ($user, $data) {
             if ($user->update([
                 'full_name' => $data['full_name'],
