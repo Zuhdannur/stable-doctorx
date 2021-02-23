@@ -18,6 +18,7 @@ use App\Events\Backend\Auth\User\UserPasswordChanged;
 use App\Notifications\Backend\Auth\UserAccountActive;
 use App\Events\Backend\Auth\User\UserPermanentlyDeleted;
 use App\Notifications\Frontend\Auth\UserNeedsConfirmation;
+use const http\Client\Curl\AUTH_ANY;
 
 /**
  * Class UserRepository.
@@ -52,6 +53,23 @@ class UserRepository extends BaseRepository
     public function getActivePaginated($paged = 25, $orderBy = 'created_at', $sort = 'desc') : LengthAwarePaginator
     {
         return $this->model
+            ->with('roles', 'abilities', 'providers')
+            ->active()
+            ->orderBy($orderBy, $sort)
+            ->paginate($paged);
+    }
+
+    /**
+     * @param int    $paged
+     * @param string $orderBy
+     * @param string $sort
+     *
+     * @return mixed
+     */
+    public function getActivePaginatedSuper($paged = 25, $orderBy = 'created_at', $sort = 'desc') : LengthAwarePaginator
+    {
+        return $this->model
+            ->where('id_klinik',Auth()->user()->klinik->id_klinik)
             ->with('roles', 'abilities', 'providers')
             ->active()
             ->orderBy($orderBy, $sort)
@@ -108,6 +126,7 @@ class UserRepository extends BaseRepository
                 'active' => isset($data['active']) && $data['active'] == '1' ? 1 : 0,
                 'confirmation_code' => md5(uniqid(mt_rand(), true)),
                 'confirmed' => isset($data['confirmed']) && $data['confirmed'] == '1' ? 1 : 0,
+                'id_klinik' => $data['id_klinik']
             ];
             // die(print_r($data));
             $user = parent::create($dataUser);
@@ -161,7 +180,7 @@ class UserRepository extends BaseRepository
         if (! isset($data['abilities']) || ! count($data['abilities'])) {
             $data['abilities'] = [];
         }
-        
+
         return DB::transaction(function () use ($user, $data) {
             if ($user->update([
                 'full_name' => $data['full_name'],

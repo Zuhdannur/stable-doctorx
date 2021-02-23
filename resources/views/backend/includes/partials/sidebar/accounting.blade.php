@@ -26,7 +26,7 @@
                 </li>
             </ul>
         </li>
-       
+
         <li class="{{ active_class(Active::checkUriPattern('admin/accounting/settings*'), 'open') }}">
             <a class="nav-submenu {{ active_class(Active::checkUriPattern('admin/accounting/settings*')) }}" data-toggle="nav-submenu" href="#">Setting</a>
             <ul>
@@ -40,6 +40,18 @@
                     <a class="{{ active_class(Active::checkUriPattern('admin/accounting/settings/ms_categories*')) }}" href="{{ route('admin.accounting.settings.ms_categories') }}">Master  Kategori Akun</a>
                 </li>
             </ul>
+        </li>
+        <li>
+            <a class="{{ active_class(Active::checkUriPattern('admin/accounting/rekap-penjualan*')) }}" href="{{ route('rekap-penjualan.index') }}">Rekap Penjualan</a>
+        </li>
+        <li>
+            <a class="{{ active_class(Active::checkUriPattern('admin/accounting/rekap-produk*')) }}" href="{{ route('rekap-produk.index') }}">Rekap Produk</a>
+        </li>
+        <li>
+            <a class="{{ active_class(Active::checkUriPattern('admin/accounting/rekap-service*')) }}" href="{{ route('rekap-service.index') }}">Rekap Service</a>
+        </li>
+        <li>
+            <a class="{{ active_class(Active::checkUriPattern('list-splitbill*')) }}" href="{{ route('list-splitbill.index') }}">List Splitbill</a>
         </li>
     </ul>
 </li>

@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
         <title>@yield('title', app_name())</title>
-        
+
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -33,8 +33,8 @@
         @yield('css_before')
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700">
 
-        <link rel="stylesheet" id="css-theme" href="{{ mix('/css/all.css') }}">
-        <link rel="stylesheet" id="css-main" href="{{ mix('/css/codebase.css') }}">
+        <link rel="stylesheet" id="css-theme" href="{{ asset('/css/all.css') }}">
+        <link rel="stylesheet" id="css-main" href="{{ asset('/css/codebase.css') }}">
         <style>
             .switch-input {
                 display: none;
@@ -118,7 +118,7 @@
                 display: block;
             }
 
-            .form-group.required .control-label:after { 
+            .form-group.required .control-label:after {
                 content:" *";
                 color:red;
             }
@@ -129,10 +129,10 @@
         <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
 
         <!-- Codebase Core JS -->
-        <script src="{{ mix('js/codebase.app.js') }}"></script>
+        <script src="{{ asset('js/codebase.app.js') }}"></script>
 
         <!-- Laravel Scaffolding JS-->
-        <script src="{{ mix('js/all.js') }}"></script>
+        <script src="{{ asset('js/all.js') }}"></script>
         <script type="text/javascript">
             $.ajaxSetup({
                 headers: {
@@ -159,7 +159,7 @@
                                 <!-- END Close Sidebar -->
 
                                 <!-- Logo -->
-                                
+
                                 <div class="content-header-item">
                                     <a class="link-effect font-w700" href="#">
                                         <i class="fa fa-medkit text-success"></i>

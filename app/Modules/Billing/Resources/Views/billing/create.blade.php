@@ -133,12 +133,12 @@
                                     <input type="text" class="form-control nomor-aja text-right" name="point_ammount" id="point_ammount" placeholder="0" readonly>
                                 </td>
                             </tr>
-                             <tr class="d-none">
+                            {{-- <tr class="d-none">
                                 <td colspan="6" class="font-weight-bold text-right">Jumlah Tax</td>
                                 <td>
                                     <input type="text" name='tax_amount' id="tax_amount" placeholder='0' class="form-control tanpa-rupiah text-right" readonly/>
                                 </td>
-                            </tr>
+                            </tr> --}}
                             <tr>
                                 <td colspan="8" class="font-weight-bold text-right">Diskon %</td>
                                 <td>

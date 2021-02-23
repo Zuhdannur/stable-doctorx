@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- Overview -->
-    @asyncWidget('\App\Modules\Patient\Widgets\RecentNews') 
+    @asyncWidget('\App\Modules\Patient\Widgets\RecentNews')
     <!-- END Overview -->
 
     <!-- Data Antrian -->
@@ -12,7 +12,7 @@
 
     @asyncWidget('\App\Modules\Patient\Widgets\RecentAssign', ['id' => 0])
     <!-- END Antrian -->
-    
+
     {{-- booking --}}
     @asyncWidget('\App\Modules\Patient\Widgets\TodayBooking', ['id' => 0])
     {{-- End of booking --}}
@@ -22,7 +22,7 @@
     <!-- END Appointment -->
 
     <!-- Patients -->
-    @asyncWidget('\App\Modules\Patient\Widgets\RecentPatients') 
+    @asyncWidget('\App\Modules\Patient\Widgets\RecentPatients')
     <!-- END Patients -->
 
     <!-- Payments -->
@@ -410,7 +410,7 @@
     {{-- end modal event --}}
 
 <script type="text/javascript">
-    jQuery(function(){ 
+    jQuery(function(){
         Codebase.layout('sidebar_mini_on');
     });
 

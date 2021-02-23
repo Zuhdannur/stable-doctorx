@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend\Auth\User;
 
+use App\Helpers\Auth\Auth;
 use App\Models\Auth\User;
 use App\Http\Controllers\Controller;
 use App\Events\Backend\Auth\User\UserDeleted;
@@ -39,8 +40,14 @@ class UserController extends Controller
      */
     public function index(ManageUserRequest $request)
     {
+        $users = $this->userRepository->getActivePaginated(25, 'id', 'asc');
+
+        if(Auth()->user()->klinik->status == "cabang") {
+            $users = $this->userRepository->getActivePaginatedSuper(25, 'id', 'asc');
+        }
+
         return view('backend.auth.user.index')
-            ->withUsers($this->userRepository->getActivePaginated(25, 'id', 'asc'));
+            ->withUsers($users);
     }
 
     /**
@@ -74,7 +81,8 @@ class UserController extends Controller
             'confirmed',
             'confirmation_email',
             'roles',
-            'abilities'
+            'abilities',
+            'id_klinik'
         ));
 
         return redirect()->route('admin.auth.user.index')->withFlashSuccess(__('alerts.backend.users.created'));

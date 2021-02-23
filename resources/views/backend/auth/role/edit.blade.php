@@ -6,7 +6,7 @@
 <div class="block">
     <div class="block-header block-header-default">
         <h3 class="block-title">@lang('labels.backend.access.roles.management') <small class="text-muted">@lang('labels.backend.access.roles.edit')</small></h3>
-        
+
     </div>
     <div class="block-content">
         {{ html()->modelForm($role, 'PATCH', route('admin.auth.role.update', $role))->class('form-horizontal')->open() }}

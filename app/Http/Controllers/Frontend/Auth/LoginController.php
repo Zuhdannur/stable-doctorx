@@ -78,7 +78,7 @@ class LoginController extends Controller
         }
 
 //        event(new UserLoggedIn($user));
-            //asdasd
+
         // If only allowed one session at a time
         if (config('access.users.single_login')) {
             resolve(UserSessionRepository::class)->clearSessionExceptCurrent($user);

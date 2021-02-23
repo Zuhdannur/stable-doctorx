@@ -24,6 +24,230 @@
   <component name="ChangeListManager">
     <list default="true" id="401c3ca8-3480-4d23-bc61-a884725b54a7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Charts/Patient.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Charts/Patient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Charts/PeakTime.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Charts/PeakTime.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Charts/SampleChart.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Charts/SampleChart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Backend/Auth/Role/AbilityCreated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Backend/Auth/Role/AbilityCreated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Backend/Auth/Role/AbilityDeleted.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Backend/Auth/Role/AbilityDeleted.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Backend/Auth/Role/AbilityUpdated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Backend/Auth/Role/AbilityUpdated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Backend/Auth/Role/RoleCreated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Backend/Auth/Role/RoleCreated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Backend/Auth/Role/RoleDeleted.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Backend/Auth/Role/RoleDeleted.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Backend/Auth/Role/RoleUpdated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Backend/Auth/Role/RoleUpdated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserConfirmed.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserConfirmed.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserCreated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserCreated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserDeactivated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserDeactivated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserDeleted.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserDeleted.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserPasswordChanged.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserPasswordChanged.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserPermanentlyDeleted.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserPermanentlyDeleted.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserReactivated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserReactivated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserRestored.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserRestored.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserSocialDeleted.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserSocialDeleted.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserUnconfirmed.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserUnconfirmed.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserUpdated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Backend/Auth/User/UserUpdated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Frontend/Auth/UserConfirmed.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Frontend/Auth/UserConfirmed.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Frontend/Auth/UserLoggedIn.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Frontend/Auth/UserLoggedIn.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Frontend/Auth/UserLoggedOut.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Frontend/Auth/UserLoggedOut.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Frontend/Auth/UserProviderRegistered.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Frontend/Auth/UserProviderRegistered.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Events/Frontend/Auth/UserRegistered.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Events/Frontend/Auth/UserRegistered.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exceptions/GeneralException.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/GeneralException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/Auth/Auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/Auth/Auth.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/Frontend/Auth/Socialite.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/Frontend/Auth/Socialite.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/General/Currency.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/General/Currency.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/General/HtmlHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/General/HtmlHelper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/General/Rcolor.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/General/Rcolor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Helpers/General/Timezone.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/General/Timezone.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Access/Permission.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Access/Permission.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Access/Role.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Access/Role.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Access/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Access/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Backend.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Backend.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Blog.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Blog.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Blog_Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Blog_Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Blog_Management.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Blog_Management.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Blog_Tag.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Blog_Tag.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Department.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Department.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Faqs.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Faqs.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/LogViewer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/LogViewer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Search.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Search.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Setting.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Breadcrumbs/Backend/Setting.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Composers/Backend/SidebarComposer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Composers/Backend/SidebarComposer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Composers/GlobalComposer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Composers/GlobalComposer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ForgotPasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/Role/AbilityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/Role/AbilityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/Role/RoleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/Role/RoleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/User/UserAccessController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/User/UserAccessController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/User/UserConfirmationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/User/UserConfirmationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/User/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/User/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/User/UserPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/User/UserPasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/User/UserSessionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/User/UserSessionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/User/UserSocialController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/User/UserSocialController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/User/UserStatusController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/Auth/User/UserStatusController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/DashboardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Backend/StatisticsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Backend/StatisticsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Auth/ConfirmAccountController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Auth/ConfirmAccountController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Auth/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Auth/ForgotPasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Auth/PasswordExpiredController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Auth/PasswordExpiredController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Auth/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Auth/ResetPasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Auth/SocialLoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Auth/SocialLoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Auth/UpdatePasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/Auth/UpdatePasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/ContactController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/ContactController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/User/AccountController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/User/AccountController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/User/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/User/DashboardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Frontend/User/ProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Frontend/User/ProfileController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Authenticate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/CheckForMaintenanceMode.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/CheckForMaintenanceMode.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/EncryptCookies.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/EncryptCookies.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/LocaleMiddleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/LocaleMiddleware.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/LogFrontEnd.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/LogFrontEnd.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/PasswordExpires.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/PasswordExpires.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/ScopeBouncer.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/ScopeBouncer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/TrimStrings.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/TrimStrings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/TrustProxies.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/TrustProxies.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/VerifyCsrfToken.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/Role/ManageAbilityRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/Role/ManageAbilityRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/Role/ManageRoleRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/Role/ManageRoleRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/Role/StoreAbilityRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/Role/StoreAbilityRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/Role/StoreRoleRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/Role/StoreRoleRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/Role/UpdateAbilityRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/Role/UpdateAbilityRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/Role/UpdateRoleRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/Role/UpdateRoleRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/User/ManageUserRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/User/ManageUserRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/User/StoreUserRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/User/StoreUserRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/User/UpdateUserPasswordRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/User/UpdateUserPasswordRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/User/UpdateUserRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Backend/Auth/User/UpdateUserRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Frontend/Auth/RegisterRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Frontend/Auth/RegisterRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Frontend/Auth/ResetPasswordRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Frontend/Auth/ResetPasswordRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Frontend/Contact/SendContactRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Frontend/Contact/SendContactRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Frontend/User/UpdatePasswordRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Frontend/User/UpdatePasswordRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Frontend/User/UpdateProfileRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Frontend/User/UpdateProfileRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Listeners/Backend/Auth/Role/RoleEventListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Listeners/Backend/Auth/Role/RoleEventListener.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Listeners/Backend/Auth/User/UserEventListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Listeners/Backend/Auth/User/UserEventListener.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Listeners/Frontend/Auth/UserEventListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Listeners/Frontend/Auth/UserEventListener.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Modules/Billing/Resources/Views/billing/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Billing/Resources/Views/billing/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Modules/Core/Models/Setting.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Core/Models/Setting.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Modules/Patient/Http/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Patient/Http/Controllers/AppointmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Modules/Patient/Repositories/PatientRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Patient/Repositories/PatientRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Notifications/Backend/Auth/UserAccountActive.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/Backend/Auth/UserAccountActive.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Notifications/Frontend/Auth/UserNeedsConfirmation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/Frontend/Auth/UserNeedsConfirmation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Notifications/Frontend/Auth/UserNeedsPasswordReset.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/Frontend/Auth/UserNeedsPasswordReset.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/BroadcastServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/BroadcastServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/ComposerServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/ComposerServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/Backend/Auth/AbilityRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Backend/Auth/AbilityRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/Backend/Auth/RoleRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Backend/Auth/RoleRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/Backend/Auth/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Backend/Auth/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/BaseRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/BaseRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/Frontend/Auth/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Frontend/Auth/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/Frontend/Auth/UserSessionRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/Frontend/Auth/UserSessionRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Repositories/RepositoryContract.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/RepositoryContract.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Rules/Auth/ChangePassword.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Rules/Auth/ChangePassword.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Rules/Auth/UnusedPassword.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Rules/Auth/UnusedPassword.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Widgets/PeakTimeWidgets.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Widgets/PeakTimeWidgets.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Widgets/RecentNews.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Widgets/RecentNews.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/id/labels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/id/labels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ar/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ar/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ar/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ar/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/bg/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/bg/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/bg/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/bg/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/de/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/de/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/de/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/de/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/en/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/en/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/en/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/en/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/es/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/es/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/es/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/es/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/et/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/et/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/et/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/et/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/fa/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/fa/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/fa/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/fa/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/fr/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/fr/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/fr/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/fr/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/hu/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/hu/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/hu/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/hu/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/hy/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/hy/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/hy/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/hy/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/id/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/id/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/id/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/id/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/it/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/it/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/it/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/it/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ja/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ja/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ja/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ja/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ko/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ko/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ko/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ko/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/nl/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/nl/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/nl/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/nl/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/pl/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/pl/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/pl/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/pl/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/pt-BR/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/pt-BR/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/pt-BR/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/pt-BR/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ro/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ro/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ro/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ro/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ru/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ru/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ru/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/ru/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/sv/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/sv/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/sv/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/sv/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/th/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/th/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/th/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/th/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/tr/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/tr/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/tr/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/tr/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/zh-TW/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/zh-TW/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/zh-TW/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/zh-TW/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/zh/general.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/zh/general.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/zh/levels.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vendor/log-viewer/zh/levels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/auth/role/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/auth/role/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/auth/role/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/auth/role/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/auth/user/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/auth/user/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/auth/user/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/auth/user/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/auth/user/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/auth/user/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/includes/partials/sidebar/accounting.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/includes/partials/sidebar/accounting.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/includes/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/includes/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backend/statistics/membership.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/statistics/membership.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/frontend/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/charts/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/charts/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/charts/c3/container.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/charts/c3/container.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/charts/c3/script.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/charts/c3/script.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/charts/chartjs/container.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/charts/chartjs/container.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/charts/chartjs/script.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/charts/chartjs/script.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/charts/echarts/container.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/charts/echarts/container.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/charts/echarts/script.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/charts/echarts/script.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/charts/frappe/container.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/charts/frappe/container.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/charts/frappe/script.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/charts/frappe/script.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/charts/fusioncharts/container.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/charts/fusioncharts/container.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/charts/fusioncharts/script.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/charts/fusioncharts/script.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/charts/highcharts/container.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/charts/highcharts/container.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/charts/highcharts/script.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/charts/highcharts/script.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/charts/init.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/charts/init.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/charts/loader.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/charts/loader.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/datatables/editor.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/datatables/editor.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/datatables/print.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/datatables/print.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/datatables/script.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/datatables/script.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/log-viewer/bootstrap-3/_master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/log-viewer/bootstrap-3/_master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/log-viewer/bootstrap-3/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/log-viewer/bootstrap-3/dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/log-viewer/bootstrap-3/logs.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/log-viewer/bootstrap-3/logs.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/log-viewer/bootstrap-3/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/log-viewer/bootstrap-3/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/log-viewer/bootstrap-4/_master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/log-viewer/bootstrap-4/_master.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/log-viewer/bootstrap-4/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/log-viewer/bootstrap-4/dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/log-viewer/bootstrap-4/logs.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/log-viewer/bootstrap-4/logs.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/log-viewer/bootstrap-4/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/log-viewer/bootstrap-4/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/pagination/bootstrap-4.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/pagination/bootstrap-4.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/pagination/default.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/pagination/default.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/pagination/semantic-ui.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/pagination/semantic-ui.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/pagination/simple-bootstrap-4.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/pagination/simple-bootstrap-4.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/pagination/simple-default.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/pagination/simple-default.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,7 +449,9 @@
       <updated>1613920169922</updated>
       <workItem from="1613920171002" duration="654000" />
       <workItem from="1613920863515" duration="2042000" />
-      <workItem from="1614040849316" duration="898000" />
+      <workItem from="1614040849316" duration="1380000" />
+      <workItem from="1614084473558" duration="833000" />
+      <workItem from="1614087453791" duration="174000" />
     </task>
     <servers />
   </component>
@@ -236,14 +462,15 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="463" y="124" key="FileChooserDialogImpl" timestamp="1613923206560">
+    <state x="463" y="124" key="FileChooserDialogImpl" timestamp="1614086751147">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738/1366.0.1360.738@0.0.1366.738" timestamp="1613923206560" />
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1614041003934">
+    <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1614086751147" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1614087620235">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738/1366.0.1360.738@0.0.1366.738" timestamp="1613927383496" />
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1614041003934" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1614087620235" />
   </component>
 </project>

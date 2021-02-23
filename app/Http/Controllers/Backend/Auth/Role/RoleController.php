@@ -22,13 +22,13 @@ class RoleController extends Controller
     protected $roleRepository;
 
     /**
-     * @var AbilityRepository 
+     * @var AbilityRepository
      */
     protected $abilityRepository ;
 
     /**
      * @param RoleRepository       $roleRepository
-     * @param AbilityRepository  $abilityRepository 
+     * @param AbilityRepository  $abilityRepository
      */
     public function __construct(RoleRepository $roleRepository, AbilityRepository  $abilityRepository )
     {

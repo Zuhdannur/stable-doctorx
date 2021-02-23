@@ -1,7 +1,8 @@
 <script {!! $chart->displayScriptAttributes() !!}>
     function {{ $chart->id }}_create(data) {
         {{ $chart->id }}_rendered = true;
-        document.getElementById("{{ $chart->id }}_loader").style.display = 'none';
+        var loader_element = document.getElementById("{{ $chart->id }}_loader");
+        loader_element.parentNode.removeChild(loader_element);
         @if ($chart->type)
             let {{ $chart->id }}_type = {{ $chart->type }}
         @else
@@ -26,23 +27,5 @@
             }).render();
         });
     }
-    @if ($chart->api_url)
-    let {{ $chart->id }}_refresh = function (url) {
-        document.getElementById("{{ $chart->id }}").style.display = 'none';
-        document.getElementById("{{ $chart->id }}_loader").style.display = 'flex';
-        if (typeof url !== 'undefined') {
-            {{ $chart->id }}_api_url = url;
-        }
-        fetch({{ $chart->id }}_api_url)
-            .then(data => data.json())
-            .then(data => {
-                document.getElementById("{{ $chart->id }}_loader").style.display = 'none';
-                document.getElementById("{{ $chart->id }}").style.display = 'block';
-                let chartData = {{ $chart->id }}.getChartData("json");
-                chartData.dataset = data;
-                {{ $chart->id }}.setChartData(chartData, "json");
-        });
-    };
-    @endif
     @include('charts::init')
 </script>

@@ -170,7 +170,7 @@ class StatisticsController extends Controller
                 'date_2' => $request->date_2,
             );
         }
-        
+
         return view('backend.statistics.membership')
             ->withDateWidget($date_widget)
             ->withFilter($filter)

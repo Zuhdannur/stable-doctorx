@@ -96,6 +96,7 @@ return [
                     'no_deactivated' => 'Tidak Ada Pengguna Dinonaktifkan',
                     'no_deleted'     => 'Tidak Ada Pengguna Dihapus',
                     'other_permissions' => 'Hak Akses Lainnya',
+                    'other_module' => 'Hak akses modul',
                     'permissions'    => 'Hak Akses',
                     'abilities'      => 'Hak Diperbolehkan',
                     'roles'          => 'Peran',

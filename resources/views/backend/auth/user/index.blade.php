@@ -56,7 +56,7 @@
 
             <div class="col-5">
                 <div class="float-right">
-                    {!! $users->render() !!}
+{{--                    {!! $users->render() !!}--}}
                 </div>
             </div><!--col-->
         </div><!--row-->

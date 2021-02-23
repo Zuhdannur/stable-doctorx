@@ -12,7 +12,7 @@
     </div>
     <div class="block-content">
         {{ html()->form('POST', route('admin.auth.user.store'))->class('form-horizontal')->open() }}
-        
+
             <div class="row mt-4 mb-4">
                     <div class="col">
                         <div class="form-group row">
@@ -75,6 +75,18 @@
                         </div><!--form-group-->
 
                         <div class="form-group row">
+                            {{ html()->label("Klinik")->class('col-md-2 form-control-label')->for('password_confirmation') }}
+
+                            <div class="col-md-8">
+                                <select name="id_klinik" id="klinik" class="form-control select">
+                                    @foreach(\App\Klinik::all() as $item)
+                                    <option value="{{ @$item->id_klinik }}">{{ @$item->nama_klinik.' - '.$item->status }}</option>
+                                    @endforeach
+                                </select>
+                            </div><!--col-->
+                        </div><!--form-group-->
+
+                        <div class="form-group row">
                             {{ html()->label(__('validation.attributes.backend.access.users.active'))->class('col-md-2 form-control-label')->for('active') }}
 
                             <div class="col-md-10">
@@ -117,7 +129,7 @@
                                     <!-- {{ json_encode($roles->groupBy('group')) }} -->
                                     <div class="row no-gutters items-push">
                                     @foreach($roles as $role)
-                                    
+
                                     @php
                                         $dataPermisson = array();
                                         //die(json_encode($role->abilities));
@@ -221,5 +233,14 @@
     {{ html()->form()->close() }}
     </div>
 </div>
-   
+
 @endsection
+
+@push('js')
+    <script>
+        $('.select').select2({
+            placeholder: "Pilih",
+            allowClear: true
+        });
+    </script>
+@endpush
