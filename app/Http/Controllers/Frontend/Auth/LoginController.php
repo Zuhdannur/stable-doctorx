@@ -111,7 +111,7 @@ class LoginController extends Controller
         /*
          * Fire event, Log out user, Redirect
          */
-        event(new UserLoggedOut($request->user()));
+        //event(new UserLoggedOut($request->user()));
 
         /*
          * Laravel specific logic
