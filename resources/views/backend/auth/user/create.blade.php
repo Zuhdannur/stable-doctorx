@@ -79,7 +79,7 @@
                             <div class="col-md-8">
                                 <select name="id_klinik" id="klinik" class="form-control select">
                                     @foreach(\App\Klinik::all() as $item)
-                                    <option value="{{ @$item->id_klinik }}">{{ @$item->nama_klinik.' - '.$item->status }}</option>
+                                    <option value="{{ @$item->id_klinik }}">{{ @$item->nama_klinik.' - '.@$item->status }}</option>
                                     @endforeach
                                 </select>
                             </div><!--col-->
@@ -241,5 +241,3 @@
         });
     </script>
 @endpush
-
-@endsection
