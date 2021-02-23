@@ -21,5 +21,5 @@ class ServiceCategory extends Model
         });
     }
 
-    protected $fillable = ['name', 'is_active'];
+    protected $fillable = ['name', 'is_active','id_klinik'];
 }

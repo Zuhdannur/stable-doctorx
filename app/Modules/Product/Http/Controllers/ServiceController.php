@@ -26,7 +26,7 @@ class ServiceController extends Controller
     public function index(Datatables $datatables)
     {
     	if ($datatables->getRequest()->ajax()) {
-            return $datatables->of($this->serviceRepository->get())
+            return $datatables->of($this->serviceRepository->where('id_klinik',Auth()->user()->klinik->id_klinik)->get())
             ->addIndexColumn()
             ->addColumn('category', function ($data) {
                 $category = $data->category;
@@ -53,21 +53,20 @@ class ServiceController extends Controller
 
     public function create()
     {
-        $ServiceCategory = ServiceCategory::get();
-
+        $ServiceCategory = ServiceCategory::where('id_klinik',Auth()->user()->klinik->id_klinik)->get();
         return view('product::service.create')->withCategory($ServiceCategory);
     }
 
     public function store(StoreServiceRequest $request)
     {
-        $this->serviceRepository->create($request->only('code', 'name', 'category_id', 'price', 'is_active'));
+        $this->serviceRepository->create($request->only('code', 'name', 'category_id', 'price', 'is_active','flag'));
 
         return redirect()->route('admin.product.service.index')->withFlashSuccess(__('product::alerts.service.created'));
     }
 
     public function edit(Service $service)
     {
-    	$ServiceCategory = ServiceCategory::get();
+        $ServiceCategory = ServiceCategory::where('id_klinik',Auth()->user()->klinik->id_klinik)->get();
 
         return view('product::service.edit')->withService($service)->withDropdownCategory($ServiceCategory);
     }

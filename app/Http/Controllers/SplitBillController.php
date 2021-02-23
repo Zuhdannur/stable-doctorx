@@ -14,7 +14,9 @@ class SplitBillController extends Controller
     }
 
     public function getData(Request $request) {
-        $model = Billing::where('status','3')->with('patient')->orderBy('created_at', 'desc');
+        $model = Billing::whereHas('patient',function ($query){
+            return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
+        })->where('status','3')->with('patient')->orderBy('created_at', 'desc');
 
         return DataTables::eloquent($model)
             ->addIndexColumn()

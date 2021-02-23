@@ -15,10 +15,12 @@ class RekapPenjualanController extends Controller
     public function getData(Request $request) {
 
         if(!empty($request->awal)) {
-            $dacteAwal =  \Carbon\Carbon::createFromFormat('d/m/Y', $request->awal)->format('Y-m-d');
+            $dateAwal =  \Carbon\Carbon::createFromFormat('d/m/Y', $request->awal)->format('Y-m-d');
             $dateAkhir =  \Carbon\Carbon::createFromFormat('d/m/Y', $request->akhir)->format('Y-m-d');
         }
-        $model = Billing::whereBetween('date',[@$dateAwal,@$dateAkhir])
+        $model = Billing::whereHas('patient',function ($query) {
+            return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
+        })->whereBetween('date',[@$dateAwal,@$dateAkhir])
             ->with('patient')
             ->orderBy('created_at', 'desc');
 

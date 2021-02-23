@@ -23,7 +23,7 @@ class RekapPenjualanServiceController extends Controller
             $dateAwal = "";
             $dateAkhir = "";
         }
-        $model = Service::orderBy('id');
+        $model = Service::where('id_klinik',Auth()->user()->klinik->id_klinik)->orderBy('id');
 
         return DataTables::eloquent($model)
             ->addIndexColumn()

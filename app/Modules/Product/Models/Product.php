@@ -71,7 +71,7 @@ class Product extends Model
 
     public function optionList()
     {
-        $data = self::get();
+        $data = self::where('id_klinik',Auth()->user()->klinik->id_klinik)->get();
 
         $option = '<option></option>';
         if(!empty($data)){

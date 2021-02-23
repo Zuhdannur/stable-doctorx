@@ -25,7 +25,7 @@ class Service extends Model
         });
     }
 
-    protected $fillable = ['code', 'name', 'category_id', 'price', 'is_active','point' ,'flag'];
+    protected $fillable = ['code', 'name', 'category_id', 'price', 'is_active','point' ,'flag','id_klinik'];
 
     protected $appends = ['type'];
 
@@ -71,7 +71,7 @@ class Service extends Model
 
     public function optionListWithPackages()
     {
-        $data = self::get();
+        $data = self::where('id_klinik',Auth()->user()->klinik->id_klinik)->get();
 
         $option = '<option></option>';
         if(!empty($data)){

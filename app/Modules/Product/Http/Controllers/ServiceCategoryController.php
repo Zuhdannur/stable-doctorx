@@ -22,7 +22,7 @@ class ServiceCategoryController extends Controller
 
     public function index(Datatables $datatables)
     {
-    	$ServiceCategory = ServiceCategory::get();
+        $ServiceCategory = ServiceCategory::where('id_klinik',Auth()->user()->klinik->id_klinik)->get();
         if ($datatables->getRequest()->ajax()) {
             return $datatables->of($ServiceCategory)
             ->addIndexColumn()

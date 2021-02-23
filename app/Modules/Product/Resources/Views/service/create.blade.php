@@ -6,7 +6,7 @@
 <div class="block">
     <div class="block-header block-header-default">
         <h3 class="block-title">@lang('product::labels.service.management') <small class="text-muted">@lang('product::labels.service.create')</small></h3>
-        
+
     </div>
     <div class="block-content">
         {{ html()->form('POST', route('admin.product.service.store'))->class('js-validation-bootstrap form-horizontal')->attributes(['autocomplete' => 'off'])->open() }}
@@ -23,7 +23,7 @@
 
                                  @foreach ($category as $item)
                                     <option value="{{ $item['id'] }}" {{ ( $item['id'] == old('category_id')) ? 'selected' : '' }}> {{ $item['name'] }} </option>
-                                @endforeach  
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -82,6 +82,22 @@
                             <label for="is_active" class="switch-label"><span class="toggle--on">@lang('labels.general.active')</span><span class="toggle--off">@lang('labels.general.inactive')</span></label>
                         </div><!--col-->
                     </div><!--form-group-->
+
+                    <div class="form-group row">
+                        {{ html()->label(__('product::validation.service.category'))
+                            ->class('col-md-2 form-control-label')
+                            ->for('section_id') }}
+
+                        <div class="col-md-10">
+                            <select class="js-select2 form-control" id="flag" name="flag" data-placeholder="Pilih" style="width: 100%">
+                                <option></option>
+
+                                @foreach (array("1" => "Dokter" , "2" => "Terapis") as $code => $item)
+                                    <option value="{{ $code }}" {{ ( $code == old('flag')) ? 'selected' : '' }}> {{ $item }} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
 

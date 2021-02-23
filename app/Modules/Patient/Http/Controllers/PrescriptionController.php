@@ -83,12 +83,10 @@ class PrescriptionController extends Controller
         if(!empty($appointment->prescription)){
             return redirect()->route('admin.patient.appointment.index')->withFlashSuccess(__('patient::exceptions.appointment.already_exists'));
         }
-
         $product = new Product;
         $listProduct = $product->optionList();
 
         $service = new Service;
-        // $listService = $service->optionList();
         $listService = $service->optionListWithPackages();
 
         $diagnose = DiagnoseItem::get();

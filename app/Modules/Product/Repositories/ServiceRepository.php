@@ -30,7 +30,9 @@ class ServiceRepository extends BaseRepository
                 'name'      => $data['name'],
                 'category_id' => $data['category_id'],
                 'price' => currency()->digit($data['price']),
-                'is_active' => $status
+                'is_active' => $status,
+                'flag' => $data['flag'],
+                'id_klinik' => Auth()->user()->klinik->id_klinik
             ]);
 
             if ($create) {

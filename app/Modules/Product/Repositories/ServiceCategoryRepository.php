@@ -29,7 +29,8 @@ class ServiceCategoryRepository extends BaseRepository
             $status = isset($data['is_active']) ? 1 : 0;
             $create = parent::create([
                 'name'      => $data['name'],
-                'is_active' => $status
+                'is_active' => $status,
+                'id_klinik' => Auth()->user()->klinik->id_klinik
             ]);
 
             if ($create) {

@@ -23,7 +23,7 @@ class RekapPenjualanProdukController extends Controller
             $dateAwal = "";
             $dateAkhir = "";
         }
-        $model = Product::orderBy('id');
+        $model = Product::where('id_klinik',Auth()->user()->klinik->id_klinik)->orderBy('id');
 
         return DataTables::eloquent($model)
             ->addIndexColumn()
