@@ -77,7 +77,7 @@ class LoginController extends Controller
             throw new GeneralException(__('exceptions.frontend.auth.deactivated'));
         }
 
-        event(new UserLoggedIn($user));
+        //event(new UserLoggedIn($user));
 
         // If only allowed one session at a time
         if (config('access.users.single_login')) {
@@ -111,7 +111,7 @@ class LoginController extends Controller
         /*
          * Fire event, Log out user, Redirect
          */
-        //event(new UserLoggedOut($request->user()));
+        event(new UserLoggedOut($request->user()));
 
         /*
          * Laravel specific logic
