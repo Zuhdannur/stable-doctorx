@@ -40,17 +40,5 @@
                 </li>
             </ul>
         </li>
-        <li>
-            <a class="{{ active_class(Active::checkUriPattern('admin/accounting/rekap-penjualan*')) }}" href="{{ route('rekap-penjualan.index') }}">Rekap Penjualan</a>
-        </li>
-        <li>
-            <a class="{{ active_class(Active::checkUriPattern('admin/accounting/rekap-produk*')) }}" href="{{ route('rekap-produk.index') }}">Rekap Produk</a>
-        </li>
-        <li>
-            <a class="{{ active_class(Active::checkUriPattern('admin/accounting/rekap-service*')) }}" href="{{ route('rekap-service.index') }}">Rekap Service</a>
-        </li>
-        <li>
-            <a class="{{ active_class(Active::checkUriPattern('list-splitbill*')) }}" href="{{ route('list-splitbill.index') }}">List Splitbill</a>
-        </li>
     </ul>
 </li>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Modules\Billing\Models\Billing;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use function foo\func;
@@ -10,7 +11,14 @@ use function foo\func;
 class SplitBillController extends Controller
 {
     public function index() {
-        return view('pages.split.index');
+        $model = Billing::whereHas('patient',function ($query){
+            return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
+        })->where('status','3')->with('patient')->orderBy('created_at', 'desc');
+        $now = Carbon::now();
+        $data['all'] = count($model->get());
+        $data['today'] = count($model->whereDate('date',$now->format('Y-m-d'))->get());
+
+        return view('pages.split.index')->with($data);
     }
 
     public function getData(Request $request) {

@@ -10,5 +10,17 @@
         <li>
             <a class="{{ active_class(Active::checkUriPattern('admin/reporting/reportingpatient*')) }}" href="{{ route('admin.reporting.reportingpatient') }}">Laporan Data Pasien</a>
         </li>
+        <li>
+            <a class="{{ active_class(Active::checkUriPattern('admin/accounting/rekap-penjualan*')) }}" href="{{ route('rekap-penjualan.index') }}">Laporan Penjualan</a>
+        </li>
+        <li>
+            <a class="{{ active_class(Active::checkUriPattern('admin/accounting/rekap-produk*')) }}" href="{{ route('rekap-produk.index') }}">Laporan Produk</a>
+        </li>
+        <li>
+            <a class="{{ active_class(Active::checkUriPattern('admin/accounting/rekap-service*')) }}" href="{{ route('rekap-service.index') }}">Laporan Service</a>
+        </li>
+        <li>
+            <a class="{{ active_class(Active::checkUriPattern('list-splitbill*')) }}" href="{{ route('list-splitbill.index') }}">Laporan Pembayaran Sebagian</a>
+        </li>
     </ul>
 </li>

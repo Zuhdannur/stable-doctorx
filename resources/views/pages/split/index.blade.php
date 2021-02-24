@@ -17,8 +17,8 @@
                             <div class="mb-10">
                                 <i class="si si-bag fa-3x text-corporate"></i>
                             </div>
-                            <div class="font-size-h4 font-w600"> {{ @$ready }} Jenis</div>
-                            <div class="text-muted">tersedia</div>
+                            <div class="font-size-h4 font-w600"> {{ @$today }}</div>
+                            <div class="text-muted">Pembayaran Sebagian Hari ini</div>
                             {{-- <div class="font-size-h4 font-w600">{{ $patient->total_patient }} Pasien</div> --}}
                             {{-- <div class="font-size-h4 font-w600">{{ $patient->total_patient_today }} pasien baru hari ini!</div> --}}
                         </div>
@@ -32,8 +32,8 @@
                             <div class="mb-10">
                                 <i class="si si-bag fa-3x text-corporate"></i>
                             </div>
-                            <div class="font-size-h4 font-w600"> {{ @$min }} Jenis</div>
-                            <div class="text-muted">stok segera habis</div>
+                            <div class="font-size-h4 font-w600"> {{ @$all }} </div>
+                            <div class="text-muted">Total Pembayaran Sebagian Lunas</div>
                         </div>
                     </div>
                 </a>
@@ -45,8 +45,8 @@
                             <div class="mb-10">
                                 <i class="si si-bag fa-3x text-corporate"></i>
                             </div>
-                            <div class="font-size-h4 font-w600"> {{ @$habis }} Jenis</div>
-                            <div class="text-muted">Stok habis</div>
+                            <div class="font-size-h4 font-w600"> {{ @$all }}</div>
+                            <div class="text-muted">Total Pembayaran Sebagian Belum Lunas</div>
                         </div>
                     </div>
                 </a>
