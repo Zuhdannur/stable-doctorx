@@ -38,6 +38,17 @@
                                 ->required() }}
                         </div><!--col-->
                     </div><!--form-group-->
+                    <div class="form-group row">
+                        {{ html()->label("Klinik")->class('col-md-2 form-control-label')->for('password_confirmation') }}
+
+                        <div class="col-md-8">
+                            <select name="id_klinik" id="klinik" class="form-control select">
+                                @foreach(\App\Klinik::all() as $item)
+                                    <option value="{{ @$item->id_klinik }}" {{ @$user->klinik->id_klinik == $item->id_klinik ? 'selected' : '' }}>{{ @$item->nama_klinik.' - '.@$item->status }}</option>
+                                @endforeach
+                            </select>
+                        </div><!--col-->
+                    </div><!--form-group-->
 
                         <div class="form-group row">
                             {{ html()->label(__('labels.backend.access.users.table.roles'))->class('col-md-2 form-control-label') }}

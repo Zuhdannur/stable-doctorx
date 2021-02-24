@@ -9,11 +9,11 @@
                         <div class="col-6 text-center">
                             <label for="startdate">Tanggal</label>
                             <div class="input-daterange input-group" data-date-format="{{ setting()->get('date_format_js') }}" data-week-start="1" data-autoclose="true" data-today-highlight="true">
-                                <input type="text" class="form-control datepicker" id="date_1" name="date_1" placeholder="Dari" data-week-start="1" data-autoclose="true" data-today-highlight="true" autocomplete="off" value="{{ isset($date['date_1']) ? $date['date_1'] : null }}">
+                                <input type="text" class="form-control datepicker" id="date_1" name="date_1" placeholder="Dari" data-week-start="1" data-autoclose="true" data-today-highlight="true" autocomplete="off" >
                                 <div class="input-group-prepend input-group-append">
                                     <span class="input-group-text font-w600">s/d</span>
                                 </div>
-                                <input type="text" class="form-control datepicker" id="date_2" name="date_2" placeholder="Hingga" data-week-start="1" data-autoclose="true" data-today-highlight="true" autocomplete="off" value="{{ isset($date['date_2']) ? $date['date_2'] : null }}">
+                                <input type="text" class="form-control datepicker" id="date_2" name="date_2" placeholder="Hingga" data-week-start="1" data-autoclose="true" data-today-highlight="true" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
 </div>
 
 <script>
-    jQuery(function(){ 
+    jQuery(function(){
         Codebase.helpers(['datepicker', 'notify', 'select2']);
 
         $(document).on("focusout", ".datepicker", function() {

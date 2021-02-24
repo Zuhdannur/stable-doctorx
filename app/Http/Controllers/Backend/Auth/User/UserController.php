@@ -139,7 +139,8 @@ class UserController extends Controller
             'full_name',
             'email',
             'roles',
-            'abilities'
+            'abilities',
+            'id_klinik'
         ));
 
         return redirect()->route('admin.auth.user.index')->withFlashSuccess(__('alerts.backend.users.updated'));

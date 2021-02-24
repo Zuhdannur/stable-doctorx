@@ -72,6 +72,10 @@
 
             Codebase.helpers(['datepicker', 'notify', 'select2']);
 
+            $('.datepicker').datepicker({
+                dateFormat: 'dd-mm-yy'
+            }).datepicker("setDate", new Date());
+
             $(document).on("focusout", ".datepicker", function () {
                 $(this).prop('readonly', false);
             });

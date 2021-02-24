@@ -12,6 +12,7 @@
             </div>
         </div>
         <div class="block-content">
+            @if(Auth()->user()->klinik->status == "pusat")
             <form action="{{ url('admin/auth/user') }}" method="GET">
 
                 <div class="d-flex col-lg-4">
@@ -34,6 +35,7 @@
                     <button class="btn btn-success">Cari</button>
                 </div>
             </form>
+            @endif
 
             <div class="table-responsive">
                 <table class="table table-striped table-vcenter">

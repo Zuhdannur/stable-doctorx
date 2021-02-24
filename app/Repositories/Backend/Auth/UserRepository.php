@@ -194,6 +194,7 @@ class UserRepository extends BaseRepository
             if ($user->update([
                 'full_name' => $data['full_name'],
                 'email' => $data['email'],
+                'id_klinik' => $data['id_klinik']
             ])) {
                 // Add selected roles/abilities
                 // $user->syncRoles($data['roles']);
