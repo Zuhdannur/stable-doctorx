@@ -40,13 +40,20 @@ class UserController extends Controller
      */
     public function index(ManageUserRequest $request)
     {
-        $users = $this->userRepository->getActivePaginated(25, 'id', 'asc');
+        $id_cabang = "all";
+        if(!empty($request->id_cabang) && @$request->id_cabang != "all") {
+            $id_cabang = $request->id_cabang;
+            $users = $this->userRepository->getActivePaginated(25, 'id', 'asc',$request->id_cabang);
+        } else {
+            $users = $this->userRepository->getActivePaginated(25, 'id', 'asc');
+        }
 
         if(Auth()->user()->klinik->status == "cabang") {
             $users = $this->userRepository->getActivePaginatedSuper(25, 'id', 'asc');
         }
 
         return view('backend.auth.user.index')
+            ->withCabang($id_cabang)
             ->withUsers($users);
     }
 

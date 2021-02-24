@@ -50,13 +50,23 @@ class UserRepository extends BaseRepository
      *
      * @return mixed
      */
-    public function getActivePaginated($paged = 25, $orderBy = 'created_at', $sort = 'desc') : LengthAwarePaginator
+    public function getActivePaginated($paged = 25, $orderBy = 'created_at', $sort = 'desc',$id = 0) : LengthAwarePaginator
     {
-        return $this->model
-            ->with('roles', 'abilities', 'providers')
-            ->active()
-            ->orderBy($orderBy, $sort)
-            ->paginate($paged);
+        if($id == 0) {
+            return $this->model
+                ->with('roles', 'abilities', 'providers')
+                ->active()
+                ->orderBy($orderBy, $sort)
+                ->paginate($paged);
+        } else {
+            return $this->model
+                ->where('id_klinik',$id)
+                ->with('roles', 'abilities', 'providers')
+                ->active()
+                ->orderBy($orderBy, $sort)
+                ->paginate($paged);
+        }
+
     }
 
     /**
