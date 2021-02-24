@@ -15,7 +15,7 @@ tfoot {
             <div class="block-content block-content-full">
                 <div class="font-size-sm font-w600 text-uppercase text-muted text-right">Pasien Baru</div>
                 <div class="py-50 text-center">
-                    <div class="font-size-h1 font-w700 mb-0 text-primary">{{ App\Modules\Patient\Models\Patient::whereOldPatient('n')->count() }}</div>
+                    <div class="font-size-h1 font-w700 mb-0 text-primary">{{ App\Modules\Patient\Models\Patient::where('id_klinik',Auth()->user()->klinik->id_klinik)->whereOldPatient('n')->count() }}</div>
                 </div>
             </div>
         </a>
@@ -25,7 +25,7 @@ tfoot {
             <div class="block-content block-content-full">
                 <div class="font-size-sm font-w600 text-uppercase text-muted text-right text-success">Pasien Lama</div>
                 <div class="py-50 text-center">
-                    <div class="font-size-h1 font-w700 mb-0 text-success">{{ App\Modules\Patient\Models\Patient::whereOldPatient('y')->count() }}</div>
+                    <div class="font-size-h1 font-w700 mb-0 text-success">{{ App\Modules\Patient\Models\Patient::where('id_klinik',Auth()->user()->klinik->id_klinik)->whereOldPatient('y')->count() }}</div>
                 </div>
             </div>
         </a>
@@ -35,7 +35,7 @@ tfoot {
             <div class="block-content block-content-full">
                 <div class="font-size-sm font-w600 text-uppercase text-muted text-right text-primary">Total Pasien</div>
                 <div class="py-50 text-center">
-                    <div class="font-size-h1 font-w700 mb-0 text-primary">{{ App\Modules\Patient\Models\Patient::count() }}</div>
+                    <div class="font-size-h1 font-w700 mb-0 text-primary">{{ App\Modules\Patient\Models\Patient::where('id_klinik',Auth()->user()->klinik->id_klinik)->count() }}</div>
                 </div>
             </div>
         </a>
@@ -80,7 +80,7 @@ tfoot {
 </div>
 
 <script>
-    jQuery(function(){ 
+    jQuery(function(){
         Codebase.layout('sidebar_mini_on');
 
         var oldPatient = null;
@@ -104,7 +104,7 @@ tfoot {
                 {
                     data: 'DT_RowIndex',
                     width: "5%",
-                    orderable: false, 
+                    orderable: false,
                     searchable: false
                 },
                 {
@@ -148,12 +148,12 @@ tfoot {
                             var val = $.fn.dataTable.util.escapeRegex(
                                 $(this).val()
                             );
-     
+
                             column
                                 .search( val ? '^'+val+'$' : '', true, false )
                                 .draw();
                         } );
-     
+
                     column.data().unique().sort().each( function ( d, j ) {
                         select.append( '<option value="'+d+'">'+d+'</option>' )
                     } );

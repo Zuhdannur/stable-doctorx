@@ -2,6 +2,7 @@
 
 namespace App\Modules\Patient\Http\Controllers;
 
+use App\Helpers\Auth\Auth;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
@@ -441,7 +442,7 @@ class PatientController extends Controller
     public function reportingpatient(Request $request)
     {
         if($request->ajax()){
-            $model = Patient::with(['city', 'district', 'village']);
+            $model = Patient::where('id_klinik',Auth()->user()->klinik->id_klinik)->with(['city', 'district', 'village']);
 
             if($request->oldPatient){
                 $model = $model->where('old_patient', $request->oldPatient);
@@ -485,7 +486,9 @@ class PatientController extends Controller
             $endDate = $request->end;
 
 
-            $model = Appointment::with('patient');
+            $model = Appointment::whereHas('patient',function ($query) {
+                return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
+            })->with('patient');
 
             if($startDate && $endDate){
                 $model = $model->whereRaw("(DATE(date) between '".$startDate."' and '".$endDate."')");
