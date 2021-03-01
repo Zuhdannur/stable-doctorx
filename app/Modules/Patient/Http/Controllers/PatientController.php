@@ -39,7 +39,7 @@ class PatientController extends Controller
     public function index(Request $request)
     {
     	if ($request->ajax()) {
-            $model = Patient::where('id_klinik',Auth()->user()->klinik->id_klinik)->orderBy('created_at', 'desc');
+            $model = Patient::orderBy('created_at', 'desc');
             return DataTables::eloquent($model)
             ->addIndexColumn()
             ->addColumn('dob', function ($data) {

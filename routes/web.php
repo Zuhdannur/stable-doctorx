@@ -89,7 +89,7 @@ Route::group(['middleware' => 'admin'], function () {
 
         Route::resource('/setting-modul-urutan','UrutanModulController');
         Route::group(['prefix' => 'setting-modul/data'],function () {
-            Route::get('/getData','UrutanModulController@getData');
+//            Route::get('/getData','UrutanModulController@getData');
         });
 
     });

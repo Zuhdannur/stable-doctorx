@@ -498,6 +498,51 @@ class PrescriptionRepository extends BaseRepository
                     );
                 }
 
+                $timeline = PatientTimeline::where('title','Referensi #'.$prescription->appointment->appointment_no)->first();
+
+                if(empty($timeline)) {
+                    $timeline = new PatientTimeline;
+
+                    $timeline->patient_id = $prescription->patient_id;
+                    $timeline->title = 'Referensi #'.$prescription->appointment->appointment_no;
+                    $timeline->timeline_date = $date;
+                    $timeline->description = 'Konsultasi';
+                    $timeline->save();
+                }
+
+                if ($request->has('inputFoto')) {
+
+                    if(!empty($timeline)){
+                        foreach ($request->inputFoto as $image) {
+                            if(substr($request->inputFoto[0],0,4) != 'http') {
+                                $delete = PatientTimelineDetail::where('timeline_id',$timeline->id)->delete();
+                                $timelineDetail = new PatientTimelineDetail;
+
+                                $timelineDetail->timeline_id = $timeline->id;
+                                $timelineDetail->setFileImage64($image);
+                                $timelineDetail->save();
+                            }
+                        }
+
+                        Prescription::where('id', $prescription->id)->update(['timeline_id' => $timeline->id]);
+                    }
+
+                    $input = $request->all();
+
+                    foreach ($request->inputFoto as $index => $image) {
+                        if(substr($request->inputFoto[0],0,4) != 'http') {
+                            $delete = PatientBeforeAfter::whereDate('date',$timeline->date)->delete();
+                            $patientBeforeAfter = new PatientBeforeAfter;
+
+                            $patientBeforeAfter->patient_id = $prescription->patient_id;
+                            $patientBeforeAfter->date = \Carbon\Carbon::now();
+                            $patientBeforeAfter->type = @$input['tipe'][$index];
+                            $patientBeforeAfter->setFileImage64($image);
+                            $patientBeforeAfter->save();
+                        }
+                    }
+                }
+
                 return response()->json(array('status' => true, 'message' => trans('patient::alerts.prescription.updated')));
             }
 

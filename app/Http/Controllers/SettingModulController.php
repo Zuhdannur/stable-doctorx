@@ -16,6 +16,22 @@ class SettingModulController extends Controller
         return view('pages.setting-modul.setting_modul_form');
     }
 
+    public function edit($id) {
+        $data['data'] = \App\Modul::find($id);
+        $data['isEdit'] = true;
+        return view('pages.setting-modul.setting_modul_form')->with($data);
+    }
+
+    public function update(Request $request,$id) {
+        $update = \App\Modul::find($id)->update($request->all());
+        if($update){
+            return redirect()->back()->with('flash_success','Update Modul Berhasil');
+        } else {
+            return redirect()->back()->with('flash_error','Update Modul Gagal');
+
+        }
+    }
+
     public function destroy($id) {
 
     }
@@ -24,15 +40,9 @@ class SettingModulController extends Controller
         $model = Modul::orderBy('id_modul');
         return DataTables::eloquent($model)
             ->addIndexColumn()
-//            ->addColumn('button',function ($data) {
-//                $button = '-';
-//                if($data->status == "cabang") {
-//                    $button = '<button class="btn btn-sm btn-warning btnUpdate" value="'.$data->id_klinik.'" data-toggle="tooltip" data-placement="top" title="Lihat"><i class="si si-book-open"></i> Ubah Menjadi Pusat</button>';
-//                }
-//                return $button;
-//            })
             ->addColumn('action', function ($data) {
                 $button = '<div class="d-flex justify-content-end">
+                <a class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Lihat" href="'. route('setting-modul.edit', $data->id_modul) .'"><i class="si si-doc"></i></a>
                 &nbsp;
                 <form action="'. route('setting-modul.destroy',$data->id_modul) .'" method="POST">
                 <input type="hidden" name="_method" value="DELETE">
@@ -42,7 +52,7 @@ class SettingModulController extends Controller
                 ';
                 return $button;
             })
-//            ->rawColumns(['button','action'])
+            ->rawColumns(['action'])
             ->make(true);
     }
 

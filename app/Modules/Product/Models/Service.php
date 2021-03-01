@@ -69,6 +69,21 @@ class Service extends Model
         return $option;
     }
 
+    public function optionListWithKlinik()
+    {
+        $data = self::where('id_klinik',Auth()->user()->klinik->id_klinik)->get();
+
+        $option = '<option></option>';
+        if(!empty($data)){
+            foreach ($data as $key => $val) {
+                $servicetName = $val->code.' - '.$val->name.' - '.$val->category->name;
+                $option .= '<option value="'.$val->id.'">'.strtoupper($servicetName).'</option>';
+            }
+        }
+
+        return $option;
+    }
+
     public function optionListWithPackages()
     {
         $data = self::where('id_klinik',Auth()->user()->klinik->id_klinik)->get();

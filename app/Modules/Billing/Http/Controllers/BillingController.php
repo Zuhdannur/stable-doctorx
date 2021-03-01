@@ -47,9 +47,7 @@ class BillingController extends Controller
     public function index(Request $request)
     {
     	if($request->ajax()){
-            $model = Billing::whereHas('patient',function ($query){
-                return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
-            })->with('patient')->orderBy('created_at', 'desc');
+            $model = Billing::with('patient')->orderBy('created_at', 'desc');
 
             return DataTables::eloquent($model)
             ->addIndexColumn()
@@ -106,9 +104,9 @@ class BillingController extends Controller
             $pid = $patientId->patient_unique_id;
         }
 
-    	$patient = Patient::where('id_klinik',Auth()->user()->klinik->id_klinik)->get();
-        $products = Product::all();
-        $services = Service::all();
+    	$patient = Patient::get();
+        $products = Product::where('id_klinik',Auth()->user()->klinik->id_klinik)->get();
+        $services = Service::where('id_klinik',Auth()->user()->klinik->id_klinik)->get();
     	/*$ProductCategory = new ProductCategory;
         $categories = $ProductCategory::select('id', 'name', 'parent_id')->get()->toTree();
         $flatData = $ProductCategory->flatten($categories);

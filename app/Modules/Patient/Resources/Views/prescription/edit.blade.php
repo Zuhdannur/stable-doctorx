@@ -457,7 +457,6 @@
                          itemtype="http://schema.org/ImageGallery">
                         @if(isset($patient->beforeafter))
                             @foreach($patient->beforeafter as $item)
-
                                 @if(!empty($item->image))
                                 <div class="col-md-2 animated fadeIn">
                                     <div class="options-container">
@@ -578,6 +577,103 @@
         </div>
     </div>
 </form>
+
+<div class="modal fade" id="modal-popout" tabindex="-1" role="dialog" aria-labelledby="modal-popout"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-popout" role="document">
+        <div class="modal-content">
+            <div class="block block-themed block-transparent mb-0">
+                <div class="block-header bg-primary-dark">
+                    <h3 class="block-title">Crop Gambar</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                            <i class="si si-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content">
+                    <div id="upload-demo"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Batalkan</button>
+                <button type="button" class="btn btn-alt-success" id="sipFoto">
+                    <i class="fa fa-check"></i> Sip lah!
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Pop Out Modal -->
+
+<!-- Webcam -->
+<div class="modal fade" id="modal-webcam" tabindex="-1" role="dialog" aria-labelledby="modal-webcam"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-popout" role="document">
+        <div class="modal-content">
+            <div class="block block-themed block-transparent mb-0">
+                <div class="block-header bg-primary-dark">
+                    <h3 class="block-title">Webcam</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                            <i class="si si-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="block text-center">
+                                <div class="block-content block-content-full block-content-sm">
+                                    <div class="font-w600">Webcam</div>
+                                </div>
+                                <div class="block-content block-content-full bg-body-light">
+                                    <div id="my_camera"></div>
+                                </div>
+                                <div class="block-content block-content-full">
+                                    <button class="btn btn-white btn-sm btn-datatable-add blue" id="buttonStart"
+                                            onclick="setup();">
+                                        <i class="ace-icon fa fa-image"></i> Start
+                                    </button>
+                                    <button class="btn btn-white btn-sm btn-datatable-add blue" disabled="disabled"
+                                            onclick="stop()" id="buttonStop">
+                                        <i class="ace-icon fa fa-stop"></i> Stop
+                                    </button>
+                                    <button class="btn btn-white btn-sm btn-datatable-add blue" disabled="disabled"
+                                            onclick="take_snapshot()" id="buttonSnap">
+                                        <i class="ace-icon fa fa-camera"></i> Capture
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="block text-center">
+                                <div class="block-content block-content-full block-content-sm">
+                                    <div class="font-w600">Hasil Foto</div>
+                                </div>
+                                <div class="block-content block-content-full bg-body-light">
+                                    <div id="results"></div>
+                                </div>
+                                <div class="block-content block-content-full">
+                                    <button type="button" class="btn btn-sm btn-success pull-right" id="savePhoto"
+                                            onclick="post_to_preview()" disabled="disabled">
+                                        <span class="bigger-110">Save Photo</span>
+
+                                        <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="{{ URL::asset('js/photoswipe.min.js') }}"></script>
 <script src="{{ URL::asset('js/photoswipe-ui-default.min.js') }}"></script>
 
@@ -665,6 +761,11 @@ jQuery(function () {
         submitHandler: function(form) {
             //Fetch Image
             var formData = new FormData(form);
+
+            $('#imageGrid').find('img').each(function () {
+                imageName = $(this).attr('src');
+                formData.append('inputFoto[]', imageName);
+            });
 
             $.ajax({
                 type: "POST",
@@ -856,6 +957,164 @@ jQuery(function () {
 
             k++;
             updateIds3();
+        });
+
+        var imageNumber = 0;
+        createImageGrid = function (image) {
+            imageNumber++;
+            var templateImage = '<div class="col-md-2 animated fadeIn" id="inputFoto' + imageNumber + '">\n' +
+                '    <div class="options-container">' +
+                '                            <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">\n' +
+                '                                <a href="' + image + '" itemprop="contentUrl" data-size="1024x1024">\n' +
+                '                                    <img name="inputFoto[]" src="' + image + '" itemprop="thumbnail" alt="Image description" />\n' +
+                '                                </a>\n' +
+                '                                <figcaption itemprop="caption description">Image caption  1</figcaption>\n' +
+                '\n' +
+                '                            </figure>\n' +
+                '    </div>' +
+                '<div class="row ml-sm-1"> ' +
+                '<input name="tipe[]" hidden>' +
+                '<button type="button" class="btn btn-sm btn-success mr-5 mb-5 btnBefore"  name="btnbefore">\n' +
+                '                            <i class="fa fa-plus mr-5"></i>Before\n' +
+                '                        </button>' +
+                '<button type="button" class="btn btn-sm btn-danger mr-5 mb-5 btnAfter" name="btnafter">\n' +
+                '                            <i class="fa fa-plus mr-5"></i>After\n' +
+                '                        </button>' +
+                '<button type="button" class="btn btn-sm btn-danger mr-5 mb-5 btnCancel" name="btncancel" style="display: none;">\n' +
+                '                            <i class="fa fa-plus mr-5"></i>Batalkan Dari \n' +
+                '                        </button>' +
+                ' </div>'
+            '                        </div>'
+            $("#imageGrid").append(templateImage);
+            $("#file-input-foto").val("");
+
+            var cls = $('.btnBefore');
+
+            $.each(cls, function (index, value) {
+
+                if (index === (imageNumber - 1)) {
+                    cls[index].click();
+                }
+            })
+
+        }
+
+        $uploadCrop = $('#upload-demo').croppie({
+            boundary: {
+                width: 400,
+                height: 400
+            },
+            viewport: {
+                width: 300,
+                height: 300,
+                type: 'square'
+            },
+            enableExif: true
+        });
+
+        $(document).on("change", "[type=file]", function () {
+            var input = this
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $uploadCrop.croppie('bind', {
+                        url: e.target.result
+                    });
+                    $(input).replaceWith($(input).clone())
+                }
+                reader.readAsDataURL(input.files[0]);
+
+                $('#modal-popout').modal('show');
+            }
+        })
+
+        $('#modal-popout').on('shown.bs.modal', function () {
+            $uploadCrop.croppie('bind');
+            // $uploadCrop.croppie('setZoom', 1.0);
+        });
+
+        $('#modal-popout').on('hidden.bs.modal', function () {
+            $("#file-input-foto").val("");
+        });
+
+        $("#sipFoto").on('click', function (e) {
+            $uploadCrop.croppie('result', {
+                type: 'canvas',
+                size: 'viewport'
+            }).then(function (response) {
+                createImageGrid(response);
+                $('#modal-popout').modal('hide');
+            });
+        })
+
+        $('#imageGrid').on('click', '.deletePhoto', function () {
+            $('#imageGrid').find('#' + $(this).data('image-id')).remove();
+        });
+
+        var avatar = "{{ asset('media/avatars/default.png') }}";
+
+        default_avatar = function () {
+            document.getElementById('results').innerHTML =
+                '<img width="240px" src="' + avatar + '"/>';
+        }
+
+        setup = function () {
+
+            Webcam.reset();
+            Webcam.on('error', function (err) {
+                Swal.fire({
+                    title: 'Webcam tidak terhubung!',
+                    type: 'error',
+                    showCancelButton: false,
+                    showConfirmButton: true,
+                })
+
+                $('#modal-webcam').modal('hide');
+            });
+            Webcam.attach('#my_camera');
+            default_avatar();
+            $('#buttonStart').prop('disabled', true);
+            $('#buttonStop').prop('disabled', false);
+            $('#buttonSnap').prop('disabled', false);
+            $('#savePhoto').prop('disabled', true);
+        }
+
+        take_snapshot = function () {
+            // take snapshot and get image data
+            Webcam.snap(function (data_uri) {
+                // display results in page
+                document.getElementById('results').innerHTML =
+                    '<img src="' + data_uri + '"/>';
+            });
+
+            $('#savePhoto').prop('disabled', false);
+        }
+
+        stop = function () {
+            // Reset
+            Webcam.reset();
+            default_avatar();
+
+            $('#buttonStart').prop('disabled', false);
+            $('#buttonStop').prop('disabled', true);
+            $('#buttonSnap').prop('disabled', true);
+            $('#savePhoto').prop('disabled', true);
+        }
+
+        post_to_preview = function () {
+            var imageResult = $('#modal-webcam').find("#results > img").attr("src");
+
+            createImageGrid(imageResult);
+
+            $('#modal-webcam').modal('hide');
+        }
+
+        $('#modal-webcam').on('shown.bs.modal', function (e) {
+            setup();
+        });
+
+        $('#modal-webcam').on('hidden.bs.modal', function (e) {
+            stop();
         });
 
         var initPhotoSwipeFromDOM = function (gallerySelector) {
@@ -1061,6 +1320,68 @@ jQuery(function () {
 
 // execute above function
         initPhotoSwipeFromDOM('.my-gallery');
+
+        $('body').on('click', '.btnAfter', function (e) {
+            var parent = $(this).parent();
+            var btnCancel = parent.find('button[name=btncancel]')
+
+
+            if (btnCancel.hasClass('btn-success')) {
+                btnCancel.removeClass('btn-success')
+            }
+
+            btnCancel.addClass('btn-danger')
+
+            btnCancel.css('display', 'inline-block')
+            btnCancel.html('Batalkan Dari After')
+
+            var myButton = $(this);
+            myButton.css('display', 'none');
+
+            var btnBefore = parent.find('button[name=btnbefore]');
+            btnBefore.css('display', 'none');
+
+            parent.find('input').val("after")
+        })
+
+        $('body').on('click', '.btnCancel', function (e) {
+            var parent = $(this).parent();
+
+            var myButton = $(this);
+            myButton.css('display', 'none');
+
+            var btnBefore = parent.find('button[name=btnbefore]');
+            btnBefore.css('display', 'inline-block');
+
+            var btnAfter = parent.find('button[name=btnafter]');
+            btnAfter.css('display', 'inline-block');
+
+            parent.find('input').val("")
+
+        })
+
+        $('body').on('click', '.btnBefore', function (e) {
+            var parent = $(this).parent();
+            var btnCancel = parent.find('button[name=btncancel]');
+
+
+            if (btnCancel.hasClass('btn-danger')) {
+                btnCancel.removeClass('btn-danger')
+            }
+
+            btnCancel.addClass('btn-success')
+
+            btnCancel.css('display', 'inline-block')
+            btnCancel.html('Batalkan Dari Before')
+
+            var myButton = $(this);
+            myButton.css('display', 'none');
+
+            var btnAfter = parent.find('button[name=btnafter]');
+            btnAfter.css('display', 'none');
+
+            parent.find('input').val("before")
+        })
 
         $(document).on('click', '.remove3', function() {
             $(this).closest('tr').remove();

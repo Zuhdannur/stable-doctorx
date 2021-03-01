@@ -134,7 +134,7 @@ class PrescriptionController extends Controller
         $listProduct = $product->optionList();
 
         $service = new Service;
-        $listService = $service->optionList();
+        $listService = $service->optionListWithKlinik();
 
         $diagnose = DiagnoseItem::get();
         $optionDiagnose = '<option></option>';

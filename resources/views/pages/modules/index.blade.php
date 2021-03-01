@@ -21,26 +21,26 @@
 
                         <div class="col-md-10">
                                 <div class="row">
-                                    @foreach(\App\ModuleMain::all() as $row)
+                                    @foreach(\App\Modul::all() as $row)
                                         <div class="col-md-4 col-xl-3">
-                                            <label>{{ ucwords($row->modul->nama_modul) }}</label>
+{{--                                            <label>{{ ucwords($row->nama_modul) }}</label>--}}
                                             <div>
-                                                @foreach($row->sub as $item)
+{{--                                                @foreach($row->sub as $item)--}}
 {{--                                                    @if(str_contains($row->modul->url_modul,'*') === false && !empty($row->modul->url_modul))--}}
 
                                                     <div class="custom-control custom-checkbox mb-5">
-                                                        {{ html()->checkbox('modul[]', in_array($item->id_modul, $modul), $item->modul->id_modul)->class('custom-control-input')->id('permission-'.$item->id_modul) }}
-                                                        {{ html()->label(ucwords($item->modul->nama_modul))->class('custom-control-label')->for('permission-'.$item->id_modul) }}
+                                                        {{ html()->checkbox('modul[]', in_array($row->id_modul, $modul), $row->id_modul)->class('custom-control-input')->id('permission-'.$row->id_modul) }}
+                                                        {{ html()->label(ucwords($row->nama_modul))->class('custom-control-label')->for('permission-'.$row->id_modul) }}
                                                     </div>
-                                                    @if(count($item->sub) > 0)
-                                                        @foreach($item->sub as $sub)
-                                                            <div class="custom-control custom-checkbox mb-5">
-                                                                {{ html()->checkbox('modul[]', in_array($sub->modul->id_modul, $modul),  $sub->modul->id_modul)->class('custom-control-input')->id('permission-'.$sub->modul->id_modul) }}
-                                                                {{ html()->label(ucwords($sub->modul->nama_modul))->class('custom-control-label')->for('permission-'.$sub->modul->id_modul) }}
-                                                            </div>
-                                                        @endforeach
-                                                    @endif
-                                                @endforeach
+{{--                                                    @if(count($item->sub) > 0)--}}
+{{--                                                        @foreach($item->sub as $sub)--}}
+{{--                                                            <div class="custom-control custom-checkbox mb-5">--}}
+{{--                                                                {{ html()->checkbox('modul[]', in_array($sub->modul->id_modul, $modul),  $sub->modul->id_modul)->class('custom-control-input')->id('permission-'.$sub->modul->id_modul) }}--}}
+{{--                                                                {{ html()->label(ucwords($sub->modul->nama_modul))->class('custom-control-label')->for('permission-'.$sub->modul->id_modul) }}--}}
+{{--                                                            </div>--}}
+{{--                                                        @endforeach--}}
+{{--                                                    @endif--}}
+{{--                                                @endforeach--}}
                                             </div>
                                         </div>
                                     @endforeach

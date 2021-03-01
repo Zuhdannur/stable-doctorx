@@ -39,9 +39,7 @@ class TreatmentController extends Controller
             $endDate = $request->endDate;
 
 
-            $model = Treatment::whereHas('patient',function ($query){
-                return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
-            })->with('patient');
+            $model = Treatment::with('patient');
 
             if($startDate && $endDate){
                 $start_date = \DateTime::createFromFormat(setting()->get('date_format'), $startDate)->format('Y-m-d');
@@ -118,16 +116,16 @@ class TreatmentController extends Controller
         $terapis = Staff::whereHas('user',function ($query) {
             return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
         })->where('designation_id', 4)->get();
-        $room = Room::whereHas('group', function ($query) {
+        $room = Room::where('id_klinik',Auth()->user()->klinik->id_klinik)->whereHas('group', function ($query) {
                     $query->where('room_groups.type', '=', 'TREATMENT');
                 })->get();
 //        $patientList = Patient::where('id_klinik',Auth()->user()->klinik->id_klinik)->get();
-        $patientList = Patient::where('id_klinik',Auth()->user()->klinik->id_klinik)->get();
+        $patientList = Patient::get();
         $patientflag = PatientFlag::all();
 
         //Add Service Item
         $service = new Service;
-        $listService = $service->optionList();
+        $listService = $service->optionListWithKlinik();
 
         return view('patient::treatment.create')
             ->withPatient($patient)->withDokter($dokter)

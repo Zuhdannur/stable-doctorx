@@ -12,12 +12,29 @@
             @if(empty($isEdit))
                 {{ html()->form('POST', route('setting-modul.store'))->class('js-validation-bootstrap form-horizontal')->attributes(['autocomplete' => 'off'])->open() }}
             @endif
-
+                {{ html()->form('POST', route('setting-modul.update',@$data->id_modul))->class('js-validation-bootstrap form-horizontal')->attributes(['autocomplete' => 'off'])->open() }}
+                {{ method_field('PATCH') }}
             @php
 
                 @endphp
             <div class="row mt-4">
                 <div class="col">
+
+                    <div class="form-group row">
+                        {{ html()->label("Parent Module")
+                            ->class('col-md-2 form-control-label')
+                            ->for('section_id') }}
+
+                        <div class="col-md-10">
+                            <select name="parent_id" class="form-control select2">
+                                <option>Tidak Ada</option>
+                                @foreach(\App\Modul::all() as $item)
+                                    <option value="{{ $item->id_modul }}" {{ @$data->parent_id == $item->id_modul ? 'selected' : '' }}> {{ $item->nama_modul }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="form-group row">
                         {{ html()->label("Nama Modul")
                             ->class('col-md-2 form-control-label')
@@ -28,7 +45,7 @@
                                 ->class('form-control')
                                 ->placeholder("Nama Modul")
                                 ->required()
-                                ->autofocus()->value(@$data->nama_klinik) }}
+                                ->autofocus()->value(@$data->nama_modul) }}
                         </div>
                     </div>
 
@@ -41,7 +58,7 @@
                             {{ html()->text('url_modul')
                                 ->class('form-control')
                                 ->placeholder("Url Modul")
-                                ->autofocus()->value(@$data->alamat) }}
+                                ->autofocus()->value(@$data->url_modul) }}
                         </div>
                     </div>
 
@@ -54,7 +71,7 @@
                             {{ html()->text('icon')
                                 ->class('form-control')
                                 ->placeholder("Icon")
-                                ->autofocus()->value(@$data->alamat) }}
+                                ->autofocus()->value(@$data->icon) }}
                         </div>
                     </div>
                 </div>
@@ -80,6 +97,7 @@
     <script type="text/javascript">
         jQuery(function () {
             Codebase.helpers(['select2']);
+            $('.select2').select2();
         });
 
         var BeFormValidation = function() {

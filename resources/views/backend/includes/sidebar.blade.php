@@ -71,11 +71,45 @@
                 <!-- END Visible only in normal mode -->
             </div>
             <!-- END Side User -->
+            @php
+                $modulAccess = \App\ModelAccess::where('id_user',Auth()->user()->id)->get();
+                $akses = array();
+                foreach ($modulAccess as $index => $item){
+                    $akses[$index] = $item->id_modul;
+                }
+
+            @endphp
 
             <!-- Side Navigation -->
             <div class="content-side content-side-full">
                 <ul class="nav-main">
                     {{-- Dashboard sidebar --}}
+                    @foreach(\App\Modul::orderBy('id_modul','asc')->get() as $item)
+                        @if(empty($item->url_modul) && empty(@$item->icon) && in_array($item->id_modul,$akses))
+                            <li class="nav-main-heading"><span class="sidebar-mini-visible">UM</span><span class="sidebar-mini-hidden">{{ @$item->nama_modul }}</span></li>
+                            @foreach(\App\Modul::where('parent_id',@$item->id_modul)->get() as $sub)
+                                @if(strpos(@$sub->url_modul,'*') !== false)
+                                    <li class="{{ active_class(Active::checkUriPattern(@$sub->url_modul), 'open') }}">
+                                        <a class="nav-submenu {{ active_class(Active::checkUriPattern(@$sub->url_modul)) }}" data-toggle="nav-submenu" href="#"><i class="{{ @$sub->icon }}"></i><span class="sidebar-mini-hide">{{ @$sub->nama_modul }}</span></a>
+                                        <ul>
+                                            @foreach(\App\Modul::where('parent_id',@$sub->id_modul)->get() as $sub_item)
+                                                <li>
+                                                    <a class="{{ active_class(Active::checkUriPattern($sub_item->url_modul)) }}" href="{{ url($sub_item->url_modul) }}">{{ $sub_item->nama_modul }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a class="{{ active_class(Active::checkUriPattern($sub->url_modul)) }}" href="{{ url($sub->url_modul) }}">
+                                            <i class="si si-cup"></i>
+                                            <span class="sidebar-mini-hide">{{ $sub->nama_modul }}</span>
+                                        </a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        @endif
+                    @endforeach
                     <li>
                         <a class="{{ active_class(Active::checkUriPattern('admin/dashboard')) }}" href="{{ route('admin.dashboard') }}">
                             <i class="si si-cup"></i>

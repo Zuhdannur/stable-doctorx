@@ -34,9 +34,7 @@ class AppointmentController extends Controller
             $endDate = $request->endDate;
 
 
-            $model = Appointment::whereHas('patient',function ($query) {
-                return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
-            })->with('patient');
+            $model = Appointment::with('patient');
 
             if($startDate && $endDate){
                 $start_date = \DateTime::createFromFormat(setting()->get('date_format'), $startDate)->format('Y-m-d');
@@ -134,7 +132,7 @@ class AppointmentController extends Controller
                     $query->where('room_groups.type', '=', 'APPOINTMENT');
                 })->get();
 
-        $patient = Patient::where('id_klinik',Auth()->user()->klinik->id_klinik)->get();
+        $patient = Patient::get();
         $patientflag = PatientFlag::all();
 
         return view('patient::appointment.create')->withStaff($staff)->withPatient($patient)->withRoom($room)->withPid($pid)->withQid($queueId)->withFlags($patientflag)->withPatientflag($flagpatient);

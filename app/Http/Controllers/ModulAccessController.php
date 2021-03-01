@@ -39,7 +39,9 @@ class ModulAccessController extends Controller
                 $input['id_user'] = $id;
                 \App\ModelAccess::create($input);
             }
+        } else {
+            $delete = \App\ModelAccess::where('id_user',$id)->delete();
         }
-        return redirect()->back();
+        return redirect()->back()->with('flash_success','Data Berhasil Dihapus');
     }
 }
