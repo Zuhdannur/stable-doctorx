@@ -218,7 +218,8 @@ class PrescriptionRepository extends BaseRepository
                     'tax_total' => '', //update dibawah
                     'status' => config('billing.invoice_unpaid'),
                     'date' => $date->format( setting()->get('date_format')),
-                    'created_by' => auth()->user()->id
+                    'created_by' => auth()->user()->id,
+                    'id_klinik' => auth()->user()->klinik->id_klinik
                 ];
 
                 $createBilling = Billing::create($dataBilling);
@@ -322,8 +323,6 @@ class PrescriptionRepository extends BaseRepository
     public function updatePrescription(Prescription $prescription, $request)
     {
         return DB::transaction(function () use ($request, $prescription) {
-
-            // dd($prescription->billing);
 
             $update_prescription = $prescription->update([
                 'complaint' => $request->complaint,

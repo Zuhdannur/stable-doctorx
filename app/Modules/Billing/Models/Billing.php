@@ -44,7 +44,8 @@ class Billing extends Model
         'marketing_id',
         'total_ammount',
         'remaining_payment',
-        'radeem_point'
+        'radeem_point',
+        'id_klinik'
     ];
 
     public function getDiscountPercentAttribute() {

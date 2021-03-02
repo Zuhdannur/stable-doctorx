@@ -28,7 +28,7 @@ class PrescriptionController extends Controller
     public function index(Datatables $datatables)
     {
     	if ($datatables->getRequest()->ajax()) {
-    	    $model = \App\Modules\Patient\Models\Prescription::where('patient_id',1)
+    	    $model = \App\Modules\Patient\Models\Prescription::where('id_klinik',auth()->user()->klinik->id_klinik)
                 ->orderBy('created_at', 'desc')
                 ->get();
 //            return $datatables->of(\App\Modules\Patient\Models\Prescription::whereHas('patient',function ($query) {

@@ -39,20 +39,21 @@ class AppointmentRepository extends BaseRepository
                 'room_id' => $data['room_id'],
                 'staff_id' => $data['staff_id'],
                 'notes' => $data['notes'],
-                'status_id' => 1
+                'status_id' => 1,
+                'id_klinik' => auth()->user()->klinik->id_klinik
             ]);
 
             if($appointment){
                 $code = 'APN'.$appointment->id;
                 $appointment->appointment_no = $code;
                 $appointment->save();
-                
+
                 $patientFlag = PatientFlag::where('name', $data['patient_flag_id'])->first();
                 // die(json_encode($patientFlag));
                 if($patientFlag){
                     Patient::where('id', $data['pid'])->update(['patient_flag_id' => $patientFlag->id]);
-                } 
-                
+                }
+
                 if($data['qId']){
                     PatientAdmission::where('id', $data['qId'])->update(['status_id' => config('admission.admission_completed')]);
 

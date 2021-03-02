@@ -34,7 +34,7 @@ class AppointmentController extends Controller
             $endDate = $request->endDate;
 
 
-            $model = Appointment::with('patient');
+            $model = Appointment::where('id_klinik',auth()->user()->klinik->id_klinik)->with('patient');
 
             if($startDate && $endDate){
                 $start_date = \DateTime::createFromFormat(setting()->get('date_format'), $startDate)->format('Y-m-d');

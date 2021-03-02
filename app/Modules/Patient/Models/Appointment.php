@@ -68,7 +68,8 @@ class Appointment extends Model
     	'room_id',
         'staff_id',
         'is_online',
-    	'status_id'
+    	'status_id',
+        'id_klinik'
     ];
 
     public function patient()
