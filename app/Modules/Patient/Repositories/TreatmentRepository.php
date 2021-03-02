@@ -61,7 +61,8 @@ class TreatmentRepository extends BaseRepository
             'room_id' => $data['room_id'],
             'staff_id' => $data['dokter_staff_id'],
             'notes' => $data['notes'],
-            'status_id' => config('admission.admission_waiting')
+            'status_id' => config('admission.admission_waiting'),
+            'id_klinik' => auth()->user()->klinik->id_klinik
         ]);
 
         $code = 'TR'.$treatment->id;

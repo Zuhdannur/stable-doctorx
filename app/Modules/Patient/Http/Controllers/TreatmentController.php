@@ -39,7 +39,7 @@ class TreatmentController extends Controller
             $endDate = $request->endDate;
 
 
-            $model = Treatment::with('patient');
+            $model = Treatment::where('id_klinik',auth()->user()->klinik->id_klinik)->with('patient');
 
             if($startDate && $endDate){
                 $start_date = \DateTime::createFromFormat(setting()->get('date_format'), $startDate)->format('Y-m-d');

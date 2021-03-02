@@ -61,19 +61,20 @@ class Treatment extends Model
 	}
 
     protected $fillable = [
-    	'patient_id', 
-    	'treatment_no', 
-        'seq', 
-        'date', 
-        'end_time', 
-    	'room_id', 
-        'appointment_id', 
-        'staff_id', 
+    	'patient_id',
+    	'treatment_no',
+        'seq',
+        'date',
+        'end_time',
+    	'room_id',
+        'appointment_id',
+        'staff_id',
         'status_id',
         'is_online',
         'service_id',
-        'service_notes', 
-    	'notes'
+        'service_notes',
+    	'notes',
+        'id_klinik'
     ];
 
     public function patient()
