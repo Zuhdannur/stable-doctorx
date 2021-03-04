@@ -237,8 +237,8 @@ class BillingController extends Controller
         // die(json_encode($invDetail));
 
         $patient = Patient::findOrFail($billing->patient->id);
-        $products = Product::all();
-        $services = Service::all();
+        $products = Product::where('id_klinik',auth()->user()->klinik->id_klinik)->get();
+        $services = Service::where('id_klinik',auth()->user()->klinik->id_klinik)->get();
 
         $cashAccount = FinanceAccount::where('account_category_id', config('finance_account.default.cash'))->get();
 

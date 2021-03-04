@@ -387,7 +387,7 @@ class BillingRepository extends BaseRepository
                     'tax_value' => !empty($tax) ? $tax->percentage : '',
                     'type' => $type,
                     'qty' => $data['qty'][$key],
-                    'discount' => $data['discount_item'][$key]
+                    'discount' => $data['discount_item'][$key] ?? 0
                 ]);
 
                 //update stock obat
