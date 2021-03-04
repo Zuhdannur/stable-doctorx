@@ -48,10 +48,10 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label>Terapis</label>
-                        <select class="form-control" id="terapis_staff_id" name="terapis_staff_id" style="width: 100%" data-placeholder="Pilih">
+                        <select class="form-control" id="staff_terapis_id" name="staff_terapis_id" style="width: 100%" data-placeholder="Pilih">
                             <option>Pilih</option>
                             @foreach ($terapis as $person)
-                                <option value="{{ $person->id }}" {{ ( $person->id == old('staff_id')) ? 'selected' : '' }}> {{ $person->user->full_name }} </option>
+                                <option value="{{ $person->id }}" {{ ( $person->id == old('staff_terapis_id')) ? 'selected' : '' }}> {{ $person->user->full_name }} </option>
                             @endforeach
                         </select>
                     </div>

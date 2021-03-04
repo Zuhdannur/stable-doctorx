@@ -1077,7 +1077,7 @@ class BillingRepository extends BaseRepository
             }
 
             //Save Maping Billing
-            $TreatmentInvoice = TreatmentInvoice::create(['treatment_id' => $treatment->id, 'invoice_id' => $billing->id]);
+            $TreatmentInvoice = TreatmentInvoice::firstOrNew(['treatment_id' => $treatment->id, 'invoice_id' => $billing->id]);
             $TreatmentInvoice->save();
             $saveDetail = true;
         }

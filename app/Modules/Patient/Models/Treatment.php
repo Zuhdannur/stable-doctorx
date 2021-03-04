@@ -74,7 +74,8 @@ class Treatment extends Model
         'service_id',
         'service_notes',
     	'notes',
-        'id_klinik'
+        'id_klinik',
+        'staff_terapis_id'
     ];
 
     public function patient()

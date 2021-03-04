@@ -59,10 +59,11 @@ class TreatmentRepository extends BaseRepository
             'date' => $combinedDT,
             'end_time' => $data['end_time'],
             'room_id' => $data['room_id'],
-            'staff_id' => $data['dokter_staff_id'],
+            'staff_id' => $data['dokter_staff_id'] ?? 0,
             'notes' => $data['notes'],
             'status_id' => config('admission.admission_waiting'),
-            'id_klinik' => auth()->user()->klinik->id_klinik
+            'id_klinik' => auth()->user()->klinik->id_klinik,
+            'staff_terapis_id' => $data['staff_terapis_id'] ?? 0
         ]);
 
         $code = 'TR'.$treatment->id;
@@ -235,7 +236,8 @@ class TreatmentRepository extends BaseRepository
             'patient_id' => $treatment->patient_id,
             'status' => config('billing.invoice_unpaid'),
             'date' => $date->format( setting()->get('date_format')),
-            'created_by' => auth()->user()->id
+            'created_by' => auth()->user()->id,
+            'id_klinik' => auth()->user()->klinik->id_klinik
         ]);
 
         /** Integrate To Finance */
@@ -248,8 +250,9 @@ class TreatmentRepository extends BaseRepository
 
     private function _storeToTransactionTable(Billing $billing)
     {
-        $transaction = FinanceTransaction::create([
+        $transaction = FinanceTransaction::firstOrNew([
             'trx_type_id' => config('finance_trx.trx_types.invoice'),
+            'transaction_code' => $billing->invoice_no,
             'memo' => '',
             'person' => $billing->patient->name,
             'person_id' => $billing->patient->id,
@@ -257,10 +260,11 @@ class TreatmentRepository extends BaseRepository
             'trx_date' => \Carbon\Carbon::now(),
             'potongan' => '',
             'created_by' => auth()->user()->id,
-            'updated_by' => auth()->user()->id
+            'updated_by' => auth()->user()->id,
+            'id_klinik' => auth()->user()->klinik->id_klinik
         ]);
 
-        $transaction->transaction_code = $billing->invoice_no;
+//        $transaction->transaction_code =
         $transaction->save();
 
         return $transaction;
