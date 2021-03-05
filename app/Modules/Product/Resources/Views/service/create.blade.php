@@ -65,8 +65,6 @@
                         <div class="col-md-10">
                             {{ html()->text('price')
                                 ->class('form-control  tanpa-rupiah')
-                                ->placeholder(__('product::validation.service.price'))
-                                ->attribute('maxlength', 128)
                                 ->attribute('placeholder', 0)
                                 ->required() }}
                         </div>
@@ -139,12 +137,12 @@ var BeFormValidation = function() {
                 'name': {
                     required: true
                 },
-                'price': {
-                    required: true,
-                    minlength: 5,
-                    maxlength: 12,
-                    number: true
-                },
+                // 'price': {
+                //     required: true,
+                //     minlength: 0,
+                //     maxlength: 100,
+                //     number: true
+                // },
             },
         });
     };

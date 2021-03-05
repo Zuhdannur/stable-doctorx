@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="form-group row">
-                        {{ html()->label(__('product::validation.service.name'))
+                        {{ html()->label("Harga")
                             ->class('col-md-2 form-control-label')
                             ->for('name') }}
 
