@@ -24,7 +24,7 @@ class IncentiveController extends Controller
     public function index(Datatables $datatables)
     {
         if ($datatables->getRequest()->ajax()) {
-            return $datatables->of(Incentive::get())
+            return $datatables->of(Incentive::where('id_klinik')->get())
             ->addIndexColumn()
             ->addColumn('details_url', function($data) {
                 return route('admin.incentive.incentivedetail', $data->id);
@@ -145,7 +145,7 @@ class IncentiveController extends Controller
         }
 
         $product = new Product;
-        $listProduct = $product->get();
+        $listProduct = $product->where('id_klinik',auth()->user()->klinik->id_klinik)->get();
 
         $optionListProduct = '<option></option>';
         foreach ($listProduct as $key => $val) {
@@ -154,7 +154,7 @@ class IncentiveController extends Controller
         }
 
         $service = new Service;
-        $listService = $service->get();
+        $listService = $service->where('id_klinik',auth()->user()->klinik->id_klinik)->get();
 
         $optionListService = '<option></option>';
         foreach ($listService as $k => $v) {
@@ -173,6 +173,7 @@ class IncentiveController extends Controller
             $Incentive->name = $request->name;
             $Incentive->product_incentive = $request->product_incentive;
             $Incentive->description = $request->description;
+            $Incentive->id_klinik = auth()->user()->klinik->id_klinik;
 
             if ($Incentive->save()) {
 

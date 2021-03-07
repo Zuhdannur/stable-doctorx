@@ -71,7 +71,7 @@ class FinanceTransaction extends Model
     }
 
     public static function generateTrxCode($type_id, $label){
-        $count = self::where('trx_type_id', $type_id)->count();
+        $count = self::where('trx_type_id', $type_id)->count() + 1;
         return $label."#".$count;
     }
 

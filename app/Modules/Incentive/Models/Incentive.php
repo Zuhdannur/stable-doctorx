@@ -29,7 +29,8 @@ class Incentive extends Model
     	'name',
     	'description',
         'product_incentive',
-        'point_value'
+        'point_value',
+        'id_klinik'
     ];
 
     public function details()

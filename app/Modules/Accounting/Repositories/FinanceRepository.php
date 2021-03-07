@@ -7,13 +7,13 @@ use App\Modules\Accounting\Models\FinanceAccount;
 use App\Modules\Accounting\Models\FinanceJournal;
 use App\Modules\Accounting\Models\FinanceTransaction;
 
-class FinanceRepository extends BaseRepository 
+class FinanceRepository extends BaseRepository
 {
     public function model()
     {
         return FinanceAccount::class;
     }
-    
+
     public static function storePendapatan($transaction_id, $value)
     {
         //save to pendapatan
@@ -26,7 +26,7 @@ class FinanceRepository extends BaseRepository
             'value' => $value,
             'tax' => '',
             'tags' => 'is_pendapatan'
-        ]); 
+        ]);
     }
 
     public static function storePiutang($transaction_id, $value)
@@ -77,29 +77,29 @@ class FinanceRepository extends BaseRepository
         $jornals = FinanceJournal::create([
             'transaction_id' => $transaction_id,
             'account_id' => $acc_radeem->id,
-            'balance'  => $acc_radeem->balance,                      
-            'type' => config('finance_journal.types.debit'), 
+            'balance'  => $acc_radeem->balance,
+            'type' => config('finance_journal.types.debit'),
             'value' => $value,
-            'description' => 'Radeem Point Membership',                        
-            'tags' => 'is_radeem'                       
+            'description' => 'Radeem Point Membership',
+            'tags' => 'is_radeem'
         ]);
     }
 
-    /** 
+    /**
      * example person param
      * $person = array(
      *  'id' => $patient->id || user()->id
      *  'name' => $patient->name || user()->name || null
      *  'type' =>  config('finance_trx.person_type.patient')
      * )
-     * 
+     *
      * $transactionType = config('finance_trx.trx_types.invoice_payment')
      */
     public static function createTransaction($transactionType, array $person)
     {
         /** save data to transaction table*/
-        $transaction = FinanceTransaction::create([
-            'trx_type_id' => $transactionType, 
+        $transaction = FinanceTransaction::firstOrNew([
+            'trx_type_id' => $transactionType,
             'transaction_code' => '', //update di bawah
             'memo' => '',
             'person' => $person['name'],

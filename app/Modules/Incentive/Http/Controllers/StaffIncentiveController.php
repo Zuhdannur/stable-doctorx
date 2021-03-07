@@ -18,10 +18,14 @@ class StaffIncentiveController extends Controller
     public function index(Datatables $datatables)
     {
         if ($datatables->getRequest()->ajax()) {
-            return $datatables->of(IncentiveStaff::get())
+            return $datatables->of(IncentiveStaff::whereHas('staff',function ($query) {
+                $query->whereHas('user',function ($query) {
+                    $query->where('id_klinik',Auth()->user()->id_klinik);
+                });
+            })->get())
             ->addIndexColumn()
             ->addColumn('staff_name', function($data) {
-                return $data->staff->user->full_name;
+                return $data->staff->user->id_klinik;
             })
             ->addColumn('incentive_name', function($data) {
                 return $data->incentive->name;
@@ -41,7 +45,9 @@ class StaffIncentiveController extends Controller
     public function staffList(Datatables $datatables)
     {
         if ($datatables->getRequest()->ajax()) {
-            return $datatables->of(Staff::get())
+            return $datatables->of(Staff::whereHas('user',function ($query) {
+                return $query->where('id_klinik',Auth()->user()->id_klinik);
+            })->get())
             ->addIndexColumn()
             ->addColumn('checkbox', function ($item) {
                 return '<input type="checkbox" id="staffId'.$item->id.'" name="staffId" class="staffId" value="'.$item->id.'" />';
@@ -78,7 +84,7 @@ class StaffIncentiveController extends Controller
         }
 
         $incentive = new Incentive;
-        $listIncentive = $incentive->get();
+        $listIncentive = $incentive->where('id_klinik',auth()->user()->klinik->id_klinik)->get();
 
         $optionListIncentive = '<option></option>';
         foreach ($listIncentive as $key => $val) {
@@ -108,10 +114,10 @@ class StaffIncentiveController extends Controller
         }
 
         \DB::beginTransaction();
-        
+
         foreach ($staffIds as $staff) {
             $Staff = Staff::findOrFail($staff);
-            
+
             // $Staff->staffIncentive()->sync($incentiveId);
 
             $IncentiveStaff = IncentiveStaff::firstOrNew(['staff_id' => $Staff->id, 'incentive_id' => $incentiveId]);

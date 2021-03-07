@@ -112,4 +112,9 @@ class Treatment extends Model
     {
         return TreatmentDetail::where('treatment_id',substr($this->treatment_no,2))->get();
     }
+
+    public function staffTerapis()
+    {
+        return $this->hasOne('App\Modules\Humanresource\Models\Staff', 'id', 'staff_terapis_id');
+    }
 }

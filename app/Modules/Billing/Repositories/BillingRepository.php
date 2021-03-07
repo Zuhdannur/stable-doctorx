@@ -285,6 +285,7 @@ class BillingRepository extends BaseRepository
                 'in_paid' => 0
             ]);
 
+
             $_transaction = FinanceTransaction::find($billing->transaction_id);
             $patient = Patient::find($billing->patient_id);
             if ($_transaction) {
@@ -662,6 +663,7 @@ class BillingRepository extends BaseRepository
         $Billing = Billing::findOrFail($invNo);
         //Save Komisi
         $staffId = array();
+        $terapisStaffId = array();
 
         $appInvoice = isset($Billing->appointmentInvoice->appointment->staff->id) ? $Billing->appointmentInvoice->appointment->staff->id : null;
         $treatInvoice = isset($Billing->treatmentInvoice->treatment->staff->id) ? $Billing->treatmentInvoice->treatment->staff->id : null;
@@ -680,6 +682,12 @@ class BillingRepository extends BaseRepository
                     $staffId[] = $treatInvoice->staff->id;
                 }
             }
+        }
+
+        $treatInvoiceTerapis = isset($Billing->treatmentInvoice->treatment->staffTerapis->id) ? $Billing->treatmentInvoice->treatment->staffTerapis->id : null;
+
+        if ($treatInvoiceTerapis) {
+            $staffId[] = $treatInvoiceTerapis;
         }
 
         $invoiceService = $Billing->invDetail->where('type', 'service');
@@ -802,6 +810,7 @@ class BillingRepository extends BaseRepository
                 }
             }
         }
+
         return true;
     }
 
