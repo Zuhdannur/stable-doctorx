@@ -2,6 +2,7 @@
 
 namespace App\Modules\Billing\Models;
 
+use App\Modules\Accounting\Models\FinanceTransaction;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Modules\Billing\Models\PaymentHistory;
@@ -45,11 +46,12 @@ class Billing extends Model
         'total_ammount',
         'remaining_payment',
         'radeem_point',
-        'id_klinik'
+        'id_klinik',
+        'notes'
     ];
 
     public function getDiscountPercentAttribute() {
-        return $this->discount ? $this->discount . '%' : '0%';
+        return $this->discount ? intval($this->discount) . '%' : '0%';
     }
 
     public function setDateAttribute($value)
@@ -162,5 +164,9 @@ class Billing extends Model
 
     public function getQtyAttribute() {
         return intval($this->invDetail()->sum('qty'));
+    }
+
+    public function finance_transaction() {
+        return $this->hasOne('App\Modules\Accounting\Models\FinanceTransaction','transaction_code','invoice_no');
     }
 }

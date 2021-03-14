@@ -106,4 +106,19 @@ class BillingDetail extends Model
 
         return $point;
     }
+
+    public function getProductPriceAttribute() {
+        $type = $this->attributes['type'];
+        $id = $this->attributes['product_id'];
+        $productName = null;
+        if($type == 'product'){
+            $source = Product::find($id);
+            $productName = $source->price;
+        }elseif($type == 'service'){
+            $source = Service::find($id);
+            $productName = $source->price;
+        }
+
+        return $productName;
+    }
 }

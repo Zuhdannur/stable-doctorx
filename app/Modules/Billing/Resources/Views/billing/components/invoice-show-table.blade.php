@@ -7,6 +7,7 @@
                 <th class="text-center" style="width: 90px;">Qty</th>
                 <th class="text-right" style="width: 120px;">Unit</th>
                 <th class="text-right" style="width: 120px;">Pajak</th>
+                <th class="text-right" style="width: 120px;">Discount</th>
                 <th class="text-right" style="width: 300px;">Amount</th>
             </tr>
         </thead>
@@ -34,7 +35,8 @@
                         <p class="font-w600 mb-5">{{ $item->tax_label != '' ? $item->tax_label : '-' }}</p>
                         <div class="text-muted tax_ammount">{{ currency()->rupiah($tax_ammount, setting()->get('currency_symbol')) }}</div>
                     </td>
-                    <td class="text-right ammount">{{ currency()->rupiah($amount, setting()->get('currency_symbol')) }}</td>
+                    <td class="text-right ammount">{{ currency()->rupiah($item->discount_item, setting()->get('currency_symbol')) }}</td>
+                    <td class="text-right">{{ currency()->rupiah($item->price, setting()->get('currency_symbol')) }}</td>
                 </tr>
             @endforeach
             {{-- Subtotal --}}
@@ -82,7 +84,7 @@
                     </tr>
                 @break
             @endswitch
-            
+
             {{-- if membership --}}
             @if ($billing->patient->membership)
                 @if ($billing->status == config('billing.invoice_unpaid'))
@@ -135,7 +137,7 @@
                     <td colspan="2" class="font-w600 text-right" id='total_potongan_point'></td>
                 </tr>
             @endif
-            
+
             {{-- Total  --}}
             <tr class="table-warning">
                 <td colspan="5" class="font-w700 text-uppercase text-right">Total</td>
@@ -143,25 +145,25 @@
             </tr>
             {{-- Total Pay --}}
             <tr class="table-info d-none" id="totalPayGroup">
-                <td colspan="5" class="font-weight-bold text-right">Jumlah Yang Akan Dibayarkan</td> 
+                <td colspan="5" class="font-weight-bold text-right">Jumlah Yang Akan Dibayarkan</td>
                 <td colspan="2">
                     <input type="number" name='totalPay' id="totalPay" placeholder='0' class="form-control font-w700 text-right required"/>
                 </td>
             </tr>
             {{-- Jumlah Diterima --}}
             <tr class="table-info">
-                <td colspan="5" class="font-weight-bold text-right">Jumlah Diterima</td> 
+                <td colspan="5" class="font-weight-bold text-right">Jumlah Diterima</td>
                 <td colspan="2">
                     <input type="number" name='total_receive' id="total_receive" placeholder='0' class="form-control font-w700 text-right required"/>
                 </td>
             </tr>
             {{-- Kembalian --}}
             <tr id="kembalianTr">
-                <td colspan="5" class="font-weight-bold text-right">Jumlah Kembalian</td> 
+                <td colspan="5" class="font-weight-bold text-right">Jumlah Kembalian</td>
                 <td colspan="2">
                     <input type="text" name='total_kembalian' id="total_kembalian" placeholder='0' class="form-control font-w700 tanpa-rupiah text-right" readonly/>
                 </td>
-            </tr>            
+            </tr>
         </tbody>
     </table>
 </div>

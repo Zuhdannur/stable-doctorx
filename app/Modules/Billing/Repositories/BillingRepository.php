@@ -109,7 +109,8 @@ class BillingRepository extends BaseRepository
                         'tax_label' => !empty($tax) ? $tax->tax_name . ' ' . $tax->percentage . ' %' : '',
                         'tax_value' => !empty($tax) ? $tax->percentage : '',
                         'type' => $type,
-                        'discount' => $data['discount_item'][$key]
+                        'discount' => $data['discount_item'][$key],
+                        'notes' => $data['notes'][$key] ?? ''
                     ]);
 
                     $billingDetail->qty = $data['qty'][$key] + (int)$billingDetail->qty;
@@ -260,7 +261,7 @@ class BillingRepository extends BaseRepository
                     /** store payment history */
                     PaymentHistory::create([
                         'invoice_id' => $createBilling->id,
-                        'total_pay' => $createBilling->total_ammount,
+                        'total_pay' => $createBilling->total_ammount - $discount_val ,
                         'in_paid' => $data['total_receive']
                     ]);
 
@@ -388,7 +389,8 @@ class BillingRepository extends BaseRepository
                     'tax_value' => !empty($tax) ? $tax->percentage : '',
                     'type' => $type,
                     'qty' => $data['qty'][$key],
-                    'discount' => $data['discount_item'][$key] ?? 0
+                    'discount' => $data['discount_item'][$key] ?? 0,
+                    'notes' => $data['notes'][$key] ?? ''
                 ]);
 
                 //update stock obat
