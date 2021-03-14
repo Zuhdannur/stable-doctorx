@@ -49,6 +49,8 @@
                         <th>Product</th>
                         <th class="text-center" style="width: 90px;">Qnt</th>
                         <th class="text-right" style="width: 120px;">Unit</th>
+                        <th class="text-right" style="width: 120px;">Discount</th>
+                        <th class="text-right" style="width: 120px;">Notes</th>
                         <th class="text-right" style="width: 120px;">Pajak</th>
                         <th class="text-right" style="width: 120px;">Amount</th>
                     </tr>
@@ -68,6 +70,8 @@
                             <span class="badge badge-pill badge-primary">{{ $item->qty }}</span>
                         </td>
                         <td class="text-right">{{ currency()->rupiah($item->price, setting()->get('currency_symbol')) }}</td>
+                        <td class="text-right">{{ currency()->rupiah($item->discount_item, setting()->get('currency_symbol')) }}</td>
+                        <td class="text-right">{{ $item->notes }}</td>
                         <td class="text-center">
                             <span>{{ $item->tax_label }}</span>
                         </td>
@@ -75,26 +79,30 @@
                     </tr>
                     @endforeach
                     <tr>
-                        <td colspan="5" class="font-w600 text-right">Subtotal</td>
+                        <td colspan="7" class="font-w600 text-right">Subtotal</td>
                         <td class="text-right">{{ currency()->rupiah($billing->subtotal, setting()->get('currency_symbol')) }}</td>
                     </tr>
                     <tr>
-                        <td colspan="5" class="font-w600 text-right">Total Tax</td>
+                        <td colspan="7" class="font-w600 text-right">Total Tax</td>
                         <td class="text-right">{{ currency()->rupiah($billing->tax_total, setting()->get('currency_symbol')) }}</td>
                     </tr>
                     <tr>
-                        <td colspan="5" class="font-w600 text-right">Diskon {{ $billing->discount_percent }}</td>
+                        <td colspan="7" class="font-w600 text-right">Diskon {{ $billing->discount_percent }}</td>
+                        <td class="text-right">{{ currency()->rupiah($billing->discountprice, setting()->get('currency_symbol')) }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" class="font-w600 text-right">Diskon Dlm Rupiah {{ $billing->discount_percent }}</td>
                         <td class="text-right">{{ currency()->rupiah($billing->discountprice, setting()->get('currency_symbol')) }}</td>
                     </tr>
                     {{-- if membership --}}
                     @if ($billing->patient->membership)
                         <tr>
-                            <td colspan="5" class="font-w600 text-right">Potongan Radeem</td>
+                            <td colspan="7" class="font-w600 text-right">Potongan Radeem</td>
                             <td colspan="2" class="text-right">{{ currency()->rupiah($billing->radeem_point, setting()->get('currency_symbol')) }}</td>
                         </tr>
                     @endif
                     <tr class="table-warning">
-                        <td colspan="5" class="font-w700 text-uppercase text-right">Total</td>
+                        <td colspan="7" class="font-w700 text-uppercase text-right">Total</td>
                         <td class="font-w700 text-right">
                             @php
                                 $total = $billing->subtotal + $billing->tax_total - $billing->discountprice - $billing->radeem_point
@@ -306,7 +314,7 @@ jQuery(function () {
 
                             printInvoice(result.data.id);
 
-                            setTimeout(function() { 
+                            setTimeout(function() {
                                 window.location = '{{ route('admin.billing.index') }}';
                             }, 1000);
                         } else {

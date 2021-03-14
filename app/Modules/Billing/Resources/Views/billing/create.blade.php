@@ -75,13 +75,14 @@
                             <tr>
                                 <th class="text-center" style="width: 50px;"> </th>
                                 <th style="width: 50px;"> # </th>
-                                <th> Item </th>
-                                <th class="text-center" style="width: 100px;"> Qty </th>
+                                <th style="width: 200px;"> Item </th>
+                                <th class="text-center" style="width: 80px;"> Qty </th>
                                 <th class="text-center" style="width: 100px;"> Harga Sebelum Discount </th>
                                 <th class="text-center" style="width: 150px;"> Discount </th>
                                 <th class="text-right" style="width: 200px;"> Harga Setelah Discount </th>
+                                <th class="text-center"> Notes</th>
                                 <th class="text-center" style="width: 150px;"> Pajak </th>
-                                <th class="text-right" style="width: 200px;"> Total </th>
+                                <th class="text-right" style="width: 150px;"> Total </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,6 +112,9 @@
                                     <input type="number" name='price[1]' placeholder='0' class="form-control text-right price required" min="1" readonly/>
                                 </td>
                                 <td>
+                                    <input type="text" name='notes[1]' placeholder='Keterangan' class="form-control"/>
+                                </td>
+                                <td>
                                     <select name="tax[1]" id="1taxselect2" class="form-control tax" data-placeholder="Pilih" width="100%">
                                         {!! $taxList !!}
                                     </select>
@@ -122,13 +126,13 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="8" class="font-weight-bold text-right">Sub Total</td>
+                                <td colspan="9" class="font-weight-bold text-right">Sub Total</td>
                                 <td>
                                     <input type="text" name='sub_total' placeholder='0' class="form-control tanpa-rupiah text-right" id="sub_total" readonly/>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="8" class="font-weight-bold text-right">Total Point</td>
+                                <td colspan="9" class="font-weight-bold text-right">Total Point</td>
                                 <td>
                                     <input type="text" class="form-control nomor-aja text-right" name="point_ammount" id="point_ammount" placeholder="0" readonly>
                                 </td>
@@ -140,38 +144,38 @@
                                 </td>
                             </tr> --}}
                             <tr>
-                                <td colspan="8" class="font-weight-bold text-right">Diskon %</td>
+                                <td colspan="9" class="font-weight-bold text-right">Diskon %</td>
                                 <td>
                                     <input type="number" class="form-control text-right" name="discount" id="discount" placeholder="0" value="0">
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="8" class="font-weight-bold text-right">Jumlah Diskon</td>
+                                <td colspan="9" class="font-weight-bold text-right">Jumlah Diskon</td>
                                 <td>
                                     <input type="text" name='discount_amount' id="discount_amount" placeholder='0' class="form-control tanpa-rupiah text-right" readonly/>
                                 </td>
                             </tr>
                             <tr class="table-warning">
-                                <td colspan="8" class="font-weight-bold text-right">Total</td>
+                                <td colspan="9" class="font-weight-bold text-right">Total</td>
                                 <td>
                                     <input type="text" name='total_amount' id="total_amount" placeholder='0' class="form-control font-w700 tanpa-rupiah text-right" readonly/>
                                 </td>
                             </tr>
                             <tr class="table-info">
-                                <td colspan="8" class="font-weight-bold text-right">Jumlah Diterima</td>
+                                <td colspan="9" class="font-weight-bold text-right">Jumlah Diterima</td>
                                 <td>
                                     <input type="number" name='total_receive' id="total_receive" placeholder='0' class="form-control font-w700 text-right required"/>
                                 </td>
                             </tr>
                             <tr id="kembalianTr">
-                                <td colspan="8" class="font-weight-bold text-right">Jumlah Kembalian</td>
+                                <td colspan="9" class="font-weight-bold text-right">Jumlah Kembalian</td>
                                 <td>
                                     <input type="text" name='total_kembalian' id="total_kembalian" placeholder='0' class="form-control font-w700 tanpa-rupiah text-right" readonly/>
                                 </td>
                             </tr>
 
                             <tr>
-                                <td colspan="9">
+                                <td colspan="10">
                                     <div class="form-group row">
                                         <label class="col-12" for="example-textarea-input">Catatan</label>
                                         <div class="col-12">
@@ -526,6 +530,7 @@ $(document).ready(function() {
         html += '<td><input type="number" name="before_discount['+(i+1)+']" placeholder="0" class="form-control before-discount" min="0" /></td>';
         html += '<td><input type="number" name="discount_item['+(i+1)+']" class="form-control discount-item" min="0" placeholder="0" /></td>';
         html += '<td><input type="number" name="price['+(i+1)+']" class="form-control text-right price required" placeholder="0" min="1" readonly/></td>';
+        html += '<td><input type="text" name="notes['+(i+1)+']" class="form-control" placeholder="Keterangan"/></td>';
         html += '<td><select id="'+(i+1)+'taxselect2" name="tax['+(i+1)+']" class="form-control tax" data-placeholder="Pilih" style="width: 100%">{!! $taxList !!}</select></td>';
         html += '<td><input type="text" name="total['+(i+1)+']" placeholder="0" class="form-control text-right total " readonly/></td>';
 

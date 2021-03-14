@@ -8,9 +8,10 @@ use App\Modules\Billing\Models\Traits\Attribute\BillingAttribute;
 class PaymentHistory extends Model
 {
     protected $fillable = [
-    	'invoice_id', 
-        'total_pay', 
+    	'invoice_id',
+        'total_pay',
         'in_paid',
+        'type'
     ];
 
     public function marketing()

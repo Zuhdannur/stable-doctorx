@@ -79,4 +79,10 @@ class FinanceTransaction extends Model
     {
         return $this->hasOne('App\Models\Auth\User', 'id', 'created_by');
     }
+
+    public function last_journal()
+    {
+        return $this->hasOne('App\Modules\Accounting\Models\FinanceJournal','transaction_id','id')->orderBy('created_at','asc');
+    }
+
 }

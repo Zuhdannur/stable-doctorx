@@ -2,9 +2,26 @@
     <div class="col-3 contact-details">
         <h5>Pasien: {{ $billing->patient->patient_name }}</h5>
         <h6><em>ID: {{ $billing->patient->patient_unique_id }}</em></h6>
-        <h6><em>Dokter: {{ isset($billing->appointmentInvoice->appointment->staff->user->full_name) ? $billing->appointmentInvoice->appointment->staff->user->full_name : '-' }}</em></h6>
-        <h6><em>Terapis: {{ isset($billing->treatmentInvoice->treatment->staff->user->full_name) ? $billing->treatmentInvoice->treatment->staff->user->full_name : '-' }}</em></h6>
-        <p><em>Alamat: {{ isset($billing->patient->address) ? ucwords(strtolower($billing->patient->address)) : '-' }}, {{ isset($billing->patient->city->name) ? ucwords(strtolower($billing->patient->city->name)) : '-' }} {{ $billing->patient->zip_code }}</em></p>
+
+        @if(!empty($billing->appointmentInvoice->appointment->staff->user->full_name))
+            <h6>
+                <em>Dokter: {{ isset($billing->appointmentInvoice->appointment->staff->user->full_name) ? $billing->appointmentInvoice->appointment->staff->user->full_name : '-' }}</em>
+            </h6>
+        @endif
+
+        @if(!empty($billing->treatmentInvoice->treatment->staff->user->full_name))
+            <h6>
+                <em>Dokter: {{ isset($billing->treatmentInvoice->treatment->staff->user->full_name) ? $billing->treatmentInvoice->treatment->staff->user->full_name : '-' }}</em>
+            </h6>
+        @endif
+        @if(!empty($billing->treatmentInvoice->treatment->staffTerapis->user->full_name))
+            <h6>
+                <em>Terapis: {{ isset($billing->treatmentInvoice->treatment->staffTerapis->user->full_name) ? $billing->treatmentInvoice->treatment->staffTerapis->user->full_name :   '-' }}</em>
+            </h6>
+        @endif
+        <p><em>Alamat: {{ isset($billing->patient->address) ? ucwords(strtolower($billing->patient->address)) : '-' }}
+                , {{ isset($billing->patient->city->name) ? ucwords(strtolower($billing->patient->city->name)) : '-' }} {{ $billing->patient->zip_code }}</em>
+        </p>
     </div>
     <div class="col-1 offset-2 logo">
         <img width="125px" height="125px" src="{{ asset(setting()->get('logo_square')) }}">

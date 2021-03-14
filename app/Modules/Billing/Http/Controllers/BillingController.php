@@ -312,6 +312,9 @@ class BillingController extends Controller
                                         </td>
                                         <td>
                                             <input type="number" name="price['.$keyProduct.']" id="'.$keyProduct.'price" placeholder="0" class="form-control text-right price required" min="1" readonly/>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="notes['.$keyProduct.']" id="'.$keyProduct.'notes" placeholder="Keterangan" class="form-control"/>
                                         </td>';
                 $htmlProductDetail .= '<td>
                                             <select name="tax['.$keyProduct.']" id="'.$keyProduct.'taxselect2" class="form-control tax" data-placeholder="Pilih" style="width=: 100%">'.$taxList.'</select>

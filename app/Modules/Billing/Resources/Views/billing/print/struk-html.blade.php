@@ -24,35 +24,35 @@
                 display: flex;
                 min-height:0.5em;
             }
-    
+
             .container{
                 width: 66mm;
                 min-height:8cm;
             }
-    
+
             .content-center{
                 justify-content: center;
             }
-    
+
             .col{
                 flex-wrap:wrap;
             }
-    
+
             table{
                 font-size: 7pt;
             }
-    
+
             td{
                 padding: 0px 1px;
             }
-    
+
             .bil-detail{
                 border-bottom: 1px solid #000000;
                 border-top: 1px solid #000000;
             }
             .wrapword {
                 white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
-                white-space: -webkit-pre-wrap;          /* Chrome & Safari */ 
+                white-space: -webkit-pre-wrap;          /* Chrome & Safari */
                 white-space: -pre-wrap;                 /* Opera 4-6 */
                 white-space: -o-pre-wrap;               /* Opera 7 */
                 white-space: pre-wrap;                  /* CSS3 */
@@ -61,7 +61,7 @@
                 white-space: normal;
                 /* border-style: ; */
             }
-    
+
             .border-solid{
                 border:1px solid #000000
             }
@@ -84,6 +84,9 @@
                 <h5>Invoice No. #{{ $billing->invoice_no }}</h5>
                 <h5><span style='width:18mm;display: inline-block;'>Dibuat Pada&nbsp;</span>: {{ $billing->created_at }}</h5>
                 <h5><span style='width:18mm;display: inline-block;'>Jatuh Tempo&nbsp;</span>: {{ $billing->date }}</h5>
+{{--                <h5><span style='width:18mm;display: inline-block;'>Metode Pembayaran&nbsp;</span>: {{ @$billing->finance_transaction->journal }}</h5>--}}
+                <h5><span style='width:18mm;display: inline-block;'>Metode Pembayaran&nbsp;</span>: Cash </h5>
+                <h5><span style='width:18mm;display: inline-block;'>Catatan&nbsp;</span>: {{ $billing->note}}</h5>
                 <hr style='width:66mm;border-bottom : 1.5px dashed #2a2929;border-top: none;margin-top:3px;'>
             </div>
         </div>
@@ -96,8 +99,10 @@
                         <th clss='bil-detail' style='width:5mm;'>No.</th>
                         <th clss='bil-detail' style='width:20mm'>Produk/Servis</th>
                         <th clss='bil-detail' style='width:8mm'>Qty</th>
-                        <th clss='bil-detail' style='width:15mm'>Harga</th>
+                        <th clss='bil-detail' style='width:20mm'>Harga</th>
+                        <th clss='bil-detail' style='width:15mm'>Discount</th>
                         <th clss='bil-detail' style='width:18mm'>Amount</th>
+                        <th clss='bil-detail' style='width:20mm'>Notes</th>
                     </thead>
                     <tbody>
                         @foreach($billing->invDetail as $key => $item)
@@ -113,8 +118,10 @@
                                     <em> {{  $item->tax_label }}</em>
                                 </td>
                                 <td class="wrapword">{{ $item->qty }}</td>
-                                <td class="wrapword">{{ currency()->rupiah($item->price, setting()->get('currency_symbol')) }}</td>
-                                <td class="wrapword"><strong>{{ currency()->rupiah($amount, setting()->get('currency_symbol')) }}</strong></td>
+                                <td >{{ currency()->rupiah($item->product_price, setting()->get('currency_symbol')) }}</td>
+                                <td>{{ currency()->rupiah($item->discount, setting()->get('currency_symbol')) }}</td>
+                                <td ><strong>{{ currency()->rupiah($amount , setting()->get('currency_symbol')) }}</strong></td>
+                                <td><strong>{{ $item->notes }}</strong></td>
                             </tr>
                         @endif
                         @endforeach
@@ -159,16 +166,16 @@
                             <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->tax_total, setting()->get('currency_symbol')) }}</strong></td>
                         </tr>
                         <tr>
-                            <th style='width:35mm;text-align: right;padding-right: 10px;'>Diskon {{ $billing->discount_percent }}</th>
+                            <th style='width:35mm;text-align: right;padding-right: 10px;'>Diskon {{ intval($billing->discount_percent).'%' }}</th>
                             <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->discountprice, setting()->get('currency_symbol')) }}</strong></td>
                         </tr>
                         <tr>
                             <th style='width:35mm;text-align: right;padding-right: 10px;'>Total</th>
-                            <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->total_ammount, setting()->get('currency_symbol')) }}</strong></td>
+                            <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->total_ammount -  $billing->discountprice, setting()->get('currency_symbol')) }}</strong></td>
                         </tr>
                         <tr>
                             <th style='width:35mm;text-align: right;padding-right: 10px;'>Jumlah yang telah dibayarkan</th>
-                            <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->total_pay, setting()->get('currency_symbol')) }}</strong></td>
+                            <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->total_pay -  $billing->discountprice, setting()->get('currency_symbol')) }}</strong></td>
                         </tr>
                         <tr>
                             <th style='width:35mm;text-align: right;padding-right: 10px;'>Sisa Pembayaran</th>
@@ -176,7 +183,7 @@
                         </tr>
                         <tr>
                             <th style='width:35mm;text-align: right;padding-right: 10px;'>Jumlah dibayarkan</th>
-                            <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->last_payment->total_pay, setting()->get('currency_symbol')) }}</strong></td>
+                            <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->last_payment->total_pay - $billing->discountprice, setting()->get('currency_symbol')) }}</strong></td>
                         </tr>
                         <tr>
                             <th style='width:35mm;text-align: right;padding-right: 10px;'>Diterima</th>
@@ -184,7 +191,7 @@
                         </tr>
                         <tr>
                             <th style='width:35mm;text-align: right;padding-right: 10px;'>Kembalian</th>
-                            <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->last_payment->in_paid - $billing->last_payment->total_pay, setting()->get('currency_symbol')) }}</strong></td>
+                            <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah(($billing->last_payment->in_paid - $billing->last_payment->total_pay) + $billing->discountprice, setting()->get('currency_symbol')) }}</strong></td>
                         </tr>
                     </tbody>
                 </table>
@@ -215,6 +222,6 @@
                 <hr style='width:66mm;border-bottom : 1.5px dashed #2a2929;border-top: none;margin-top:3px;'>
             </div>
         </div>
-    </div>    
+    </div>
 {{-- </body> --}}
 </html>
