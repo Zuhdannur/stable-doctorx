@@ -8,7 +8,9 @@
                 <p class="font-w600">{{ timezone()->convertToLocal($appointment->date, 'day') }}, {{ timezone()->convertToLocal($appointment->date, 'date') }} | {{ timezone()->convertToLocal($appointment->date, 'time') }}</p>
                 <p>Dokter: {{ $appointment->staff->user->full_name }}<br>
                 Ruangan: {{ isset($appointment->room->name) ? $appointment->room->name : '-' }}<br>
-                Status : <span class="badge badge-{{ $appointment->status->class_style }}">{{ $appointment->status->name }}</span>
+                Status : <span class="badge badge-{{ $appointment->status->class_style }}">{{ $appointment->status->name }}</span> <br>
+                Keluhan : {{ $appointment->prescription->complaint }} <br>
+                    Riwayat Perawatan dan Alergi : {{ $appointment->prescription->treatment_history }}
                  </p>
                 @if(isset($appointment->prescription))
                 <div class="row">

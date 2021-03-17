@@ -108,9 +108,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#tab-timeline" name="timeline">Timeline</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#tab-billing" name="billing">Billing</a>
+                </li>
                 <li class="nav-item ml-auto">
                     <div class="btn-group btn-group-sm mr-15" id="actionTab">
-                        
+
                     </div>
                 </li>
             </ul>
@@ -124,13 +127,16 @@
                 <div class="tab-pane fade fade-right show" id="tab-timeline" role="tabpanel">
                     @include('patient::patient.tabs.timeline')
                 </div>
+                <div class="tab-pane fade fade-right show" id="tab-billing" role="tabpanel">
+                    @include('patient::patient.tabs.billing')
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    jQuery(function(){ 
+    jQuery(function(){
         $('ul[data-toggle="tabs"]').on('shown.bs.tab', function (e) {
             var inTab = $(e.target).attr("name");
 

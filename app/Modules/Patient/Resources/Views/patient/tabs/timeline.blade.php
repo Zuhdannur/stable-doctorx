@@ -21,7 +21,6 @@
                             @endforeach
                         @endif
                     @endif
-                    
                 </div>
             </div>
         </li>
