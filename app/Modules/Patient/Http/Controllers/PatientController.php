@@ -3,6 +3,7 @@
 namespace App\Modules\Patient\Http\Controllers;
 
 use App\Helpers\Auth\Auth;
+use App\Modules\Billing\Models\Billing;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
@@ -187,8 +188,9 @@ class PatientController extends Controller
                 }
             ]
         );
+        $invoice = Billing::where('patient_id',$patient->id)->orderBy('created_at','desc')->get();
         // dd($patient->appointment);
-        return view('patient::patient.show')->withPatient($patient);
+        return view('patient::patient.show')->withPatient($patient)->withInvoice($invoice);
     }
 
     public function getpatient($pid)
