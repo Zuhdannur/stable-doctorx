@@ -169,4 +169,8 @@ class Billing extends Model
     public function finance_transaction() {
         return $this->hasOne('App\Modules\Accounting\Models\FinanceTransaction','transaction_code','invoice_no');
     }
+
+    public function getLastPaymentHistoriAttribute() {
+        return $this->paymentHistory()->orderBy('created_at','desc');
+    }
 }

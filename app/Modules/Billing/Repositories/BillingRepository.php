@@ -109,7 +109,7 @@ class BillingRepository extends BaseRepository
                         'tax_label' => !empty($tax) ? $tax->tax_name . ' ' . $tax->percentage . ' %' : '',
                         'tax_value' => !empty($tax) ? $tax->percentage : '',
                         'type' => $type,
-                        'discount' => $data['discount_item'][$key],
+                        'discount' => @$data['discount_item'][$key] ?? 0,
                         'notes' => $data['notes'][$key] ?? ''
                     ]);
 
@@ -262,7 +262,8 @@ class BillingRepository extends BaseRepository
                     PaymentHistory::create([
                         'invoice_id' => $createBilling->id,
                         'total_pay' => $createBilling->total_ammount - $discount_val ,
-                        'in_paid' => $data['total_receive']
+                        'in_paid' => $data['total_receive'],
+                        'type' => $data['acc_cash']
                     ]);
 
                     return $createBilling;
