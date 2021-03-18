@@ -85,7 +85,7 @@
                 <h5><span style='width:18mm;display: inline-block;'>Dibuat Pada&nbsp;</span>: {{ $billing->created_at }}</h5>
                 <h5><span style='width:18mm;display: inline-block;'>Jatuh Tempo&nbsp;</span>: {{ $billing->date }}</h5>
 {{--                <h5><span style='width:18mm;display: inline-block;'>Metode Pembayaran&nbsp;</span>: {{ @$billing->finance_transaction->journal }}</h5>--}}
-                <h5><span style='width:18mm;display: inline-block;'>Metode Pembayaran&nbsp;</span>: {{ \App\Modules\Billing\Models\PaymentHistory::where('invoice_id',$billing->id)->first()->account->account_name }} </h5>
+                <h5><span style='width:18mm;display: inline-block;'>Metode Pembayaran&nbsp;</span>: {{ @\App\Modules\Billing\Models\PaymentHistory::where('invoice_id',$billing->id)->first()->account->account_name }} </h5>
                 <h5><span style='width:18mm;display: inline-block;'>Catatan&nbsp;</span>: {{ $billing->note}}</h5>
                 <hr style='width:66mm;border-bottom : 1.5px dashed #2a2929;border-top: none;margin-top:3px;'>
             </div>
