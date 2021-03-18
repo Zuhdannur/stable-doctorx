@@ -18,4 +18,9 @@ class PaymentHistory extends Model
     {
         return $this->hasOne('App\Modules\Crm\Models\CrmMarketing', 'id', 'marketing_id');
     }
+
+    public function account() {
+        return $this->hasOne('App\Modules\Accounting\Models\FinanceAccount','id','type');
+    }
+
 }
