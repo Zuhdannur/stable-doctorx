@@ -46,7 +46,6 @@ class BillingRepository extends BaseRepository
     public function create(array $data): Billing
     {
         return DB::transaction(function () use ($data) {
-
             $patient = Patient::findOrFail($data['patient_id']);
 
             //save data to transaction table
@@ -110,7 +109,7 @@ class BillingRepository extends BaseRepository
                         'tax_value' => !empty($tax) ? $tax->percentage : '',
                         'type' => $type,
                         'discount' => @$data['discount_item'][$key] ?? 0,
-                        'notes' => $data['notes'][$key] ?? ''
+                        'notes' => @$data['notes_item'][$key]
                     ]);
 
                     $billingDetail->qty = $data['qty'][$key] + (int)$billingDetail->qty;
@@ -390,8 +389,8 @@ class BillingRepository extends BaseRepository
                     'tax_value' => !empty($tax) ? $tax->percentage : '',
                     'type' => $type,
                     'qty' => $data['qty'][$key],
-                    'discount' => $data['discount_item'][$key] ?? 0,
-                    'notes' => $data['notes'][$key] ?? ''
+                    'discount' => @$data['discount_item'][$key] ?? 0,
+                    'notes' => @$data['notes'][$key] ?? ''
                 ]);
 
                 //update stock obat

@@ -102,7 +102,6 @@
                         <th clss='bil-detail' style='width:20mm'>Harga</th>
                         <th clss='bil-detail' style='width:15mm'>Discount</th>
                         <th clss='bil-detail' style='width:18mm'>Amount</th>
-                        <th clss='bil-detail' style='width:20mm'>Notes</th>
                     </thead>
                     <tbody>
                         @foreach($billing->invDetail as $key => $item)
@@ -123,8 +122,8 @@
                                 <td ><strong>{{ currency()->rupiah($amount , setting()->get('currency_symbol')) }}</strong></td>
                             </tr>
                             <tr>
-                                <td><strong>Catatan :</strong></td>
-                                <td colspan="5"><strong>{{ $item->notes }}</strong></td>
+                                <td colspan="2"><strong>Catatan :</strong></td>
+                                <td colspan="4"><strong>{{ $item->notes }}</strong></td>
                             </tr>
                         @endif
                         @endforeach

@@ -33,7 +33,8 @@ class BillingDetail extends Model
     	'tax_label',
         'tax_value',
         'payment_step',
-        'discount'
+        'discount',
+        'notes'
     ];
 
     public function getProductAttribute()

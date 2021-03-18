@@ -112,7 +112,7 @@
                                     <input type="number" name='price[1]' placeholder='0' class="form-control text-right price required" min="1" readonly/>
                                 </td>
                                 <td>
-                                    <input type="text" name='notes[1]' placeholder='Keterangan' class="form-control"/>
+                                    <input type="text" name='notes_item[1]' placeholder='Keterangan' class="form-control"/>
                                 </td>
                                 <td>
                                     <select name="tax[1]" id="1taxselect2" class="form-control tax" data-placeholder="Pilih" width="100%">
@@ -530,7 +530,7 @@ $(document).ready(function() {
         html += '<td><input type="number" name="before_discount['+(i+1)+']" placeholder="0" class="form-control before-discount" min="0" /></td>';
         html += '<td><input type="number" name="discount_item['+(i+1)+']" class="form-control discount-item" min="0" placeholder="0" /></td>';
         html += '<td><input type="number" name="price['+(i+1)+']" class="form-control text-right price required" placeholder="0" min="1" readonly/></td>';
-        html += '<td><input type="text" name="notes['+(i+1)+']" class="form-control" placeholder="Keterangan"/></td>';
+        html += '<td><input type="text" name="notes_item['+(i+1)+']" class="form-control" placeholder="Keterangan"/></td>';
         html += '<td><select id="'+(i+1)+'taxselect2" name="tax['+(i+1)+']" class="form-control tax" data-placeholder="Pilih" style="width: 100%">{!! $taxList !!}</select></td>';
         html += '<td><input type="text" name="total['+(i+1)+']" placeholder="0" class="form-control text-right total " readonly/></td>';
 
