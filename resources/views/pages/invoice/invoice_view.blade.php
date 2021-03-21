@@ -66,7 +66,6 @@
                     <th>Tindakan</th>
                 </tr>
                 </thead>
-
             </table>
         </div>
     </div>
@@ -96,8 +95,8 @@
                 pageLength: 25,
                 autoWidth: true,
                 ajax: {
-                    url : '{!! url('admin/accounting/rekap-penjualan/data/getData') !!}',
-                    data: function(data) {
+                    url: '{!! url('admin/accounting/rekap-penjualan/data/getData') !!}',
+                    data: function (data) {
                         data.awal = $("#date_1").val()
                         data.akhir = $("#date_2").val()
                     }
@@ -172,10 +171,9 @@
                 addDeleteForms();
             });
 
-            $(".datepicker").on('change',function () {
+            $(".datepicker").on('change', function () {
                 dt.ajax.reload()
             })
-
 
 
         })
