@@ -889,19 +889,27 @@ jQuery(function () {
     $(document).ready(function() {
 
         $(document).on('click', '.add', function () {
+            i = 1
+            $('#tab_logic tbody tr').each(function(z, element) {
+                var html = $(this).html();
+                i++;
+            });
+
+            var id = (i + 1)
+
             var html = '';
             html += '<tr>';
             html += '<td><button type="button" name="remove" class="btn btn-sm btn-circle btn-outline-danger remove" title="Hapus Item"><i class="fa fa-times"></i></button></td>';
-            html += '<td class="nomor">' + (i + 1) + '</td>';
-            html += '<td><select class="form-control product required" id="product' + (i + 1) + '" name="product[' + (i + 1) + ']" data-placeholder="Pilih" style="width: 100%">{!! $product !!}</select></td>';
-            html += '<td><input type="number" name="qty[' + (i + 1) + ']" class="form-control qty" value="1" min="1"/></td>';
-            html += '<td><input type="text" name="instruction[' + (i + 1) + ']" class="form-control instruction" /></td>';
+            html += '<td class="nomor">' + id + '</td>';
+            html += '<td><select class="form-control product required" id="product' + id + '" name="product[' + id + ']" data-placeholder="Pilih" style="width: 100%">{!! $product !!}</select></td>';
+            html += '<td><input type="number" name="qty[' + ( id  - 1 ) + ']" class="form-control qty" value="1" min="1"/></td>';
+            html += '<td><input type="text" name="instruction[' + id + ']" class="form-control instruction" /></td>';
 
             html += '</tr>';
 
             $('#tab_logic > tbody').append(html);
 
-            $('#product' + (i + 1) + '').select2({
+            $('#product' + id + '').select2({
                 placeholder: "Pilih"
             });
 

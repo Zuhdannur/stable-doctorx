@@ -323,7 +323,6 @@ class PrescriptionRepository extends BaseRepository
     public function updatePrescription(Prescription $prescription, $request)
     {
         return DB::transaction(function () use ($request, $prescription) {
-
             $update_prescription = $prescription->update([
                 'complaint' => $request->complaint,
                 'treatment_history' => $request->treatment_history
