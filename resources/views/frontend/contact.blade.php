@@ -10,6 +10,7 @@
                     <h3 class="block-title">@lang('labels.frontend.contact.box_title')
                     </strong></h3>
                 </div>
+                asdasddsa
                 <div class="block-content">
                     <form class="js-validation-be-contact px-30" method="POST" action="{{ route('frontend.contact.send') }}">
                     @csrf
@@ -27,7 +28,7 @@
                                     <div id="name-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('name') }}</div>
                                 @endif
                             </div>
-                            
+
                         </div>
                         <div class="form-group {{ $errors->has('email') ? ' is-invalid' : '' }} row">
                             <div class="col-12">
@@ -42,7 +43,7 @@
                                     <div id="email-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('email') }}</div>
                                 @endif
                             </div>
-                            
+
                         </div>
                         <div class="form-group {{ $errors->has('phone') ? ' is-invalid' : '' }} row">
                             <div class="col-12">
@@ -53,7 +54,7 @@
                                     <div id="phone-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('phone') }}</div>
                                 @endif
                             </div>
-                            
+
                         </div>
                         <div class="form-group {{ $errors->has('message') ? ' is-invalid' : '' }} row">
                             <div class="col-12">
@@ -64,7 +65,7 @@
                                     <div id="message-error" class="invalid-feedback animated fadeInDown">{{ $errors->first('message') }}</div>
                                 @endif
                             </div>
-                            
+
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-sm-6 push">
