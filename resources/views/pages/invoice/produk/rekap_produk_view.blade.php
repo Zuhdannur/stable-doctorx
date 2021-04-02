@@ -38,7 +38,14 @@
 
     <div class="block" id="my-block-2">
         <div class="block-header block-header-default">
-            <h3 class="block-title">Data Rekap Produk</h3>
+            <div class="d-flex justify-content-between">
+                <h3 class="block-title">Data Rekap Produk</h3>
+                &nbsp;&nbsp;
+                <select class="form-control" name="filter" id="filters">
+                    <option value="semua">Semua Produk</option>
+                    <option value="filter">Yang ada penjualannya</option>
+                </select>
+            </div>
             <div class="block-options">
                 <div class="btn-toolbar float-right" role="toolbar"
                      aria-label="@lang('labels.general.toolbar_btn_groups')">
@@ -96,6 +103,7 @@
                     data: function(data) {
                         data.awal = $("#date_1").val()
                         data.akhir = $("#date_2").val()
+                        data.filter = $("#filters").val()
                     }
                 },
                 language: {
@@ -168,7 +176,11 @@
                 dt.ajax.reload()
             })
 
+            $("#filters").select2()
 
+            $("#filters").on('change',function () {
+                dt.ajax.reload()
+            })
 
         })
     </script>
