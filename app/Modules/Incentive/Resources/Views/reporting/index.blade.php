@@ -28,11 +28,11 @@ tfoot {
                                 <option></option><!-- js-select2  -->
 
                                 @foreach ($staffs as $staff)
-                                    <option value="{{ $staff->id }}" {{ ( $staff->id == old('staff_id')) ? 'selected' : '' }}> {{ $staff->user->full_name }} - {{ $staff->department->department_name }} - {{ $staff->designation->name }} </option>
-                                @endforeach    
+                                    <option value="{{ $staff->id }}" {{ ( $staff->id == old('staff_id')) ? 'selected' : '' }}> {{ @$staff->user->full_name }} - {{ @$staff->department->department_name }} - {{ @$staff->designation->name }} </option>
+                                @endforeach
                             </select>
                         </div>
-                        
+
                         <div class="col-6">
                             <label for="startdate">Tanggal</label>
                             <div class="input-daterange input-group" data-date-format="{{ setting()->get('date_format_js') }}" data-week-start="1" data-autoclose="true" data-today-highlight="true">
@@ -112,7 +112,7 @@ tfoot {
 </div>
 @endif
 <script>
-jQuery(function(){ 
+jQuery(function(){
     Codebase.helpers(['datepicker', 'notify', 'select2']);
 
     $('#staff_id').val("{{ isset($input['staff_id']) ? $input['staff_id'] : 0 }}").trigger("change");
