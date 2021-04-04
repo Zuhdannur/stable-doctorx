@@ -59,6 +59,14 @@ trait AppointmentAttribute
     /**
      * @return string
      */
+    public function getViewConsentAttribute()
+    {
+        return '<button style="width: 50%" class="btn btn-sm btn-warning mr-5 mb-5 btnConsent" value="'.@$this->prescription->inform_concern.'" data-toggle="tooltip" data-placement="top" title="Lihat Consent"><i class="fa fa-check-circle-o"></i></a>';
+    }
+
+    /**
+     * @return string
+     */
     public function getActionButtonsAttribute()
     {
         $appointment = $this;
@@ -66,6 +74,7 @@ trait AppointmentAttribute
         $btnEdit = null;
         $btnV = null;
         $btnVPre = null;
+        $btnViewConsent = null;
 
         switch ($appointment->status_id) {
             case '1': //waiting
@@ -77,6 +86,9 @@ trait AppointmentAttribute
                     if($appointment->billing->status != 0){
                         $btnV = $this->view_prescription_button;
                     }else{
+                        if(!empty($this->prescription->inform_concern)) {
+                            $btnViewConsent = $this->view_consent;
+                        }
                         $btnVPre = $this->edit_prescription_button;
                     }
                 }else{
@@ -85,11 +97,12 @@ trait AppointmentAttribute
                 break;
 
         }
-       
+
         return '<div class="btn-group btn-group-sm" role="group" aria-label="'.__('labels.backend.access.users.user_actions').'">
               '.$btnEdit.'
 			  '.$this->view_button.'
               '.$btnVPre.'
+              '.$btnViewConsent.'
               '.$btnV.'
               '.$btn.'
 			</div>';

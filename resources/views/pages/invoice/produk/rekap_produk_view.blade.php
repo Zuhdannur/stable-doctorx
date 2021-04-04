@@ -43,7 +43,7 @@
                 &nbsp;&nbsp;
                 <select class="form-control" name="filter" id="filters">
                     <option value="semua">Semua Produk</option>
-                    <option value="filter">Yang ada penjualannya</option>
+                    <option value="filter">Penjualan</option>
                 </select>
             </div>
             <div class="block-options">
@@ -61,12 +61,12 @@
                 <tr>
                     <th>#</th>
                     <th>Nama Produk</th>
-                    <th>Kuantitas Terjual</th>
-                    <th>Kuantitas Retur</th>
+                    <th>Terjual</th>
+                    <th>Retur</th>
                     <th>Satuan</th>
-                    <th>Total Nilai Terjual</th>
-                    <th>Total Nilai Retur</th>
-                    <th>Harga Penjualan Rata Rata</th>
+                    <th>Total Penjualan</th>
+                    <th>Total Retur</th>
+                    <th>Stok</th>
                 </tr>
                 </thead>
 
@@ -143,8 +143,8 @@
                         name: 'total_retur',
                     },
                     {
-                        data: 'rata_rata',
-                        name: 'rata_rata',
+                        data: 'stok',
+                        name: 'stok',
                     }
                     // {
                     //     "visible": false,

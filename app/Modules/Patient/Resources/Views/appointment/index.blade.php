@@ -68,9 +68,82 @@
     </div>
 </div>
 
+<div class="modal fade" id="view_consent" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="block block-themed block-transparent mb-0">
+                <div class="block-header bg-primary-dark">
+                    <h3 class="block-title">SURAT PERSETUJUAN/PENOLAKAN MEDIS KHUSUS</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                            <i class="si si-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content">
+{{--                    <table class="table">--}}
+{{--                        <tr>--}}
+{{--                            <td>Nama</td>--}}
+{{--                            <td>CANDA</td>--}}
+{{--                        </tr>--}}
+{{--                        <tr>--}}
+{{--                            <td>Jenis Kelamin (L/P)</td>--}}
+{{--                            <td></td>--}}
+{{--                        </tr>--}}
+{{--                        <tr>--}}
+{{--                            <td>Umur</td>--}}
+{{--                            <td></td>--}}
+{{--                        </tr>--}}
+{{--                        <tr>--}}
+{{--                            <td>Alamat</td>--}}
+{{--                            <td></td>--}}
+{{--                        </tr>--}}
+{{--                        <tr>--}}
+{{--                            <td>Telp</td>--}}
+{{--                            <td></td>--}}
+{{--                        </tr>--}}
+{{--                    </table>--}}
+{{--                    <p>Menyatakan dengan sesungguhnya dari saya sendiri/*sebagai orang tua/*suami/*istri/*anak/*wali dari:</p>--}}
+{{--                    <table class="table">--}}
+{{--                        <tr>--}}
+{{--                            <td>Nama</td>--}}
+{{--                            <td>CANDA</td>--}}
+{{--                        </tr>--}}
+{{--                        <tr>--}}
+{{--                            <td>Jenis Kelamin (L/P)</td>--}}
+{{--                            <td></td>--}}
+{{--                        </tr>--}}
+{{--                        <tr>--}}
+{{--                            <td>Umur</td>--}}
+{{--                            <td></td>--}}
+{{--                        </tr>--}}
+{{--                        <tr>--}}
+{{--                            <td>Alamat</td>--}}
+{{--                            <td></td>--}}
+{{--                        </tr>--}}
+{{--                        <tr>--}}
+{{--                            <td>Telp</td>--}}
+{{--                            <td></td>--}}
+{{--                        </tr>--}}
+{{--                    </table>--}}
+
+{{--                    <p>Dengan ini menyatakan SETUJU/MENOLAK untuk dilakukan Tindakan Medis berupa</p>--}}
+{{--                    <strong><p>SETUJU</p></strong>--}}
+{{--                    <p>Dari penjelasan yang diberikan, telah saya mengerti segala hal yang berhubungan dengan penyakit tersebut, serta tindakan medis yang akan dilakukan dan kemungkinana pasca tindakan yang dapat terjadi sesuai penjelasan yang diberikan</p>--}}
+                    <div role="main" id="viewport"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+    </div>
+</div>
+
 <script src="{{ URL::asset('js/plugins/moment/moment-with-locales.min.js') }}"></script>
+<script src="{{ URL::asset('js/pdf.js') }}"></script>
 <script>
-    jQuery(function(){ 
+    jQuery(function(){
         Codebase.layout('sidebar_mini_on');
         var formatDate = "{{ setting()->get('date_format_js') }}";
         // Codebase.helpers(['datepicker']);
@@ -105,7 +178,7 @@
                 {
                     data: 'DT_RowIndex',
                     width: "5%",
-                    orderable: false, 
+                    orderable: false,
                     searchable: false
                 },
                 {
@@ -152,7 +225,7 @@
                     data: 'action',
                     width: "8%",
                     className: 'text-right',
-                    orderable: false, 
+                    orderable: false,
                     searchable: false
                 }
             ]
@@ -175,5 +248,36 @@
         }
 
     });
+
+    $("body").on('click','.btnConsent',function (){
+        let pdfInstance = null
+        var url = "{!! asset("inform_concern") !!}/"+$(this).val().split("/")[1]
+        var viewport = $('#viewport');
+
+        pdfjsLib.GlobalWorkerOptions.workerSrc = '{!! asset('js/pdf.worker.js') !!}'
+        pdfjsLib.getDocument(url).promise.then(pdf => {
+            pdfInstance = pdf
+            viewport.innerHTML = '<div><canvas></canvas></div>'
+
+            var pdfViewport = pdf.getViewport(180);
+
+            var container = viewport.children[0];
+
+            // Render at the page size scale.
+            pdfViewport = pdf.getViewport(container.offsetWidth / pdfViewport.width);
+            var canvas = container.children[0];
+            var context = canvas.getContext("2d");
+            canvas.height = pdfViewport.height;
+            canvas.width = pdfViewport.width;
+
+            pdf.render({
+                canvasContext: context,
+                viewport: pdfViewport
+            });
+        })
+
+
+        $("#view_consent").modal('show')
+    })
 </script>
 @endsection

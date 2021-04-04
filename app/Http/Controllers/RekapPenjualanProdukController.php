@@ -72,7 +72,7 @@ class RekapPenjualanProdukController extends Controller
                     "satuan" => "pcs",
                     "total_sold" => currency()->rupiah($total, setting()->get('currency_symbol')),
                     "total_retur" => 0,
-                    "rata_rata" => $rata_rata,
+                    "stok" => $row->quantity,
                     "action" => $row->action_buttons
                 ]);
             }
