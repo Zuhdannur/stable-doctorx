@@ -27,6 +27,7 @@ use App\Modules\Patient\Http\Requests\Patient\ManagePatientRequest;
 use App\Modules\Patient\Http\Requests\Patient\StorePatientRequest;
 
 use DataTables;
+use function foo\func;
 
 class PatientController extends Controller
 {
@@ -50,6 +51,10 @@ class PatientController extends Controller
             ->addColumn('action', function ($data) {
                 $button = $data->action_buttons;
                 return $button;
+            })
+            ->addColumn('klinik',function ($data) {
+                $asal = $data->klinik->nama_klinik ?? '-';
+                return $asal;
             })
             ->editColumn('id', '{{$id}}')
             ->rawColumns(['action'])

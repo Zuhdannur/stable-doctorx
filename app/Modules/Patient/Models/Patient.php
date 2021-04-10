@@ -2,6 +2,7 @@
 
 namespace App\Modules\Patient\Models;
 
+use App\Klinik;
 use Illuminate\Database\Eloquent\Model;
 use App\Modules\Patient\Models\Traits\Attribute\PatientAttribute;
 
@@ -198,5 +199,9 @@ class Patient extends Model
         $this->last_wa = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
 
         return $this->save();
+    }
+
+    public function klinik() {
+        return $this->hasOne(Klinik::class,'id_klinik','id_klinik');
     }
 }

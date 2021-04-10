@@ -22,6 +22,7 @@
                     <th>@lang('billing::labels.billing.table.invoice_no')</th>
                     <th>@lang('billing::labels.billing.table.invoice_date')</th>
                     <th>@lang('billing::labels.billing.table.patient_name')</th>
+                    <th>Asal Klinik</th>
                     <th>@lang('billing::labels.billing.table.discount')</th>
                     <th>@lang('billing::labels.billing.table.total')</th>
                     <th>@lang('billing::labels.billing.table.status')</th>
@@ -29,13 +30,13 @@
                     <th class="text-center" style="width: 100px;">@lang('labels.general.actions')</th>
                 </tr>
             </thead>
-           
+
         </table>
     </div>
 </div>
 
 <script>
-    jQuery(function(){ 
+    jQuery(function(){
         $(document).on("focusout", ".datepicker", function() {
             $(this).prop('readonly', false);
         });
@@ -60,7 +61,7 @@
                     data: 'DT_RowIndex',
                     name: 'id',
                     width: "5%",
-                    orderable: false, 
+                    orderable: false,
                     searchable: false
                 },
                 {
@@ -75,6 +76,10 @@
                 {
                     data: 'patient_name',
                     name: 'patient.patient_name',
+                },
+                {
+                    data: 'klinik',
+                    name: 'klinik'
                 },
                 {
                     "visible": false,
@@ -98,7 +103,7 @@
                     name: 'action',
                     width: "8%",
                     className: 'text-right',
-                    orderable: false, 
+                    orderable: false,
                     searchable: false
                 }
             ]

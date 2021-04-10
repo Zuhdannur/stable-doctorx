@@ -28,6 +28,7 @@
                     <th>@lang('patient::labels.patient.table.gender')</th>
                     <th>@lang('patient::labels.patient.table.dob')</th>
                     <th>@lang('patient::labels.patient.table.age')</th>
+                    <th>Asal Klinik</th>
                     <th class="text-center" style="width: 100px;">@lang('labels.general.actions')</th>
                 </tr>
             </thead>
@@ -83,6 +84,10 @@
                 {
                     data: 'age',
                     name: 'age',
+                },
+                {
+                    data: 'klinik',
+                    name: 'klinik'
                 },
                 {
                     data: 'action',

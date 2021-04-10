@@ -47,7 +47,7 @@ class BillingController extends Controller
     public function index(Request $request)
     {
     	if($request->ajax()){
-            $model = Billing::with('patient')->orderBy('created_at', 'desc');
+            $model = Billing::where('id_klinik',auth()->user()->id_klinik)->with('patient')->orderBy('created_at', 'desc');
 
             return DataTables::eloquent($model)
             ->addIndexColumn()
@@ -73,6 +73,10 @@ class BillingController extends Controller
             ->addColumn('total', function ($data) {
                 $total = $data->totalPrice;
                 return currency()->rupiah($total, setting()->get('currency_symbol'));
+            })
+            ->addColumn('klinik',function ($data) {
+                $patient = @$data->patient->klinik->nama_klinik;
+                return $patient;
             })
             ->addColumn('action', function ($data) {
                 $button = $data->action_buttons;

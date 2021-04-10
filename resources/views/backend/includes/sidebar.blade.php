@@ -218,7 +218,9 @@
                     {{-- end of master-data sidebar --}}
 
                     {{-- accounting sidebar --}}
+                    @if(!empty(""))
                     @include('backend.includes.partials.sidebar.accounting')
+                    @endif
                     {{-- end of accounting sidebar --}}
 
                     {{-- reporting sidebar --}}
