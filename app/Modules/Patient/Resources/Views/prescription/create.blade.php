@@ -387,21 +387,6 @@
                                                 <figcaption itemprop="caption description">Image caption 1</figcaption>
                                             </figure>
                                         </div>
-{{--                                        <div class="row ml-sm-1">--}}
-{{--                                            <input name="tipe[]" hidden>--}}
-{{--                                            <button type="button" class="btn btn-sm btn-success mr-5 mb-5 btnBefore"--}}
-{{--                                                    name="btnbefore">--}}
-{{--                                                <i class="fa fa-plus mr-5"></i>Before--}}
-{{--                                            </button>--}}
-{{--                                            <button type="button" class="btn btn-sm btn-danger mr-5 mb-5 btnAfter"--}}
-{{--                                                    name="btnafter">--}}
-{{--                                                <i class="fa fa-plus mr-5"></i>--}}
-{{--                                            </button>--}}
-{{--                                            <button type="button" class="btn btn-sm btn-danger mr-5 mb-5 btnCancel"--}}
-{{--                                                    name="btncancel" style="display: none;">--}}
-{{--                                                <i class="fa fa-plus mr-5"></i>Batalkan Dari--}}
-{{--                                            </button>--}}
-{{--                                        </div>--}}
                                     </div>
                                     @endif
                                 @endforeach
@@ -479,6 +464,49 @@
         </div>
 
         @include('patient::patient.getbeforeafter')
+
+        <div class="block my-block" id="my-block3">
+            <div class="block-header block-header-default">
+                <div class="d-flex" style="width: 100%">
+                    <h3 class="block-title col-md-2">Record Mapping Wajah</h3>
+                    <div class="col-md-8">
+                        <input type="checkbox" id="is_record" name="is_record" class="switch-input">
+                        <label for="is_record" class="switch-label"><span class="toggle--on">Ya</span><span
+                                class="toggle--off">Tidak</span></label>
+                    </div><!--col-->
+                </div>
+            </div>
+            <div class="block-content block-content-full">
+                <div class="row clearfix">
+                    <div class="col-md-12" id="record_wajah_content" style="display: none">
+                        <span id="error"></span>
+                        <div class="col-lg-4">
+                            <canvas id="c" width="710" height="300"></canvas>
+                        </div>
+                        <div class="d-flex p-4">
+                            <table>
+                                <tr>
+                                    <td><img src="{{ asset('media/segitiga.png') }}" alt=""></td>
+                                    <td><button type="button" class="btn btn-sm btn-outline-success" id="btnTanamBenang">Tanam Benang</button></td>
+                                    <td><img src="{{ asset('media/little_oval.png') }}" alt=""></td>
+                                    <td><button type="button" class="btn btn-sm btn-outline-success" id="btnFillerLittle">Filler</button></td>
+                                </tr>
+                                <tr>
+                                    <td><img src="{{ asset('media/oval.png') }}" alt=""></td>
+                                    <td><button type="button" class="btn btn-sm btn-outline-success" id="btnFillerOval">Filler</button></td>
+                                    <td><img src="{{ asset('media/gel.png') }}" alt=""></td>
+                                    <td><button type="button" class="btn btn-sm btn-outline-success" id="btnGelWajahMerata">Gel Wajah merata</button></td>
+                                </tr>
+                            </table>
+                            &nbsp;
+                            <button type="button" class="btn btn-sm btn-danger" style="display:none;" id="btnDelete">Hapus Komponen</button>
+                            <button type="button" class="btn btn-sm btn-danger" id="btnSave">Btn Save</button>
+                            <input type="text" id="base64" name="base64" hidden>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
@@ -777,6 +805,9 @@
     <script src="{{ URL::asset('js/plugins/croppie/croppie.js') }}"></script>
     <script src="{{ URL::asset('js/plugins/croppie/exif-js.js') }}"></script>
     <script src="{{ URL::asset('js/plugins/webcam/webcam.min.js') }}"></script>
+    <script src="{{ asset('js/fabric.min.js') }}"></script>
+    <script src="{{ asset('js/FileSaver.js') }}"></script>
+    <script src="{{ asset('js/htmltoimage.js') }}"></script>
     <script language="JavaScript">
         Webcam.set({
             width: 320,
@@ -1573,6 +1604,84 @@
                 btnAfter.css('display', 'none');
 
                 parent.find('input').val("before")
+            })
+
+            fabric.Object.prototype.set({
+                transparentCorners: false,
+                cornerColor: 'rgba(102,153,255,0.5)',
+                cornerSize: 12,
+                padding: 5
+            });
+
+            var canvas = window._canvas = new fabric.Canvas('c');
+
+            canvas.on('mouse:up', function () {
+                if(canvas.getActiveObject()) {
+                    $("#btnDelete").show();
+                } else {
+                    $("#btnDelete").hide();
+                }
+            });
+
+            canvas.setBackgroundImage('{{ asset('media/example.PNG') }}', canvas.renderAll.bind(canvas), {
+                backgroundImageOpacity: 0.5,
+                backgroundImageStretch: false,
+            });
+
+
+            $("#btnTanamBenang").on('click',function (e) {
+                fabric.Image.fromURL('{{ asset('media/segitiga.png') }}',function (myImage) {
+                    var img1 = myImage.set({ left: 0, top: 0 ,width:40,height:40});
+                    canvas.add(img1)
+                })
+            })
+
+            $("#btnFillerOval").on('click',function (e) {
+                fabric.Image.fromURL('{{ asset('media/oval.png') }}',function (myImage) {
+                    var img1 = myImage.set({ left: 0, top: 0 ,width:40,height:40});
+                    canvas.add(img1)
+                })
+            })
+
+            $("#btnFillerLittle").on('click',function (e) {
+                fabric.Image.fromURL('{{ asset('media/little_oval.png') }}',function (myImage) {
+                    var img1 = myImage.set({ left: 0, top: 0 ,width:40,height:40});
+                    canvas.add(img1)
+                })
+            })
+
+            $("#btnGelWajahMerata").on('click',function (e) {
+                fabric.Image.fromURL('{{ asset('media/gel.png') }}',function (myImage) {
+                    var img1 = myImage.set({ left: 0, top: 0 ,width:40,height:40});
+                    canvas.add(img1)
+                })
+            })
+
+            $("#is_record").on('change',function (){
+               if($("#is_record").is(':checked')) {
+                   $("#record_wajah_content").show();
+               } else {
+                   $("#record_wajah_content").hide();
+               }
+            })
+
+            $("#btnDelete").on('click',function () {
+                var object = canvas.getActiveObject()
+                if (!object){
+                    alert('Please select the element to remove');
+                    return '';
+                }
+                canvas.remove(object);
+                $(this).hide()
+            })
+
+            $("#btnSave").on('click',function () {
+                console.log(JSON.stringify(canvas))
+
+
+                var can = document.getElementById("c")
+                var base64 = can.toDataURL();
+                $("#base64").val(base64)
             })
 
         });

@@ -21,17 +21,17 @@
 
         </div>
         <div class="block-content block-content-full">
-            <div class="row">
-                <div class="col-lg-4">
-                    <canvas id="c" width="300" height="300"></canvas>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <button class="btn btn-sm btn-success" id="btnTanamBenang">Tanam Benang</button><br><br>
-                    <button class="btn btn-sm btn-success">Tanam Benang</button><br><br>
-                    <button class="btn btn-sm btn-success">Tanam Benang</button><br><br>
-                    <button class="btn btn-sm btn-success">Tanam Benang</button><br>
-
-                </div>
+            <div class="col-lg-4">
+                <canvas id="c" width="710" height="300"></canvas>
+            </div>
+            <div class="d-flex p-4">
+                <button class="btn btn-sm btn-success" id="btnTanamBenang">Tanam Benang</button>
+                &nbsp;
+                <button class="btn btn-sm btn-success" id="btnFillerOval">Filler</button>
+                &nbsp;
+                <button class="btn btn-sm btn-success" id="btnFillerLittle">Tanam Benang</button>
+                &nbsp;
+                <button class="btn btn-sm btn-success" id="btnGelWajahMerata">Gel Wajah merata</button>
             </div>
 
         </div>
@@ -49,14 +49,25 @@
 
             var canvas = window._canvas = new fabric.Canvas('c');
 
-            canvas.setBackgroundImage('{{ asset('media/left-person.png') }}', canvas.renderAll.bind(canvas), {
+            canvas.setBackgroundImage('{{ asset('media/example.PNG') }}', canvas.renderAll.bind(canvas), {
                 backgroundImageOpacity: 0.5,
                 backgroundImageStretch: false,
             });
 
+            canvas.on('mouseup',function (options) {
+                alert("MANTAP")
+            })
+
             $("#btnTanamBenang").on('click',function (e) {
                 fabric.Image.fromURL('{{ asset('media/segitiga.png') }}',function (myImage) {
-                    var img1 = myImage.set({ left: 0, top: 0 ,width:50,height:50});
+                    var img1 = myImage.set({ left: 0, top: 0 ,width:40,height:40});
+                    canvas.add(img1)
+                })
+            })
+
+            $("#btnFillerOval").on('click',function (e) {
+                fabric.Image.fromURL('{{ asset('media/oval.png') }}',function (myImage) {
+                    var img1 = myImage.set({ left: 0, top: 0 ,width:40,height:40});
                     canvas.add(img1)
                 })
             })
