@@ -55,17 +55,30 @@ class PrescriptionRepository extends BaseRepository
     {
         $appointment = Appointment::findOrFail($request->appid);
 
-        if(Prescription::where('appointment_id', $request->appid)->first()){
+        if (Prescription::where('appointment_id', $request->appid)->first()) {
             return response()->json(array('status' => false, 'message' => trans('patient::exceptions.prescription.already_exists')));
         }
 
         DB::beginTransaction();
         try {
             $informConcern = null;
-            if($request->withConcern == 'true'){
+            if ($request->withConcern == 'true') {
                 $Prescription = new Prescription;
                 // $informConcern = $Prescription->createInformConcent($appointment->patient);
                 $informConcern = $Prescription->generatePDFInformConcern($appointment->patient, $request->input());
+            }
+
+            if (!empty($request->is_record) && $request->is_record == "on") {
+                $recordMapping = new \App\RecordMapping;
+                $recordMapping->appointment_id = $request->appid;
+                $recordMapping->jenis_tindakan = $request->jenis_tindakan;
+                $recordMapping->jenis_bahan = $request->jenis_bahan;
+                $recordMapping->jumlah = $request->jumlah;
+                $recordMapping->lokasi = $request->lokasi;
+                $recordMapping->catatan = $request->catatan;
+                $recordMapping->canvas = $request->canvas;
+                $recordMapping->image = $request->base64;
+                $recordMapping->save();
             }
 
             $createPrescription = Prescription::create([
@@ -95,17 +108,17 @@ class PrescriptionRepository extends BaseRepository
             $saveTreatment = false;
 
             foreach ($totaloop as $key => $val) { //$value->code.' - '.$value->name.' - '.$value->category->name
-                if($request->product[$key]){
+                if ($request->product[$key]) {
                     $getProduct = Product::find($request->product[$key]);
-                    $billProduct[] = $request->product[$key].'#product';
+                    $billProduct[] = $request->product[$key] . '#product';
                     $billProductPrice[] = $getProduct->price;
                     $billProductQty[] = $request->qty[$key];
 
                     $prescriptionDetail = PrescriptionDetail::firstOrNew([
-                      'prescription_id' => $createPrescription->id,
-                      'product_id' => $getProduct->id,
-                      'name' => $getProduct->code.' - '.$getProduct->name.' - '.$getProduct->category->name,
-                      'instruction' => $request->instruction[$key]
+                        'prescription_id' => $createPrescription->id,
+                        'product_id' => $getProduct->id,
+                        'name' => $getProduct->code . ' - ' . $getProduct->name . ' - ' . $getProduct->category->name,
+                        'instruction' => $request->instruction[$key]
                     ]);
 
                     $saveObat = $prescriptionDetail->save();
@@ -113,36 +126,36 @@ class PrescriptionRepository extends BaseRepository
             }
 
             foreach ($totaloopService as $key3 => $val3) {
-                if($request->service[$key3]){
+                if ($request->service[$key3]) {
                     $explode_service = explode('#', $request->service[$key3]);
 
-                    if($explode_service[0] == "servicePackages"){
+                    if ($explode_service[0] == "servicePackages") {
                         $getService = ServicesPackage::find("$explode_service[1]");
-                        if(isset($getService->details)){
+                        if (isset($getService->details)) {
                             foreach ($getService->details as $value) {
 
-                                $billService[] = $value->service['id'].'#service';
+                                $billService[] = $value->service['id'] . '#service';
                                 $billServicePrice[] = $value->service['price'];
                                 $billServiceQty[] = $request->qty[$key] * $value->qty;
                                 $prescriptionService = PrescriptionTreatment::firstOrNew([
                                     'prescription_id' => $createPrescription->id,
                                     'services_id' => $value->service['id'],
-                                    'name' => $value->service['code'].' - '.$value->service['name'].' - '.$value->service['category']['name'],
+                                    'name' => $value->service['code'] . ' - ' . $value->service['name'] . ' - ' . $value->service['category']['name'],
                                     'description' => $request->servicenotes[$key3]
-                                    ]);
-                                }
+                                ]);
+                            }
                         }
-                    }else{
+                    } else {
                         $getService = Service::find($explode_service[1]);
                         // $getService = Service::find($request->service[$key3]);
-                        $billService[] = $request->service[$key3].'#service';
+                        $billService[] = $request->service[$key3] . '#service';
                         $billServicePrice[] = $getService->price;
                         $billServiceQty[] = $request->qty[$key];
 
                         $prescriptionService = PrescriptionTreatment::firstOrNew([
                             'prescription_id' => $createPrescription->id,
                             'services_id' => $getService->id,
-                            'name' => $getService->code.' - '.$getService->name.' - '.$getService->category->name,
+                            'name' => $getService->code . ' - ' . $getService->name . ' - ' . $getService->category->name,
                             'description' => $request->servicenotes[$key3]
                         ]);
                     }
@@ -155,9 +168,9 @@ class PrescriptionRepository extends BaseRepository
             $saveDiagnosis = false;
 
             foreach ($totaloopDiagnosis as $key2 => $val2) {
-                if($request->diagnosis[$key2]){
+                if ($request->diagnosis[$key2]) {
                     $diagnoseItem = DiagnoseItem::find($request->diagnosis[$key2]);
-                    if($diagnoseItem){
+                    if ($diagnoseItem) {
                         $diagnosis = Diagnoses::firstOrNew([
                             'appointment_id' => $request->appid,
                             'diagnose_item_id' => $diagnoseItem->id,
@@ -170,13 +183,13 @@ class PrescriptionRepository extends BaseRepository
                 }
             }
 
-            if($request->is_treatment != "on" && $saveTreatment == true){
+            if ($request->is_treatment != "on" && $saveTreatment == true) {
                 $saveTreatment = false;
             }
 
             $date = \Carbon\Carbon::now();
-	        if($saveObat || $saveTreatment){
-                if($saveTreatment == true){  //daftar treatment
+            if ($saveObat || $saveTreatment) {
+                if ($saveTreatment == true) {  //daftar treatment
                     $admissionData = [
                         'patient_id' => $appointment->patient_id,
                         'admission_type_id' => config('admission.admission_treatment'),
@@ -184,7 +197,7 @@ class PrescriptionRepository extends BaseRepository
                         'status_id' => config('admission.admission_waiting'),
                         'reference_id' => $appointment->appointment_no,
                         'created_by' => auth()->user()->id,
-                        'notes' => 'Referensi #'.$appointment->appointment_no
+                        'notes' => 'Referensi #' . $appointment->appointment_no
                     ];
 
                     $admission = PatientAdmission::create($admissionData);
@@ -192,8 +205,8 @@ class PrescriptionRepository extends BaseRepository
 
                 /* Start Create Billing */
                 $dataProduct = array(
-                    'product'   => array_merge($billProduct, $billService),
-                    'price'   => array_merge($billProductPrice, $billServicePrice),
+                    'product' => array_merge($billProduct, $billService),
+                    'price' => array_merge($billProductPrice, $billServicePrice),
                     'qty' => array_merge($billProductQty, $billServiceQty)
                 );
 
@@ -217,7 +230,7 @@ class PrescriptionRepository extends BaseRepository
                     'patient_id' => $appointment->patient_id,
                     'tax_total' => '', //update dibawah
                     'status' => config('billing.invoice_unpaid'),
-                    'date' => $date->format( setting()->get('date_format')),
+                    'date' => $date->format(setting()->get('date_format')),
                     'created_by' => auth()->user()->id,
                     'id_klinik' => auth()->user()->klinik->id_klinik
                 ];
@@ -225,8 +238,8 @@ class PrescriptionRepository extends BaseRepository
                 $createBilling = Billing::create($dataBilling);
 
                 // Find a Same invoice
-                $duplicate = FinanceTransaction::where('transaction_code',$createBilling->invoice_no)->first();
-                if($duplicate) {
+                $duplicate = FinanceTransaction::where('transaction_code', $createBilling->invoice_no)->first();
+                if ($duplicate) {
                     $duplicate->delete();
                 }
 
@@ -236,8 +249,8 @@ class PrescriptionRepository extends BaseRepository
                 $createBilling->transaction_id = $transaction->id;
                 $createBilling->save();
 
-                $storeInvoicePrescription = $this->billingRepository->storeInvoicePrescription($dataProduct,  $createBilling, $transaction);
-                if($storeInvoicePrescription == false){
+                $storeInvoicePrescription = $this->billingRepository->storeInvoicePrescription($dataProduct, $createBilling, $transaction);
+                if ($storeInvoicePrescription == false) {
                     DB::rollback();
                     return response()->json(array('status' => false, 'message' => 'Ada Kesalahan Saat Menyimpan Data Ini'));
                 }
@@ -246,22 +259,22 @@ class PrescriptionRepository extends BaseRepository
                 $AppointmentInvoice = AppointmentInvoice::firstOrNew(['appointment_id' => $request->appid, 'invoice_id' => $createBilling->id]);
                 $AppointmentInvoice->save();
 
-	        }
+            }
             /**End Of Create Billing */
 
             //Create Timeline
             $timeline = new PatientTimeline;
 
             $timeline->patient_id = $appointment->patient_id;
-            $timeline->title = 'Referensi #'.$appointment->appointment_no;
+            $timeline->title = 'Referensi #' . $appointment->appointment_no;
             $timeline->timeline_date = $date;
             $timeline->description = 'Konsultasi';
 
             if ($request->has('inputFoto')) {
 
-                if($timeline->save()){
+                if ($timeline->save()) {
                     foreach ($request->inputFoto as $image) {
-                        if(substr($request->inputFoto[0],0,4) != 'http') {
+                        if (substr($request->inputFoto[0], 0, 4) != 'http') {
                             $timelineDetail = new PatientTimelineDetail;
 
                             $timelineDetail->timeline_id = $timeline->id;
@@ -276,7 +289,7 @@ class PrescriptionRepository extends BaseRepository
                 $input = $request->all();
 
                 foreach ($request->inputFoto as $index => $image) {
-                    if(substr($request->inputFoto[0],0,4) != 'http') {
+                    if (substr($request->inputFoto[0], 0, 4) != 'http') {
                         $patientBeforeAfter = new PatientBeforeAfter;
 
                         $patientBeforeAfter->patient_id = $appointment->patient_id;
@@ -295,7 +308,7 @@ class PrescriptionRepository extends BaseRepository
                 ]
             );
 
-            if($request->next_appointment_date){
+            if ($request->next_appointment_date) {
                 $date = $request->next_appointment_date;
                 $date = \Carbon\Carbon::createFromFormat(setting()->get('date_format'), $date)->format('Y-m-d');
 
@@ -316,19 +329,40 @@ class PrescriptionRepository extends BaseRepository
                 [
                     'status' => false,
                     'message' => $e->getMessage()
-            ], 500);
+                ], 500);
         }
     }
 
     public function updatePrescription(Prescription $prescription, $request)
     {
         return DB::transaction(function () use ($request, $prescription) {
+            if (!empty($request->is_record) && $request->is_record == "on") {
+
+                $recordMapping = \App\RecordMapping::updateOrCreate(
+                    ['appointment_id' => $prescription->appointment_id],
+                    [
+                        'jenis_tindakan' => $request->jenis_tindakan,
+                        'jenis_bahan' => $request->jenis_bahan,
+                        'jumlah' => $request->jumlah,
+                        'lokasi' => $request->lokasi,
+                        'catatan' => $request->catatan,
+                        'canvas' => $request->canvas,
+                        'image' => $request->base64
+                    ]);
+
+            } else {
+                $findRecord = \App\RecordMapping::where('appointment_id', $prescription->appointment_id)->first();
+                if (!empty($findRecord)) {
+                    $findRecord->delete();
+                }
+            }
+
             $update_prescription = $prescription->update([
                 'complaint' => $request->complaint,
                 'treatment_history' => $request->treatment_history
             ]);
 
-            if($update_prescription){
+            if ($update_prescription) {
 
                 //SetArrayForBill
                 $billProduct = array();
@@ -349,17 +383,17 @@ class PrescriptionRepository extends BaseRepository
                 //renew data obat
                 PrescriptionDetail::where('prescription_id', $prescription->id)->delete();
                 foreach ($totaloop as $key => $val) { //$value->code.' - '.$value->name.' - '.$value->category->name
-                    if($request->product[$key]){
+                    if ($request->product[$key]) {
                         $getProduct = Product::find($request->product[$key]);
-                        $billProduct[] = $request->product[$key].'#product';
+                        $billProduct[] = $request->product[$key] . '#product';
                         $billProductPrice[] = $getProduct->price;
                         $billProductQty[] = $request->qty[$key];
 
                         $prescriptionDetail = PrescriptionDetail::firstOrNew([
-                          'prescription_id' => $prescription->id,
-                          'product_id' => $getProduct->id,
-                          'name' => $getProduct->code.' - '.$getProduct->name.' - '.$getProduct->category->name,
-                          'instruction' => $request->instruction[$key]
+                            'prescription_id' => $prescription->id,
+                            'product_id' => $getProduct->id,
+                            'name' => $getProduct->code . ' - ' . $getProduct->name . ' - ' . $getProduct->category->name,
+                            'instruction' => $request->instruction[$key]
                         ]);
 
                         $saveObat = $prescriptionDetail->save();
@@ -367,20 +401,20 @@ class PrescriptionRepository extends BaseRepository
                 }
 
                 //renew data treatment
-                if($totaloopService){
+                if ($totaloopService) {
                     PrescriptionTreatment::where('prescription_id', $prescription->id)->delete();
                     foreach ($totaloopService as $key3 => $val3) {
-                        if($request->service[$key3]){
+                        if ($request->service[$key3]) {
                             $getService = Service::find($request->service[$key3]);
-                            $billService[] = $request->service[$key3].'#service';
+                            $billService[] = $request->service[$key3] . '#service';
                             $billServicePrice[] = $getService->price;
                             $billServiceQty[] = $request->qty[$key];
 
                             $prescriptionService = PrescriptionTreatment::firstOrNew([
-                              'prescription_id' => $prescription->id,
-                              'services_id' => $getService->id,
-                              'name' => $getService->code.' - '.$getService->name.' - '.$getService->category->name,
-                              'description' => $request->servicenotes[$key3]
+                                'prescription_id' => $prescription->id,
+                                'services_id' => $getService->id,
+                                'name' => $getService->code . ' - ' . $getService->name . ' - ' . $getService->category->name,
+                                'description' => $request->servicenotes[$key3]
                             ]);
 
                             $saveTreatment = $prescriptionService->save();
@@ -389,11 +423,11 @@ class PrescriptionRepository extends BaseRepository
                 }
 
                 //renew data diagnosis
-                Diagnoses::where('appointment_id',$prescription->appointment_id)->delete();
+                Diagnoses::where('appointment_id', $prescription->appointment_id)->delete();
                 foreach ($totaloopDiagnosis as $key2 => $val2) {
-                    if($request->diagnosis[$key2]){
+                    if ($request->diagnosis[$key2]) {
                         $diagnoseItem = DiagnoseItem::find($request->diagnosis[$key2]);
-                        if($diagnoseItem){
+                        if ($diagnoseItem) {
                             $diagnosis = Diagnoses::firstOrNew([
                                 'appointment_id' => $prescription->appointment_id,
                                 'diagnose_item_id' => $diagnoseItem->id,
@@ -407,84 +441,84 @@ class PrescriptionRepository extends BaseRepository
                 }
 
                 $date = \Carbon\Carbon::now();
-                if($saveObat || $saveTreatment){
+                if ($saveObat || $saveTreatment) {
 
                     // renew data invoices detail
-                    if($prescription->billing->id){
-                        if($prescription->billing->transaction_id == null || $prescription->billing->transaction_id < 0){
+                    if ($prescription->billing->id) {
+                        if ($prescription->billing->transaction_id == null || $prescription->billing->transaction_id < 0) {
                             return response()->json(array('status' => false, 'message' => 'Oopps, Data ini sudah tidak bisa di update'));
-                        }else{
+                        } else {
 
                             $_transaction = FinanceTransaction::findOrFail($prescription->billing->transaction_id);
                             $billing = $prescription->billing;
                             /** reverse and delete last finance process */
-                                $_inv_detail = $billing->invDetail;
-                                $_rev_point = 0;
+                            $_inv_detail = $billing->invDetail;
+                            $_rev_point = 0;
 
-                                // looping reverse product stock
-                                foreach($_inv_detail as $key => $val){
+                            // looping reverse product stock
+                            foreach ($_inv_detail as $key => $val) {
 
-                                    //update stock obat
-                                    if($val->type == 'product'){
-                                        $_product = Product::findOrFail($val->product_id);
-                                        $_product->quantity = $_product->quantity - $val->qty;
+                                //update stock obat
+                                if ($val->type == 'product') {
+                                    $_product = Product::findOrFail($val->product_id);
+                                    $_product->quantity = $_product->quantity - $val->qty;
 
-                                        $_rev_point = $_rev_point + $_product->point;
-                                        if($_product->quantity < $_product->min_stock){
-                                            $_product->is_min_stock = 1;
-                                        }
-
-                                        $_product->save();
-
-                                    }else{
-                                        $_service = Service::findOrFail($val->product_id);
-                                        $_rev_point = $_rev_point + $_service->point;
+                                    $_rev_point = $_rev_point + $_product->point;
+                                    if ($_product->quantity < $_product->min_stock) {
+                                        $_product->is_min_stock = 1;
                                     }
-                                }
 
-                                //reverse finance journal and account balance
-                                foreach($_transaction->journal as $key => $val){
-                                    if($val->type == config('finance_journal.types.debit')){
-                                        FinanceAccount::sumDebit($val->account_id, $val->value);
-                                    }else if(config('finance_journal.types.kredit')){
-                                        FinanceAccount::sumKredit($val->account_id, $val->value);
-                                    }
-                                }
+                                    $_product->save();
 
-                                // deleting the journal and inv detail
-                                $_transaction->journal()->delete();
-                                $billing->invDetail()->delete();
-
-                                // update point membership
-                                if($_rev_point > 0){
-                                    $patient = Patient::findOrFail($billing->patient_id);
-                                    if($patient->membership){
-                                        $patient->membership->total_point = $patient->membership->total_point - $_rev_point;
-                                        $patient->membership->save();
-                                    }
+                                } else {
+                                    $_service = Service::findOrFail($val->product_id);
+                                    $_rev_point = $_rev_point + $_service->point;
                                 }
+                            }
+
+                            //reverse finance journal and account balance
+                            foreach ($_transaction->journal as $key => $val) {
+                                if ($val->type == config('finance_journal.types.debit')) {
+                                    FinanceAccount::sumDebit($val->account_id, $val->value);
+                                } else if (config('finance_journal.types.kredit')) {
+                                    FinanceAccount::sumKredit($val->account_id, $val->value);
+                                }
+                            }
+
+                            // deleting the journal and inv detail
+                            $_transaction->journal()->delete();
+                            $billing->invDetail()->delete();
+
+                            // update point membership
+                            if ($_rev_point > 0) {
+                                $patient = Patient::findOrFail($billing->patient_id);
+                                if ($patient->membership) {
+                                    $patient->membership->total_point = $patient->membership->total_point - $_rev_point;
+                                    $patient->membership->save();
+                                }
+                            }
 
                             /** End Of reverse and delete last finance process */
 
                             //CreateBillingData
                             $dataProduct = array(
-                                'product'   => array_merge($billProduct, $billService),
-                                'price'   => array_merge($billProductPrice, $billServicePrice),
+                                'product' => array_merge($billProduct, $billService),
+                                'price' => array_merge($billProductPrice, $billServicePrice),
                                 'qty' => array_merge($billProductQty, $billServiceQty)
                             );
 
-                           $storeInvoicePrescription = $this->billingRepository->storeInvoicePrescription($dataProduct, $billing, $_transaction);
+                            $storeInvoicePrescription = $this->billingRepository->storeInvoicePrescription($dataProduct, $billing, $_transaction);
 
-                           if($storeInvoicePrescription == false){
+                            if ($storeInvoicePrescription == false) {
                                 return response()->json(array('status' => false, 'message' => 'Error Update Process'));
-                           }
+                            }
 
                         }
 
                     }
                 }
 
-                if($request->next_appointment_date){
+                if ($request->next_appointment_date) {
                     $date = $request->next_appointment_date;
                     $date = \Carbon\Carbon::CreateFromFormat(setting()->get('date_format'), $date)->format('Y-m-d');
 
@@ -496,13 +530,13 @@ class PrescriptionRepository extends BaseRepository
                     );
                 }
 
-                $timeline = PatientTimeline::where('title','Referensi #'.$prescription->appointment->appointment_no)->first();
+                $timeline = PatientTimeline::where('title', 'Referensi #' . $prescription->appointment->appointment_no)->first();
 
-                if(empty($timeline)) {
+                if (empty($timeline)) {
                     $timeline = new PatientTimeline;
 
                     $timeline->patient_id = $prescription->patient_id;
-                    $timeline->title = 'Referensi #'.$prescription->appointment->appointment_no;
+                    $timeline->title = 'Referensi #' . $prescription->appointment->appointment_no;
                     $timeline->timeline_date = $date;
                     $timeline->description = 'Konsultasi';
                     $timeline->save();
@@ -510,10 +544,10 @@ class PrescriptionRepository extends BaseRepository
 
                 if ($request->has('inputFoto')) {
 
-                    if(!empty($timeline)){
+                    if (!empty($timeline)) {
                         foreach ($request->inputFoto as $image) {
-                            if(substr($request->inputFoto[0],0,4) != 'http') {
-                                $delete = PatientTimelineDetail::where('timeline_id',$timeline->id)->delete();
+                            if (substr($request->inputFoto[0], 0, 4) != 'http') {
+                                $delete = PatientTimelineDetail::where('timeline_id', $timeline->id)->delete();
                                 $timelineDetail = new PatientTimelineDetail;
 
                                 $timelineDetail->timeline_id = $timeline->id;
@@ -528,8 +562,8 @@ class PrescriptionRepository extends BaseRepository
                     $input = $request->all();
 
                     foreach ($request->inputFoto as $index => $image) {
-                        if(substr($request->inputFoto[0],0,4) != 'http') {
-                            $delete = PatientBeforeAfter::whereDate('date',$timeline->date)->delete();
+                        if (substr($request->inputFoto[0], 0, 4) != 'http') {
+                            $delete = PatientBeforeAfter::whereDate('date', $timeline->date)->delete();
                             $patientBeforeAfter = new PatientBeforeAfter;
 
                             $patientBeforeAfter->patient_id = $prescription->patient_id;

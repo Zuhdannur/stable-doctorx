@@ -500,9 +500,53 @@
                             </table>
                             &nbsp;
                             <button type="button" class="btn btn-sm btn-danger" style="display:none;" id="btnDelete">Hapus Komponen</button>
-                            <button type="button" class="btn btn-sm btn-danger" id="btnSave">Btn Save</button>
-                            <input type="text" id="base64" name="base64" hidden>
                         </div>
+                        <br>
+                        <div class="form-groups">
+                            {{ html()->label('Jenis Tindakan')
+                                ->class('col-md-2 form-control-label')
+                                ->for('code') }}
+                            <div class="col-md-6">
+                                <input class="form-control" name="jenis_tindakan"/>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-groups">
+                            {{ html()->label('Jenis Bahan')
+                                ->class('col-md-2 form-control-label')
+                                ->for('code') }}
+                            <div class="col-md-6">
+                                <input class="form-control" name="jenis_bahan"/>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-groups">
+                            {{ html()->label('Jumlah')
+                                ->class('col-md-2 form-control-label')
+                                ->for('code') }}
+                            <div class="col-md-6">
+                                <input class="form-control" name="jumlah" type="number"/>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-groups">
+                            {{ html()->label('Lokasi')
+                                ->class('col-md-2 form-control-label')
+                                ->for('code') }}
+                            <div class="col-md-6">
+                                <textarea class="form-control" name="lokasi"></textarea>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-groups">
+                            {{ html()->label('Catatan')
+                                ->class('col-md-2 form-control-label')
+                                ->for('code') }}
+                            <div class="col-md-6">
+                                <textarea class="form-control" name="catatan"></textarea>
+                            </div>
+                        </div>
+                        <br>
                     </div>
                 </div>
             </div>
@@ -822,6 +866,28 @@
             Codebase.layout('sidebar_mini_on');
             Codebase.helpers(['masked-inputs', 'simplemde']);
 
+            fabric.Object.prototype.set({
+                transparentCorners: false,
+                cornerColor: 'rgba(102,153,255,0.5)',
+                cornerSize: 12,
+                padding: 5
+            });
+
+            var canvas = window._canvas = new fabric.Canvas('c');
+
+            canvas.on('mouse:up', function () {
+                if(canvas.getActiveObject()) {
+                    $("#btnDelete").show();
+                } else {
+                    $("#btnDelete").hide();
+                }
+            });
+
+            canvas.setBackgroundImage('{{ asset('media/example.PNG') }}', canvas.renderAll.bind(canvas), {
+                backgroundImageOpacity: 0.5,
+                backgroundImageStretch: false,
+            });
+
             var dataString, datastring2;
             $("#signature").jSignature({
                 color: "#00f",
@@ -896,6 +962,13 @@
                 submitHandler: function (form) {
                     //Fetch Image
                     var formData = new FormData(form);
+
+                    if($("#is_record").is(':checked')) {
+                        var can = document.getElementById("c")
+                        var base64 = can.toDataURL();
+                        formData.append('base64',base64)
+                        formData.append('canvas',JSON.stringify(canvas))
+                    }
 
                     $('#imageGrid').find('img').each(function () {
                         imageName = $(this).attr('src');
@@ -1606,27 +1679,7 @@
                 parent.find('input').val("before")
             })
 
-            fabric.Object.prototype.set({
-                transparentCorners: false,
-                cornerColor: 'rgba(102,153,255,0.5)',
-                cornerSize: 12,
-                padding: 5
-            });
 
-            var canvas = window._canvas = new fabric.Canvas('c');
-
-            canvas.on('mouse:up', function () {
-                if(canvas.getActiveObject()) {
-                    $("#btnDelete").show();
-                } else {
-                    $("#btnDelete").hide();
-                }
-            });
-
-            canvas.setBackgroundImage('{{ asset('media/example.PNG') }}', canvas.renderAll.bind(canvas), {
-                backgroundImageOpacity: 0.5,
-                backgroundImageStretch: false,
-            });
 
 
             $("#btnTanamBenang").on('click',function (e) {
@@ -1673,15 +1726,6 @@
                 }
                 canvas.remove(object);
                 $(this).hide()
-            })
-
-            $("#btnSave").on('click',function () {
-                console.log(JSON.stringify(canvas))
-
-
-                var can = document.getElementById("c")
-                var base64 = can.toDataURL();
-                $("#base64").val(base64)
             })
 
         });

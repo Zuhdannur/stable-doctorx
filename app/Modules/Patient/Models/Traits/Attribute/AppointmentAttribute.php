@@ -67,6 +67,15 @@ trait AppointmentAttribute
     /**
      * @return string
      */
+    public function getViewMappingAttribute()
+    {
+        return '<div><input type="text" value="'.@$this->prescription->mapping->image.'" hidden>
+        <button class="btn btn-sm btn-info mr-5 mb-5 btnMapping" data-toggle="tooltip" data-placement="top" title="Lihat Record Mapping"><i class="fa fa-user"></i></button></div>';
+    }
+
+    /**
+     * @return string
+     */
     public function getActionButtonsAttribute()
     {
         $appointment = $this;
@@ -75,6 +84,7 @@ trait AppointmentAttribute
         $btnV = null;
         $btnVPre = null;
         $btnViewConsent = null;
+        $btnMapping = null;
 
         switch ($appointment->status_id) {
             case '1': //waiting
@@ -88,6 +98,10 @@ trait AppointmentAttribute
                     }else{
                         if(!empty($this->prescription->inform_concern)) {
                             $btnViewConsent = $this->view_consent;
+                        }
+
+                        if(!empty($this->prescription->mapping)) {
+                            $btnMapping = $this->view_mapping;
                         }
                         $btnVPre = $this->edit_prescription_button;
                     }
@@ -103,6 +117,7 @@ trait AppointmentAttribute
 			  '.$this->view_button.'
               '.$btnVPre.'
               '.$btnViewConsent.'
+              '.$btnMapping.'
               '.$btnV.'
               '.$btn.'
 			</div>';

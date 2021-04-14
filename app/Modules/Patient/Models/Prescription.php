@@ -2,6 +2,7 @@
 
 namespace App\Modules\Patient\Models;
 
+use App\RecordMapping;
 use Illuminate\Database\Eloquent\Model;
 use PDF;
 
@@ -143,5 +144,9 @@ class Prescription extends Model
 
     public function patient() {
         return $this->hasOne('App\Modules\Patient\Models\Patient','id','patient_id');
+    }
+
+    public function mapping() {
+        return $this->hasOne(RecordMapping::class,'appointment_id','appointment_id');
     }
 }

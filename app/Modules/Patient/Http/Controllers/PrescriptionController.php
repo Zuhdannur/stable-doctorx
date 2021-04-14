@@ -3,6 +3,7 @@
 namespace App\Modules\Patient\Http\Controllers;
 
 use App\Modules\Patient\Models\PatientTimeline;
+use App\RecordMapping;
 use Illuminate\Http\Request;
 
 use App\Modules\Patient\Models\Appointment;
@@ -123,11 +124,13 @@ class PrescriptionController extends Controller
     {
         $appointment = array();
         $patient = array();
+        $record = null;
         if($prescription){
             $appointment = Appointment::find($prescription->appointment_id);
             if($appointment) {
                 $patient = PatientTimeline::where('patient_id',$appointment->patient_id)->orderBy('timeline_date','desc')->skip(1)->take(1)->get();
             }
+            $record = RecordMapping::where('appointment_id',$prescription->appointment_id)->first();
         }
 
         $product = new Product;
@@ -145,8 +148,9 @@ class PrescriptionController extends Controller
 
         // die(json_encode($appointment->patient));
         return view('patient::prescription.edit')
+                ->withRecord($record)
                 ->withPatient($appointment->patient)
-               ->withPrescription($prescription)
+                ->withPrescription($prescription)
                 ->withProduct($listProduct)->withService($listService)
                 ->withDatadiagnoseitem($optionDiagnose)
                 ->withPatient($prescription->appointment->patient);

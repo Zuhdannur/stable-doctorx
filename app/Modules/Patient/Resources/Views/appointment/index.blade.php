@@ -81,56 +81,32 @@
                     </div>
                 </div>
                 <div class="block-content">
-{{--                    <table class="table">--}}
-{{--                        <tr>--}}
-{{--                            <td>Nama</td>--}}
-{{--                            <td>CANDA</td>--}}
-{{--                        </tr>--}}
-{{--                        <tr>--}}
-{{--                            <td>Jenis Kelamin (L/P)</td>--}}
-{{--                            <td></td>--}}
-{{--                        </tr>--}}
-{{--                        <tr>--}}
-{{--                            <td>Umur</td>--}}
-{{--                            <td></td>--}}
-{{--                        </tr>--}}
-{{--                        <tr>--}}
-{{--                            <td>Alamat</td>--}}
-{{--                            <td></td>--}}
-{{--                        </tr>--}}
-{{--                        <tr>--}}
-{{--                            <td>Telp</td>--}}
-{{--                            <td></td>--}}
-{{--                        </tr>--}}
-{{--                    </table>--}}
-{{--                    <p>Menyatakan dengan sesungguhnya dari saya sendiri/*sebagai orang tua/*suami/*istri/*anak/*wali dari:</p>--}}
-{{--                    <table class="table">--}}
-{{--                        <tr>--}}
-{{--                            <td>Nama</td>--}}
-{{--                            <td>CANDA</td>--}}
-{{--                        </tr>--}}
-{{--                        <tr>--}}
-{{--                            <td>Jenis Kelamin (L/P)</td>--}}
-{{--                            <td></td>--}}
-{{--                        </tr>--}}
-{{--                        <tr>--}}
-{{--                            <td>Umur</td>--}}
-{{--                            <td></td>--}}
-{{--                        </tr>--}}
-{{--                        <tr>--}}
-{{--                            <td>Alamat</td>--}}
-{{--                            <td></td>--}}
-{{--                        </tr>--}}
-{{--                        <tr>--}}
-{{--                            <td>Telp</td>--}}
-{{--                            <td></td>--}}
-{{--                        </tr>--}}
-{{--                    </table>--}}
-
-{{--                    <p>Dengan ini menyatakan SETUJU/MENOLAK untuk dilakukan Tindakan Medis berupa</p>--}}
-{{--                    <strong><p>SETUJU</p></strong>--}}
-{{--                    <p>Dari penjelasan yang diberikan, telah saya mengerti segala hal yang berhubungan dengan penyakit tersebut, serta tindakan medis yang akan dilakukan dan kemungkinana pasca tindakan yang dapat terjadi sesuai penjelasan yang diberikan</p>--}}
                     <div role="main" id="viewport"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="view_mapping" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="block block-themed block-transparent mb-0">
+                <div class="block-header bg-primary-dark">
+                    <h3 class="block-title">Mapping Wajah Pasien</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                            <i class="si si-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content">
+                    <div id="mapping_content" class="col-lg-12">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -279,5 +255,25 @@
 
         $("#view_consent").modal('show')
     })
+
+    $('body').on('click','.btnMapping',function () {
+
+        var parent = $(this).parent()
+
+        var base64 = parent.find('input').val()
+        Base64ToImage(base64, function (img) {
+            document.getElementById("mapping_content").appendChild(img)
+            alert(img.width)
+        })
+        $("#view_mapping").modal('show')
+    })
+
+    function Base64ToImage(base64img, callback) {
+        var img = new Image();
+        img.onload = function() {
+            callback(img);
+        };
+        img.src = base64img;
+    }
 </script>
 @endsection

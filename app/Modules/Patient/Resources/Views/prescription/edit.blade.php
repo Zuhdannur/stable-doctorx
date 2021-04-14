@@ -567,6 +567,95 @@
 
     @include('patient::patient.getbeforeafter')
 
+    @if(!empty($record))
+    <div class="block my-block" id="my-block3">
+        <div class="block-header block-header-default">
+            <div class="d-flex" style="width: 100%">
+                <h3 class="block-title col-md-2">Record Mapping Wajah</h3>
+                <div class="col-md-8">
+                    <input type="checkbox" id="is_record" name="is_record" class="switch-input" checked>
+                    <label for="is_record" class="switch-label"><span class="toggle--on">Ya</span><span
+                            class="toggle--off">Tidak</span></label>
+                </div><!--col-->
+            </div>
+        </div>
+        <div class="block-content block-content-full">
+            <div class="row clearfix">
+                <div class="col-md-12" id="record_wajah_content">
+                    <span id="error"></span>
+                    <div class="col-lg-4">
+                        <canvas id="c" width="710" height="300"></canvas>
+                    </div>
+                    <div class="d-flex p-4">
+                        <table>
+                            <tr>
+                                <td><img src="{{ asset('media/segitiga.png') }}" alt=""></td>
+                                <td><button type="button" class="btn btn-sm btn-outline-success" id="btnTanamBenang">Tanam Benang</button></td>
+                                <td><img src="{{ asset('media/little_oval.png') }}" alt=""></td>
+                                <td><button type="button" class="btn btn-sm btn-outline-success" id="btnFillerLittle">Filler</button></td>
+                            </tr>
+                            <tr>
+                                <td><img src="{{ asset('media/oval.png') }}" alt=""></td>
+                                <td><button type="button" class="btn btn-sm btn-outline-success" id="btnFillerOval">Filler</button></td>
+                                <td><img src="{{ asset('media/gel.png') }}" alt=""></td>
+                                <td><button type="button" class="btn btn-sm btn-outline-success" id="btnGelWajahMerata">Gel Wajah merata</button></td>
+                            </tr>
+                        </table>
+                        &nbsp;
+                        <button type="button" class="btn btn-sm btn-danger" style="display:none;" id="btnDelete">Hapus Komponen</button>
+                    </div>
+                    <br>
+                    <div class="form-groups">
+                        {{ html()->label('Jenis Tindakan')
+                            ->class('col-md-2 form-control-label')
+                            ->for('code') }}
+                        <div class="col-md-6">
+                            <input class="form-control" name="jenis_tindakan" value="{{ @$record->jenis_tindakan }}" />
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-groups">
+                        {{ html()->label('Jenis Bahan')
+                            ->class('col-md-2 form-control-label')
+                            ->for('code') }}
+                        <div class="col-md-6">
+                            <input class="form-control" name="jenis_bahan" value="{{ @$record->jenis_bahan }}" />
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-groups">
+                        {{ html()->label('Jumlah')
+                            ->class('col-md-2 form-control-label')
+                            ->for('code') }}
+                        <div class="col-md-6">
+                            <input class="form-control" name="jumlah" type="number" value="{{ @$record->jumlah }}" />
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-groups">
+                        {{ html()->label('Lokasi')
+                            ->class('col-md-2 form-control-label')
+                            ->for('code') }}
+                        <div class="col-md-6">
+                            <textarea class="form-control" name="lokasi">{{ @$record->lokasi }}</textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-groups">
+                        {{ html()->label('Catatan')
+                            ->class('col-md-2 form-control-label')
+                            ->for('code') }}
+                        <div class="col-md-6">
+                            <textarea class="form-control" name="catatan">{{ @$record->catatan }}</textarea>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
     <div class="row clearfix">
         <div class="col">
             {{ form_cancel(route('admin.patient.index'), __('buttons.general.cancel')) }}
@@ -683,6 +772,9 @@
 <script src="{{ URL::asset('js/plugins/croppie/croppie.js') }}"></script>
 <script src="{{ URL::asset('js/plugins/croppie/exif-js.js') }}"></script>
 <script src="{{ URL::asset('js/plugins/webcam/webcam.min.js') }}"></script>
+<script src="{{ asset('js/fabric.min.js') }}"></script>
+<script src="{{ asset('js/FileSaver.js') }}"></script>
+<script src="{{ asset('js/htmltoimage.js') }}"></script>
 <script language="JavaScript">
     Webcam.set({
         width: 320,
@@ -696,6 +788,37 @@ jQuery(function () {
 
     Codebase.layout('sidebar_mini_on');
     Codebase.helpers(['masked-inputs', 'simplemde']);
+
+    fabric.Object.prototype.set({
+        transparentCorners: false,
+        cornerColor: 'rgba(102,153,255,0.5)',
+        cornerSize: 12,
+        padding: 5
+    });
+
+    var canvas = window._canvas = new fabric.Canvas('c');
+
+    canvas.on('mouse:up', function () {
+        if(canvas.getActiveObject()) {
+            $("#btnDelete").show();
+        } else {
+            $("#btnDelete").hide();
+        }
+    });
+
+    @if(!empty($record))
+        var jsonCanvas = '{!! $record->canvas !!}'
+        canvas.loadFromJSON(jsonCanvas,function () {
+            canvas.renderAll();
+        } , function (o,object) {
+
+        })
+    @endif
+
+    canvas.setBackgroundImage('{{ asset('media/example.PNG') }}', canvas.renderAll.bind(canvas), {
+        backgroundImageOpacity: 0.5,
+        backgroundImageStretch: false,
+    });
 
     $('#1diagnosis2, #product1, #service1').select2({
         placeholder: "Pilih"
@@ -761,6 +884,13 @@ jQuery(function () {
         submitHandler: function(form) {
             //Fetch Image
             var formData = new FormData(form);
+
+            if($("#is_record").is(':checked')) {
+                var can = document.getElementById("c")
+                var base64 = can.toDataURL();
+                formData.append('base64',base64)
+                formData.append('canvas',JSON.stringify(canvas))
+            }
 
             $('#imageGrid').find('img').each(function () {
                 imageName = $(this).attr('src');
@@ -1396,6 +1526,52 @@ jQuery(function () {
             $(this).closest('tr').remove();
             updateIds3();
         });
+
+        $("#btnTanamBenang").on('click',function (e) {
+            fabric.Image.fromURL('{{ asset('media/segitiga.png') }}',function (myImage) {
+                var img1 = myImage.set({ left: 0, top: 0 ,width:40,height:40});
+                canvas.add(img1)
+            })
+        })
+
+        $("#btnFillerOval").on('click',function (e) {
+            fabric.Image.fromURL('{{ asset('media/oval.png') }}',function (myImage) {
+                var img1 = myImage.set({ left: 0, top: 0 ,width:40,height:40});
+                canvas.add(img1)
+            })
+        })
+
+        $("#btnFillerLittle").on('click',function (e) {
+            fabric.Image.fromURL('{{ asset('media/little_oval.png') }}',function (myImage) {
+                var img1 = myImage.set({ left: 0, top: 0 ,width:40,height:40});
+                canvas.add(img1)
+            })
+        })
+
+        $("#btnGelWajahMerata").on('click',function (e) {
+            fabric.Image.fromURL('{{ asset('media/gel.png') }}',function (myImage) {
+                var img1 = myImage.set({ left: 0, top: 0 ,width:40,height:40});
+                canvas.add(img1)
+            })
+        })
+
+        $("#is_record").on('change',function (){
+            if($("#is_record").is(':checked')) {
+                $("#record_wajah_content").show();
+            } else {
+                $("#record_wajah_content").hide();
+            }
+        })
+
+        $("#btnDelete").on('click',function () {
+            var object = canvas.getActiveObject()
+            if (!object){
+                alert('Please select the element to remove');
+                return '';
+            }
+            canvas.remove(object);
+            $(this).hide()
+        })
     });
 });
 </script>
