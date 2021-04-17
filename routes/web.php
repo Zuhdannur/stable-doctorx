@@ -94,8 +94,10 @@ Route::group(['middleware' => 'admin'], function () {
 
     });
 
+});
 
-
+Route::get('expired',function () {
+    return view('errors.expired');
 });
 
 

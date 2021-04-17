@@ -11,9 +11,10 @@
         <div class="block-content">
             @if(empty($isEdit))
                 {{ html()->form('POST', route('setting-modul.store'))->class('js-validation-bootstrap form-horizontal')->attributes(['autocomplete' => 'off'])->open() }}
-            @endif
+            @else
                 {{ html()->form('POST', route('setting-modul.update',@$data->id_modul))->class('js-validation-bootstrap form-horizontal')->attributes(['autocomplete' => 'off'])->open() }}
                 {{ method_field('PATCH') }}
+            @endif
             @php
 
                 @endphp

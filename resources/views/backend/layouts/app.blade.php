@@ -168,6 +168,29 @@
         @include('backend.includes.footer')
         <!-- END Footer -->
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = "{{ env('API_URL') }}data/expired"
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    env_id : '{{ env('ENV_ID') }}'
+                },
+                dataType: 'json',
+                error: function (x, status, error) {
+                    window.location.href = '{{ url('expired') }}';
+                },
+                success: function (response) {
+                    console.log(response)
+                },
+            })
+        })
+    </script>
+
     @stack('js')
 </body>
 </html>
+

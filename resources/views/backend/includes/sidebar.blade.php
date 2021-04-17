@@ -82,7 +82,6 @@
             foreach ($modulAccess as $index => $item){
                 $akses[$index] = $item->id_modul;
             }
-
         @endphp
 
         <!-- Side Navigation -->
@@ -94,6 +93,7 @@
                             <li class="nav-main-heading"><span class="sidebar-mini-visible">UM</span><span
                                     class="sidebar-mini-hidden">{{ @$item->nama_modul }}</span></li>
                             @foreach(\App\Modul::where('parent_id',@$item->id_modul)->get() as $sub)
+                                @if(in_array($sub->id_modul,$akses))
                                 @if(strpos(@$sub->url_modul,'*') !== false)
                                     <li class="{{ active_class(Active::checkUriPattern(@$sub->url_modul), 'open') }}">
                                         <a class="nav-submenu {{ active_class(Active::checkUriPattern(@$sub->url_modul)) }}"
@@ -101,6 +101,7 @@
                                                 class="sidebar-mini-hide">{{ @$sub->nama_modul }}</span></a>
                                         <ul>
                                             @foreach(\App\Modul::where('parent_id',@$sub->id_modul)->get() as $sub_item)
+                                                @if(in_array($sub_item->id_modul,$akses))
                                                 @if(strpos(@$sub_item->url_modul,'*') !== false)
                                                     <li class="{{ active_class(Active::checkUriPattern(@$sub_item->url_modul), 'open') }}">
                                                         <a class="nav-submenu {{ active_class(Active::checkUriPattern(@$sub_item->url_modul)) }}"
@@ -109,6 +110,7 @@
                                                                 class="sidebar-mini-hide">{{ @$sub_item->nama_modul }}</span></a>
                                                         <ul>
                                                     @foreach(\App\Modul::where('parent_id',@$sub_item->id_modul)->get() as $sub_sub_item)
+                                                        @if(in_array($sub_sub_item->id_modul,$akses))
                                                         @if(strpos(@$sub_sub_item->url_modul,'*') !== false)
                                                             <li class="{{ active_class(Active::checkUriPattern(@$sub_sub_item->url_modul), 'open') }}">
                                                                 <a class="nav-submenu {{ active_class(Active::checkUriPattern(@$sub_sub_item->url_modul)) }}"
@@ -117,18 +119,21 @@
                                                                         class="sidebar-mini-hide">{{ @$sub_sub_item->nama_modul }}</span></a>
                                                                 <ul>
                                                                 @foreach(\App\Modul::where('parent_id',@$sub_sub_item->id_modul)->get() as $sub_sub_sub_item)
-                                                                        @if(strpos(@$sub_sub_item->url_modul,'*') !== false)
-                                                                            <li class="{{ active_class(Active::checkUriPattern(@$sub_sub_item->url_modul), 'open') }}">
-                                                                                <a class="nav-submenu {{ active_class(Active::checkUriPattern(@$sub_sub_item->url_modul)) }}"
+                                                                        @if(in_array($sub_sub_sub_item->id_modul,$akses))
+                                                                        @if(strpos(@$sub_sub_sub_item->url_modul,'*') !== false)
+                                                                            <li class="{{ active_class(Active::checkUriPattern(@$sub_sub_sub_item->url_modul), 'open') }}">
+                                                                                <a class="nav-submenu {{ active_class(Active::checkUriPattern(@$sub_sub_sub_item->url_modul)) }}"
                                                                                    data-toggle="nav-submenu" href="#"><i
-                                                                                        class="{{ @$sub_sub_item->icon }}"></i><span
-                                                                                        class="sidebar-mini-hide">{{ @$sub_sub_item->nama_modul }}</span></a>
+                                                                                        class="{{ @$sub_sub_sub_item->icon }}"></i><span
+                                                                                        class="sidebar-mini-hide">{{ @$sub_sub_sub_item->nama_modul }}</span></a>
                                                                                 <ul>
-                                                                                    @foreach(\App\Modul::where('parent_id',@$sub_sub_sub_item->id_modul)->get() as $sub_sub_sub_item)
+                                                                                    @foreach(\App\Modul::where('parent_id',@$sub_sub_sub_item->id_modul)->get() as $sub_sub_sub_sub_item)
+                                                                                        @if(in_array($sub_sub_sub_sub_item->id_modul,$akses))
                                                                                         <li>
-                                                                                            <a class="{{ active_class(Active::checkUriPattern($sub_sub_sub_item->url_modul)) }}"
-                                                                                               href="{{ url($sub_sub_sub_item->url_modul) }}">{{ $sub_sub_sub_item->nama_modul }}</a>
+                                                                                            <a class="{{ active_class(Active::checkUriPattern($sub_sub_sub_sub_item->url_modul)) }}"
+                                                                                               href="{{ url($sub_sub_sub_sub_item->url_modul) }}">{{ $sub_sub_sub_sub_item->nama_modul }}</a>
                                                                                         </li>
+                                                                                        @endif
                                                                                     @endforeach
                                                                                 </ul>
                                                                             </li>
@@ -137,6 +142,7 @@
                                                                                 <a class="{{ active_class(Active::checkUriPattern($sub_sub_sub_item->url_modul)) }}"
                                                                                    href="{{ url($sub_sub_sub_item->url_modul) }}">{{ $sub_sub_sub_item->nama_modul }}</a>
                                                                             </li>
+                                                                        @endif
                                                                         @endif
                                                                 @endforeach
                                                                 </ul>
@@ -147,6 +153,7 @@
                                                                                href="{{ url($sub_sub_item->url_modul) }}">{{ $sub_sub_item->nama_modul }}</a>
                                                             </li>
                                                         @endif
+                                                                @endif
                                                     @endforeach
                                                         </ul>
                                                     </li>
@@ -155,6 +162,7 @@
                                                           <a class="{{ active_class(Active::checkUriPattern($sub_item->url_modul)) }}"
                                                              href="{{ url($sub_item->url_modul) }}">{{ $sub_item->nama_modul }}</a>
                                                       </li>
+                                                @endif
                                                 @endif
                                             @endforeach
                                         </ul>
@@ -168,122 +176,123 @@
                                         </a>
                                     </li>
                                 @endif
+                                @endif
                             @endforeach
                         @endif
                     @endforeach
-                    <li>
-                        <a class="{{ active_class(Active::checkUriPattern('admin/dashboard')) }}"
-                           href="{{ route('admin.dashboard') }}">
-                            <i class="si si-cup"></i>
-                            <span class="sidebar-mini-hide">@lang('menus.backend.sidebar.dashboard')</span>
-                        </a>
-                    </li>
+{{--                    <li>--}}
+{{--                        <a class="{{ active_class(Active::checkUriPattern('admin/dashboard')) }}"--}}
+{{--                           href="{{ route('admin.dashboard') }}">--}}
+{{--                            <i class="si si-cup"></i>--}}
+{{--                            <span class="sidebar-mini-hide">@lang('menus.backend.sidebar.dashboard')</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                     {{-- End Of Dashboard sidebar --}}
 
                     {{-- calendar sidebar --}}
-                    @include('backend.includes.partials.sidebar.calendar')
+{{--                    @include('backend.includes.partials.sidebar.calendar')--}}
                     {{-- end of calendar sidebar --}}
 
                     {{-- statistics sidebar --}}
-                    @include('backend.includes.partials.sidebar.statistics')
+{{--                    @include('backend.includes.partials.sidebar.statistics')--}}
                     {{-- end of statistics sidebar --}}
-                    <li class="nav-main-heading"><span class="sidebar-mini-visible">UM</span><span
-                            class="sidebar-mini-hidden">@lang('menus.backend.sidebar.general')</span></li>
+{{--                    <li class="nav-main-heading"><span class="sidebar-mini-visible">UM</span><span--}}
+{{--                            class="sidebar-mini-hidden">@lang('menus.backend.sidebar.general')</span></li>--}}
 
                     {{-- patient sidebar --}}
-                    @include('backend.includes.partials.sidebar.patient')
+{{--                    @include('backend.includes.partials.sidebar.patient')--}}
                     {{-- end of patient sidebar --}}
 
                     {{-- appointment sidebar --}}
-                    @include('backend.includes.partials.sidebar.appointment')
+{{--                    @include('backend.includes.partials.sidebar.appointment')--}}
                     {{-- end of appointment sidebar --}}
 
                     {{-- treatment sidebar --}}
-                    @include('backend.includes.partials.sidebar.treatment')
+{{--                    @include('backend.includes.partials.sidebar.treatment')--}}
                     {{-- end of treatment sidebar --}}
 
                     {{-- billing sidebar --}}
-                    @include('backend.includes.partials.sidebar.billing')
+{{--                    @include('backend.includes.partials.sidebar.billing')--}}
                     {{-- end of billing sidebar --}}
 
                     {{-- crm sidebar --}}
-                    @include('backend.includes.partials.sidebar.crm')
+{{--                    @include('backend.includes.partials.sidebar.crm')--}}
                     {{-- end of crm sidebar --}}
 
-                    <li class="nav-main-heading"><span class="sidebar-mini-visible">SYS</span><span
-                            class="sidebar-mini-hidden">@lang('menus.backend.sidebar.system')</span></li>
+{{--                    <li class="nav-main-heading"><span class="sidebar-mini-visible">SYS</span><span--}}
+{{--                            class="sidebar-mini-hidden">@lang('menus.backend.sidebar.system')</span></li>--}}
 
                     {{-- master-data sidebar --}}
-                    @include('backend.includes.partials.sidebar.master-data')
+{{--                    @include('backend.includes.partials.sidebar.master-data')--}}
                     {{-- end of master-data sidebar --}}
 
                     {{-- accounting sidebar --}}
-                    @if(!empty(""))
-                    @include('backend.includes.partials.sidebar.accounting')
-                    @endif
+{{--                    @if(!empty(""))--}}
+{{--                    @include('backend.includes.partials.sidebar.accounting')--}}
+{{--                    @endif--}}
                     {{-- end of accounting sidebar --}}
 
                     {{-- reporting sidebar --}}
-                    @include('backend.includes.partials.sidebar.reporting')
+{{--                    @include('backend.includes.partials.sidebar.reporting')--}}
                     {{-- end of reporting sidebar --}}
 
                     {{-- humanresource sidebar --}}
-                    @include('backend.includes.partials.sidebar.humanresource')
+{{--                    @include('backend.includes.partials.sidebar.humanresource')--}}
                     {{-- end of humanresource sidebar --}}
 
                     {{-- incentive sidebar --}}
-                    @include('backend.includes.partials.sidebar.incentive')
+{{--                    @include('backend.includes.partials.sidebar.incentive')--}}
                     {{-- end of incentive sidebar --}}
 
-                    <li class="{{ active_class(Active::checkUriPattern('admin/auth*'), 'open') }}">
-                        <a class="nav-submenu {{ active_class(Active::checkUriPattern('admin/auth*')) }}"
-                           data-toggle="nav-submenu" href="#">
-                            <i class="si si-lock"></i>
-                            <span class="sidebar-mini-hide">
-                                    @lang('menus.backend.access.title')
-                                </span>
+{{--                    <li class="{{ active_class(Active::checkUriPattern('admin/auth*'), 'open') }}">--}}
+{{--                        <a class="nav-submenu {{ active_class(Active::checkUriPattern('admin/auth*')) }}"--}}
+{{--                           data-toggle="nav-submenu" href="#">--}}
+{{--                            <i class="si si-lock"></i>--}}
+{{--                            <span class="sidebar-mini-hide">--}}
+{{--                                    @lang('menus.backend.access.title')--}}
+{{--                                </span>--}}
 
-                            @if ($pending_approval > 0)
-                                <span class="badge badge-danger">{{ $pending_approval }}</span>
-                            @endif
-                        </a>
-                        <ul>
-                            <li>
-                                <a class="{{ active_class(Active::checkUriPattern('admin/auth/user*')) }}"
-                                   href="{{ route('admin.auth.user.index') }}">
-                                        <span class="sidebar-mini-hide">
-                                            @lang('labels.backend.access.users.management')
-                                        </span>
-                                    @if ($pending_approval > 0)
-                                        <span class="badge badge-danger">{{ $pending_approval }}</span>
-                                    @endif
-                                </a>
-                            </li>
-                            <li>
-                                <a class="{{ active_class(Active::checkUriPattern('admin/auth/role*')) }}"
-                                   href="{{ route('admin.auth.role.index') }}">
-                                        <span class="sidebar-mini-hide">
-                                            @lang('labels.backend.access.roles.management')
-                                        </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="{{ active_class(Active::checkUriPattern('admin/auth/ability*')) }}"
-                                   href="{{ route('admin.auth.ability.index') }}">
-                                        <span class="sidebar-mini-hide">
-                                            @lang('labels.backend.access.abilities.management')
-                                        </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+{{--                            @if ($pending_approval > 0)--}}
+{{--                                <span class="badge badge-danger">{{ $pending_approval }}</span>--}}
+{{--                            @endif--}}
+{{--                        </a>--}}
+{{--                        <ul>--}}
+{{--                            <li>--}}
+{{--                                <a class="{{ active_class(Active::checkUriPattern('admin/auth/user*')) }}"--}}
+{{--                                   href="{{ route('admin.auth.user.index') }}">--}}
+{{--                                        <span class="sidebar-mini-hide">--}}
+{{--                                            @lang('labels.backend.access.users.management')--}}
+{{--                                        </span>--}}
+{{--                                    @if ($pending_approval > 0)--}}
+{{--                                        <span class="badge badge-danger">{{ $pending_approval }}</span>--}}
+{{--                                    @endif--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <a class="{{ active_class(Active::checkUriPattern('admin/auth/role*')) }}"--}}
+{{--                                   href="{{ route('admin.auth.role.index') }}">--}}
+{{--                                        <span class="sidebar-mini-hide">--}}
+{{--                                            @lang('labels.backend.access.roles.management')--}}
+{{--                                        </span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <a class="{{ active_class(Active::checkUriPattern('admin/auth/ability*')) }}"--}}
+{{--                                   href="{{ route('admin.auth.ability.index') }}">--}}
+{{--                                        <span class="sidebar-mini-hide">--}}
+{{--                                            @lang('labels.backend.access.abilities.management')--}}
+{{--                                        </span>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+{{--                    </li>--}}
 
                     {{-- log-viewer sidebar --}}
                     {{-- @include('backend.includes.partials.sidebar.log-viewer') --}}
                     {{-- end of log-viewer sidebar --}}
 
                     {{-- settings sidebar --}}
-                    @include('backend.includes.partials.sidebar.settings')
+{{--                    @include('backend.includes.partials.sidebar.settings')--}}
                     {{-- end of settings sidebar --}}
 
                 </ul>
