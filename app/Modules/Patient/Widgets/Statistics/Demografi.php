@@ -628,7 +628,6 @@ class Demografi extends AbstractWidget
     public function run()
     {
         $work = $this->work();
-        dd($work);
         $age = $this->age();
         $gender = $this->gender();
         $district = $this->district();

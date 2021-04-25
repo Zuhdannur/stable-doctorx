@@ -70,6 +70,13 @@
 </head>
 {{-- <body> --}}
     <div class="container">
+        <div class="d-flex justify-content-center">
+            <div class="col" style='margin-bottom:10px;margin-top:8px;text-align: center'>
+                <img src="{{ asset(setting()->get('logo_header')) }}" width="40px" class="" alt="">
+                <h5 class="wrapword">{{ 'Klinik '.setting()->get('app_name') }}</h5>
+                <p>{{ setting()->get('address') }}</p>
+            </div>
+        </div>
         <div class="row">
             <div class="col" style='margin-bottom:10px;margin-top:8px'>
                 <hr style='width:66mm;border-bottom : 1.5px dashed #2a2929;border-top: none;margin-bottom:3px;'>
@@ -81,7 +88,7 @@
         <div class="row" style='margin-bottom:10px;'>
             <div class="col">
                 <hr style='width:66mm;border-bottom : 1.5px dashed #2a2929;border-top: none;margin-bottom:3px;'>
-                <h5>Invoice No. #{{ $billing->invoice_no }}</h5>
+                <h4>Invoice No. #{{ $billing->invoice_no }}</h4>
                 <h5><span style='width:18mm;display: inline-block;'>Dibuat Pada&nbsp;</span>: {{ $billing->created_at }}</h5>
                 <h5><span style='width:18mm;display: inline-block;'>Jatuh Tempo&nbsp;</span>: {{ $billing->date }}</h5>
 {{--                <h5><span style='width:18mm;display: inline-block;'>Metode Pembayaran&nbsp;</span>: {{ @$billing->finance_transaction->journal }}</h5>--}}
@@ -150,10 +157,10 @@
                             <th style='width:35mm;text-align: right;padding-right: 10px;'>Subtotal</th>
                             <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->subtotal, setting()->get('currency_symbol')) }}</strong></td>
                         </tr>
-                        <tr>
-                            <th style='width:35mm;text-align: right;padding-right: 10px;'>Total Tax</th>
-                            <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->tax_total, setting()->get('currency_symbol')) }}</strong></td>
-                        </tr>
+{{--                        <tr>--}}
+{{--                            <th style='width:35mm;text-align: right;padding-right: 10px;'>Total Tax</th>--}}
+{{--                            <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->tax_total, setting()->get('currency_symbol')) }}</strong></td>--}}
+{{--                        </tr>--}}
                         @php
                             $potongan_radeem = 0;
                         @endphp
@@ -220,7 +227,15 @@
         <div class="row">
             <div class="col">
                 <hr style='width:66mm;border-bottom : 1.5px dashed #2a2929;border-top: none;margin-bottom:3px;'>
-                <p class="wrapword">Powered By {{app_name()}}</p>
+                <p class="wrapword">Facebook : {{ setting()->get('copyright') }} , Instagram : {{ setting()->get('copyright_link') }}</p>
+                <hr style='width:66mm;border-bottom : 1.5px dashed #2a2929;border-top: none;margin-top:3px;'>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <hr style='width:66mm;border-bottom : 1.5px dashed #2a2929;border-top: none;margin-bottom:3px;'>
+                <p class="wrapword">Powered By {{ app_name() }}</p>
+                <p class="wrapword">BARANG YANG SUDAH DI BELI TIDAK BISA DI TUKAR/ DI KEMBALIKAN</p>
                 <hr style='width:66mm;border-bottom : 1.5px dashed #2a2929;border-top: none;margin-top:3px;'>
             </div>
         </div>

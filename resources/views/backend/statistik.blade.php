@@ -59,7 +59,7 @@
 </div>
 
 <script>
-    jQuery(function(){ 
+    jQuery(function(){
         Codebase.helpers(['datepicker', 'notify', 'select2']);
 
         $(document).on("focusout", ".datepicker", function() {
@@ -77,19 +77,19 @@
 {{-- peak time widget --}}
 
 {{-- appointment peak time --}}
-@widget('\App\Modules\Patient\Widgets\PatientPeakTime', [ 'start_date' => $dateWidget['start_date'], 'end_date' => $dateWidget['end_date'] ]) 
+@widget('\App\Modules\Patient\Widgets\PatientPeakTime', [ 'start_date' => $dateWidget['start_date'], 'end_date' => $dateWidget['end_date'] ])
 {{-- End OF appointment peak time --}}
 
 <!-- Produk Statistics -->
-@widget('\App\Modules\Product\Widgets\Statistics', [ 'start_date' => $dateWidget['start_date'], 'end_date' => $dateWidget['end_date'] ]) 
+@widget('\App\Modules\Product\Widgets\Statistics', [ 'start_date' => $dateWidget['start_date'], 'end_date' => $dateWidget['end_date'] ])
 <!-- END Patients -->
 
 <!-- Pasien Statistics -->
-@widget('\App\Modules\Patient\Widgets\Statistics', [ 'start_date' => $dateWidget['start_date'], 'end_date' => $dateWidget['end_date'] ]) 
+@widget('\App\Modules\Patient\Widgets\Statistics', [ 'start_date' => $dateWidget['start_date'], 'end_date' => $dateWidget['end_date'] ])
 <!-- END Patients -->
 
 <script type="text/javascript">
-jQuery(function(){ 
+jQuery(function(){
     Codebase.layout('sidebar_mini_on');
 });
 </script>

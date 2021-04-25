@@ -237,7 +237,7 @@
                     {{-- end of reporting sidebar --}}
 
                     {{-- humanresource sidebar --}}
-{{--                    @include('backend.includes.partials.sidebar.humanresource')--}}
+                    @include('backend.includes.partials.sidebar.humanresource')
                     {{-- end of humanresource sidebar --}}
 
                     {{-- incentive sidebar --}}

@@ -33,7 +33,8 @@ class SettingModulController extends Controller
     }
 
     public function destroy($id) {
-
+        $delete = \App\Modul::find($id)->delete();
+        return redirect()->back()->with('flash_success','Menu Berhasil dihapus');
     }
 
     public function getData(Request $request) {

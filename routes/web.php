@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GradeController;
 use App\Http\Controllers\LanguageController;
 
 Route::get('lang/{lang}', [LanguageController::class, 'swap']);
@@ -92,6 +93,13 @@ Route::group(['middleware' => 'admin'], function () {
 //            Route::get('/getData','UrutanModulController@getData');
         });
 
+    });
+
+    Route::group(['prefix' => 'admin/crm'] , function () {
+        Route::resource('/grade','GradeController');
+        Route::group(['prefix' => 'grade/data'],function () {
+           Route::get('/getData','GradeController@getData');
+        });
     });
 
 });
