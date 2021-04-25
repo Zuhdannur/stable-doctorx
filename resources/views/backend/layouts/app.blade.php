@@ -182,7 +182,7 @@
                     },
                     dataType: 'json',
                     error: function (x, status, error) {
-                        window.location.href = '{{ url('expired') }}';
+                        {{--window.location.href = '{{ url('expired') }}';--}}
                     },
                     success: function (response) {
                         console.log(response)
