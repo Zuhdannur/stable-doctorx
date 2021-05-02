@@ -13,4 +13,8 @@ class Role extends \Silber\Bouncer\Database\Role
 {
     use RoleAttribute,
         RoleMethod, SoftDeletes;
+
+    public function modul() {
+        return $this->hasMany('\App\ModelAccess','id_user','id');
+    }
 }

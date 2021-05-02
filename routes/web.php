@@ -102,6 +102,13 @@ Route::group(['middleware' => 'admin'], function () {
         });
     });
 
+    Route::group(['prefix' => 'admin/access'] , function () {
+        Route::resource('role-module','RoleModuleAccessController');
+        Route::group(['prefix' => 'role-module/data'],function () {
+            Route::get('/getData','RoleModuleAccessController@getData');
+        });
+    });
+
 });
 
 Route::get('expired',function () {

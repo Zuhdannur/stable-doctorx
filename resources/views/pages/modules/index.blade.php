@@ -6,9 +6,9 @@
     <div class="block">
         <div class="block-header block-header-default">
             <h3 class="block-title">@lang('labels.backend.access.users.management') <small class="text-muted">@lang('labels.backend.access.users.edit')</small></h3>
-            <div class="block-options">
-                @include('backend.auth.user.includes.breadcrumb-links')
-            </div>
+{{--            <div class="block-options">--}}
+{{--                @include('backend.auth.user.includes.breadcrumb-links')--}}
+{{--            </div>--}}
         </div>
         <div class="block-content">
             {{ html()->modelForm($user, 'PATCH', route('modul.update', $user->id))->class('form-horizontal')->open() }}

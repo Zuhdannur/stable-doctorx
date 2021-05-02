@@ -77,13 +77,19 @@
             </div>
             <!-- END Side User -->
         @php
-            $modulAccess = \App\ModelAccess::where('id_user',Auth()->user()->id)->get();
-            $akses = array();
-            foreach ($modulAccess as $index => $item){
-                $akses[$index] = $item->id_modul;
-            }
-        @endphp
+                $akses = array();
+                foreach(Auth()->user()->roles as $item) {
+                    $modulAccess = \App\ModelAccess::where('id_user',$item->id)->get();
+                    foreach ($modulAccess as $modul) {
+                        array_push($akses,$modul->id_modul);
+                    }
+                }
+                array_unique($akses);
 
+        @endphp
+{{--            foreach ($modulAccess as $index => $item){--}}
+{{--            $akses[$index] = $item->id_modul;--}}
+{{--            }--}}
         <!-- Side Navigation -->
             <div class="content-side content-side-full">
                 <ul class="nav-main">

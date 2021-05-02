@@ -146,10 +146,10 @@
                             </div>
 
                         </div><!--form-group-->
-                    <div class="form-group row">
-                        {{ html()->label(__('labels.backend.access.users.table.other_module'))->class('col-md-2 form-control-label') }}
-                        <a class="btn btn-sm btn-success" href="{{ route('modul.edit',$user->id) }}">Lihat Akses</a>
-                    </div>
+{{--                    <div class="form-group row">--}}
+{{--                        {{ html()->label(__('labels.backend.access.users.table.other_module'))->class('col-md-2 form-control-label') }}--}}
+{{--                        <a class="btn btn-sm btn-success" href="{{ route('modul.edit',$user->id) }}">Lihat Akses</a>--}}
+{{--                    </div>--}}
                 </div><!--col-->
             </div><!--row-->
 
