@@ -84,7 +84,7 @@ class Billing extends Model
     	$numberdigit = setting()->get('invoice_digit');
     	$code = strtoupper(setting()->get('invoice_code')).$separator.$dt.$separator;
 
-    	$count = self::whereDate('date', $date)->withTrashed()->count();
+    	$count = self::whereDate('date', $date)->where('id_klinik',auth()->user()->klinik->id_klinik)->withTrashed()->count();
 
 		$newId = $code . str_pad($count + 1, $numberdigit, 0, STR_PAD_LEFT);
 

@@ -17,7 +17,7 @@
             @endphp
             @foreach($billing->invDetail as $key => $item)
                 @php
-                    $point = $point + $item->point;
+                    $point = $point + @$item->point;
                     $tax_ammount = intVal($item->qty * $item->price * $item->tax_value / 100);
                     $amount = $item->qty * $item->price;
                 @endphp
@@ -89,7 +89,7 @@
             @if ($billing->patient->membership)
                 @if ($billing->status == config('billing.invoice_unpaid'))
                     @php
-                        $pointMembership = ($billing->total_price / $billing->patient->membership->ms_membership->min_trx) * $billing->patient->membership->ms_membership->point;
+                        $pointMembership = ($billing->total_price / $billing->patient->membership->ms_membership->min_trx) * @$billing->patient->membership->ms_membership->point;
                         $pointMembership = intVal($pointMembership) + $point;
                     @endphp
                     <tr>
