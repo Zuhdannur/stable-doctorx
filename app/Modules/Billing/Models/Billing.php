@@ -80,9 +80,11 @@ class Billing extends Model
             $date = \Carbon\Carbon::createFromFormat('d/m/Y', $date)->format('Y-m-d');
         }
 
+        $klinik = auth()->user()->klinik->id_klinik;
+
     	$separator = setting()->get('invoice_separator');
     	$numberdigit = setting()->get('invoice_digit');
-    	$code = strtoupper(setting()->get('invoice_code')).$separator.$dt.$separator;
+    	$code = strtoupper(setting()->get('invoice_code')).$separator.$dt.$separator.$klinik;
 
     	$count = self::whereDate('date', $date)->where('id_klinik',auth()->user()->klinik->id_klinik)->withTrashed()->count();
 

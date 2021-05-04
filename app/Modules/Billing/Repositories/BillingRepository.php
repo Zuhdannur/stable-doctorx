@@ -73,7 +73,8 @@ class BillingRepository extends BaseRepository
                 'discount' => $data['discount'],
                 'created_by' => auth()->user()->id,
                 'in_paid' => $data['total_receive'],
-                'id_klinik' => auth()->user()->id_klinik
+                'id_klinik' => auth()->user()->id_klinik,
+                'note' => $data['notes']
             ];
             $createBilling = parent::create($dataBilling);
             $transaction->transaction_code = $createBilling->invoice_no;
