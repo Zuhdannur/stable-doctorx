@@ -190,7 +190,7 @@
             </div>
             <div class="row clearfix">
                 <div class="col-md-12 text-center">
-                    <button type="submit" class="btn btn-success"><span class="fa fa-check"></span> Buat Invoice & Print</button>
+                    <button type="submit" class="btn btn-success" id="btnSubmit"><span class="fa fa-check"></span> Buat Invoice & Print</button>
                 </div>
             </div>
         </form>
@@ -350,6 +350,7 @@ var validator = jQuery('.js-validation-bootstrap').validate({
             dataType: 'json',
             beforeSend: function(xhr) {
                 Codebase.blocks('#my-block2', 'state_loading');
+                $("#btnSubmit").prop('disabled',true);
             },
             error: function(x, status, error) {
                 if (x.status == 403) {
@@ -386,6 +387,7 @@ var validator = jQuery('.js-validation-bootstrap').validate({
                 }
 
                 Codebase.blocks('#my-block2', 'state_normal');
+                $("#btnSubmit").prop('disabled',false);
             },
             success: function(result) {
                 if (result.status) {
@@ -409,6 +411,7 @@ var validator = jQuery('.js-validation-bootstrap').validate({
                 }
 
                 Codebase.blocks('#my-block2', 'state_normal');
+                $("#btnSubmit").prop('disabled',false);
             }
         });
         return false; // required to block normal submit since you used ajax
