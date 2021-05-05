@@ -149,7 +149,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <span class="font-w600">Copyright Name</span>
+                                <span class="font-w600">Facebook</span>
                             </td>
                             <td class="text-right">
                                 <span>{{ setting()->get('copyright') }}</span>
@@ -157,7 +157,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <span class="font-w600">Copyright Link</span>
+                                <span class="font-w600">Instagram</span>
                             </td>
                             <td class="text-right">
                                 <span>{{ setting()->get('copyright_link') }}</span>
@@ -216,7 +216,7 @@
 			                            <label>Zona Waktu</label>
 			                            <br>
 			                            {!! \Timezonelist::create('timezone', setting()->get('timezone'), 'id="timezone" class="js-select2 form-control" style="width:100%"') !!}
-			                            
+
 			                        </div>
 			                    </div>
 			                    <div class="form-group row">
@@ -285,7 +285,7 @@
 			                </div>
 			            </div>
                     </div>
-                
+
 	                <div class="modal-footer">
 	                    <button type="button" class="btn btn-alt-secondary" data-dismiss="modal">Tutup</button>
 	                    <button type="submit" class="btn btn-alt-success">
@@ -406,7 +406,7 @@ var BeFormValidation = function() {
 
                             setTimeout(function(){// wait for 5 secs(2)
                                 location.reload(); // then reload the page.(3)
-                            }, 2000); 
+                            }, 2000);
                         }else{
                             $.alert({
                                 title: 'Error',
@@ -415,7 +415,7 @@ var BeFormValidation = function() {
                                 content: result.message,
                             });
                         }
-                        
+
                         Codebase.blocks('#my-block2', 'state_normal');
 			        }
 			    });
@@ -444,7 +444,7 @@ jQuery(function(){ BeFormValidation.init(); });
 $('#modalImage').on('show.bs.modal', function(event) {
     var key = $(event.relatedTarget).attr('data-key');
     var title = $(event.relatedTarget).attr('data-title');
-    
+
     $(this).find('.modal-title').text(title);
     $(this).find('#key').val(key);
 });
