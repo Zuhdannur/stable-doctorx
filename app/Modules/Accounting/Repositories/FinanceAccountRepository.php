@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use App\Repositories\BaseRepository;
 use App\Modules\Attribute\Models\LogActivity;
-use App\Modules\Accounting\Models\FinanceAccount; 
-use App\Modules\Accounting\Models\FinanceJournal; 
-use App\Modules\Accounting\Models\FinanceTransaction; 
+use App\Modules\Accounting\Models\FinanceAccount;
+use App\Modules\Accounting\Models\FinanceJournal;
+use App\Modules\Accounting\Models\FinanceTransaction;
 
-class FinanceAccountRepository extends BaseRepository 
+class FinanceAccountRepository extends BaseRepository
 {
     public function model()
     {
@@ -30,15 +30,15 @@ class FinanceAccountRepository extends BaseRepository
             ]);
 
             if($cash){
-                $acc_code = FinanceAccount::generateAccountCode($data['category'],$cash->accountCategory->category_code);                
-                
+                $acc_code = FinanceAccount::generateAccountCode($data['category'],$cash->accountCategory->category_code);
+
                 FinanceAccount::where('id', $cash->id)->update(['account_code' => $acc_code]);
-                
+
                 $log = new LogActivity();
                 $log->module_id = config('my-modules.accounting');
                 $log->action = "Create Finance Account";
                 $log->desc = "Kode Akun : $acc_code, Nama Akun : ".$data['acc_name'];
-                
+
                 $log->save();
 
                 return $cash;
@@ -62,15 +62,15 @@ class FinanceAccountRepository extends BaseRepository
             ]);
 
             if($cash){
-                $acc_code = FinanceAccount::generateAccountCode(8,$cash->accountCategory->category_code);                
-                
+                $acc_code = FinanceAccount::generateAccountCode(8,$cash->accountCategory->category_code);
+
                 FinanceAccount::where('id', $cash->id)->update(['account_code' => $acc_code]);
-                
+
                 $log = new LogActivity();
                 $log->module_id = config('my-modules.accounting');
                 $log->action = "Create Finance Account";
                 $log->desc = "Kode Akun : $acc_code, Nama Akun : ".$data['acc_name'];
-                
+
                 $log->save();
 
                 return $cash;
@@ -93,10 +93,10 @@ class FinanceAccountRepository extends BaseRepository
             $log->module_id = config('my-modules.accounting');
             $log->action = "Update Finance Account";
             $log->desc = "Kode Akun : $account->account_code, Nama Akun : ".$account->account_name;
-            
+
             $log->save();
 
-            return $account;            
+            return $account;
         });
     }
 
@@ -105,7 +105,7 @@ class FinanceAccountRepository extends BaseRepository
         return DB::transaction(function () use ($data) {
 
             $transaction = FinanceTransaction::create([
-                'trx_type_id' => config('finance_trx.trx_types.general'), 
+                'trx_type_id' => config('finance_trx.trx_types.general'),
                 'memo' => $data['notes'],
                 'created_by' => auth()->user()->id,
                 'updated_by' => auth()->user()->id
@@ -132,7 +132,7 @@ class FinanceAccountRepository extends BaseRepository
                 //looping for store data to journal
                 foreach($totalLoop as $key => $val){
 
-                    //replace 
+                    //replace
                     $value = str_replace('.','',$data['total'][$key]);
 
                     if($data["type"][$key] == config('finance_journal.types.debit')){
@@ -143,28 +143,28 @@ class FinanceAccountRepository extends BaseRepository
                         // save account jurnal
                         $jornals = FinanceJournal::create([
                              'transaction_id' => $transaction->id,
-                             'type' => config('finance_journal.types.debit'), 
+                             'type' => config('finance_journal.types.debit'),
                              'account_id' => $val,
                              'value' => $value,
-                             'balance'  => $account->balance,                      
-                             'description' => $data['acc_desc'][$key],                        
+                             'balance'  => $account->balance,
+                             'description' => $data['acc_desc'][$key],
                         ]);
 
                         $debit = intval($debit + $value);
- 
+
                     }else if($data["type"][$key] == config('finance_journal.types.kredit')){
-                        
+
                         //update balance account
                         $account = FinanceAccount::sumKredit($val,$value);
 
                         // save account jurnal
                         $jornals = FinanceJournal::create([
                              'transaction_id' => $transaction->id,
-                             'type' => config('finance_journal.types.kredit'), 
+                             'type' => config('finance_journal.types.kredit'),
                              'account_id' => $val,
                              'value' => $value,
-                             'balance'  => $account->balance,                      
-                             'description' => $data['acc_desc'][$key],                        
+                             'balance'  => $account->balance,
+                             'description' => $data['acc_desc'][$key],
                         ]);
 
                         $kredit = intval($kredit + $value);
@@ -183,7 +183,7 @@ class FinanceAccountRepository extends BaseRepository
                 $log->module_id = config('my-modules.accounting');
                 $log->action = "Create General Journal";
                 $log->desc = "Kode Transaksi : $transaction->transaction_code, Tipe Transaksi : ".config('finance_trx.label_trx_types.'.$transaction->trx_type_id);
-                
+
                 $log->save();
 
                 return $transaction;

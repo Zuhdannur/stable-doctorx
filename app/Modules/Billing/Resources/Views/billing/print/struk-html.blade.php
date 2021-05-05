@@ -11,13 +11,13 @@
                 font-family: sans-serif,tahoma;
             }
             body{
-                font-size: 8pt;
+                font-size: 10pt;
                 letter-spacing: 0px;
                 line-height: 15px;
                 max-width: 66mm;
             }
             .row{
-                font-size: 8pt;
+                font-size: 10pt;
                 letter-spacing: 0px;
                 line-height: 15px;
                 max-width: 66mm;
@@ -39,7 +39,7 @@
             }
 
             table{
-                font-size: 7pt;
+                font-size: 8pt;
             }
 
             td{
@@ -170,14 +170,18 @@
                                 <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->radeem_point, setting()->get('currency_symbol')) }}</strong></td>
                             </tr>
                         @endif
+                        @if(!empty($billing->tax_total))
                         <tr>
                             <th style='width:35mm;text-align: right;padding-right: 10px;'>Total Tax</th>
                             <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->tax_total, setting()->get('currency_symbol')) }}</strong></td>
                         </tr>
+                        @endif
+                        @if(!empty($billing->discountprice))
                         <tr>
                             <th style='width:35mm;text-align: right;padding-right: 10px;'>Diskon {{ intval($billing->discount_percent).'%' }}</th>
                             <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->discountprice, setting()->get('currency_symbol')) }}</strong></td>
                         </tr>
+                        @endif
                         <tr>
                             <th style='width:35mm;text-align: right;padding-right: 10px;'>Total</th>
                             <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->total_ammount -  $billing->discountprice, setting()->get('currency_symbol')) }}</strong></td>
@@ -186,10 +190,12 @@
                             <th style='width:35mm;text-align: right;padding-right: 10px;'>Jumlah yang telah dibayarkan</th>
                             <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->total_pay -  $billing->discountprice, setting()->get('currency_symbol')) }}</strong></td>
                         </tr>
+                        @if(!empty($billing->remaining_payment))
                         <tr>
                             <th style='width:35mm;text-align: right;padding-right: 10px;'>Sisa Pembayaran</th>
                             <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->remaining_payment, setting()->get('currency_symbol')) }}</strong></td>
                         </tr>
+                        @endif
                         <tr>
                             <th style='width:35mm;text-align: right;padding-right: 10px;'>Jumlah dibayarkan</th>
                             <td class='wrapword' style="font-size:9pt"><strong>{{ currency()->rupiah($billing->last_payment->total_pay - $billing->discountprice, setting()->get('currency_symbol')) }}</strong></td>

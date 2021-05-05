@@ -2,6 +2,7 @@
 
 namespace App\Modules\Billing\Repositories;
 
+use App\Modules\Attribute\Models\LogActivity;
 use Exception;
 use App\Models\Auth\User;
 use Illuminate\Support\Facades\DB;
@@ -267,10 +268,23 @@ class BillingRepository extends BaseRepository
                         'type' => $data['acc_cash']
                     ]);
 
+                    $data_log = Billing::with('invDetail')->find($createBilling->id);
+
+                    $log = new LogActivity();
+                    $log->module_id = config('my-modules.billing');
+                    $log->action = "Create Billing";
+                    $log->desc = "$data_log";
+
+                    $log->save();
+
+
                     return $createBilling;
                 }
 
             }
+
+
+
 
             throw new GeneralException(__('exceptions.staff.create_error'));
         });
@@ -487,6 +501,15 @@ class BillingRepository extends BaseRepository
 
             /** Store a Invoice Payment */
             $this->storepaid($billing, $request = (object)$data);
+
+            $data_log = Billing::with('invDetail')->find($billing->id);
+
+            $log = new LogActivity();
+            $log->module_id = config('my-modules.billing');
+            $log->action = "Update Billing";
+            $log->desc = "$data_log";
+
+            $log->save();
             /** End Of Store a Invoice Payment */
         } catch (\Exception $e) {
             throw new Exception($e->getMessage());

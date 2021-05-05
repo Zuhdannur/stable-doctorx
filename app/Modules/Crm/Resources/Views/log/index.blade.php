@@ -3,9 +3,9 @@
 @section('title', app_name() . ' | '. __('log.show'))
 
 @section('content')
-  
+
     @include('accounting::reports.partial.range-date')
-    
+
     <div class="clearfix"></div>
     <div class="clearfix"></div>
 
@@ -35,7 +35,40 @@
             </table>
         </div>
     </div>
-    
+
+    <div class="modal fade" id="view_billing" role="dialog" style="z-index: 10000">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="block block-themed block-transparent mb-0">
+                    <div class="block-header bg-primary-dark">
+                        <h3 class="block-title" id="title"></h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                <i class="si si-close"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <p id="date"></p>
+                        <p id="status">Status : </p>
+                        <p id="in_paid">Terbayar : </p>
+                        <table id="detail" class="table table-striped ">
+                            <tr>
+                                <th>#</th>
+                                <th>Nama</th>
+                                <th>Jumlah</th>
+                                <th>Harga</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+
     <script>
          jQuery(function(){
             var dt = $('#table').DataTable({
@@ -59,7 +92,7 @@
                         data: 'DT_RowIndex',
                         name: 'id',
                         width: "5%",
-                        orderable: false, 
+                        orderable: false,
                         searchable: false
                     },
                     {
@@ -89,6 +122,29 @@
                 $('[data-toggle="tooltip"]').tooltip();
                 addDeleteForms();
             });
+
+            $('body').on('click','.btnDetailBilling',function () {
+                var item = JSON.parse($(this).val())
+                $("#title").text("Log Aktivitas Invoice : "+item.invoice_no)
+                $("#date").text("Tanggal :" +item.date)
+                $("#status").text("Status : "+item.status)
+                $("#in_paid").text("Terbayar : "+item.in_paid)
+                var index = 0;
+
+                $.each(item.inv_detail , function (key,value) {
+                    index++;
+                    $('#detail tr:last').after('<tr>' +
+                        '<td>'+ index + '</td>' +
+                        '<td>'+ value.product_id + '</td>' +
+                        '<td>'+ value.qty + '</td>' +
+                        '<td>'+ value.price + '</td>' +
+                        '</tr>');
+
+                    $("#view_billing").modal('show')
+                })
+
+
+            })
         })
     </script>
 @endsection

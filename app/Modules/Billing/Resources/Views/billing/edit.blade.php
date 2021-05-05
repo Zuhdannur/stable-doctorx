@@ -90,14 +90,14 @@
                             </td>
                         </tr>
                         <tr class="table-secondary">
-                            <td class="font-w600 text-center" colspan="9">Radeem Point (Jumlah Point :&nbsp;
+                            <td class="font-w600 text-center" colspan="10">Radeem Point (Jumlah Point :&nbsp;
                                 {{ $billing->patient->membership->total_point}}&nbsp;+&nbsp;
                                 <span id="totalPoint" data-point="{{ $billing->patient->membership->total_point}}">0</span>)
                             </td>
                         </tr>
                         <tr>
                             <td>#</td>
-                            <td colspan="4" class="text-center">Item Radeems</td>
+                            <td colspan="5" class="text-center">Item Radeems</td>
                             <td>Qty</td>
                             <td class="text-center">Total Point</td>
                             <td colspan="2" class="text-center">Total Nominal</td>
@@ -106,7 +106,7 @@
                             <td>
                                 <button type="button" class="btn btn-sm btn-circle btn-outline-success addRadeem" title="Tambah Item"><i class="fa fa-plus"></i></button>
                             </td>
-                            <td colspan="4">
+                            <td colspan="5">
                                 <select name="item_radeem[1]" id="1item_radeem" class="form-control item_radeem select2" width="70%">{!! $radeem !!}</select>
                             </td>
                             <td>
@@ -231,6 +231,7 @@
                 html += '<td><input type="number" name="before_discount['+(i+1)+']" placeholder="0" class="form-control before-discount" min="0" /></td>';
                 html += '<td><input type="number" name="discount_item['+(i+1)+']" class="form-control discount-item" min="0" placeholder="0" /></td>';
                 html += '<td><input type="number" name="price['+( numProduct + 1 )+']" class="form-control text-right price required" placeholder="0" min="1" readonly/></td>';
+                html += '<td><input type="text" name="notes_item['+(i+1)+']" class="form-control" placeholder="Keterangan"/></td>';
                 html += '<td><select id="'+( numProduct + 1 )+'taxselect2" name="tax['+( numProduct + 1 )+']" class="form-control tax" data-placeholder="Pilih" style="width: 100%">{!! $taxList !!}</select></td>';
                 html += '<td><input type="text" name="total['+( numProduct + 1 )+']" placeholder="0" class="form-control text-right total " readonly/></td>';
 
