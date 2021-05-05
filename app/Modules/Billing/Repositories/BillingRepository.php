@@ -130,6 +130,7 @@ class BillingRepository extends BaseRepository
 
                         $_product->save();
 
+
                         if ($_product->purchase_price_avg != 0 && $_product->sales_type == 0) {
                             $_product_value = $billingDetail->qty * $_product->purchase_price_avg;
                         } else {
@@ -418,6 +419,13 @@ class BillingRepository extends BaseRepository
                     }
 
                     $product->save();
+
+                    $log = new LogActivity();
+                    $log->module_id = config('my-modules.product');
+                    $log->action = "Update Stok";
+                    $log->desc = "Stok Untuk $product->name berkurang $billingDetail->qty sisa stok $product->quantity";
+
+                    $log->save();
 
                     if ($product->purchase_price_avg != 0 && $product->sales_type == 0) {
                         $product_value = $billingDetail->qty * $product->purchase_price_avg;
