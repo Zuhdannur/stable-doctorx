@@ -175,4 +175,8 @@ class Billing extends Model
     public function getLastPaymentHistoriAttribute() {
         return $this->paymentHistory()->orderBy('created_at','desc');
     }
+
+    public function klinik() {
+        return $this->hasOne('\App\Klinik','id_klinik','id_klinik');
+    }
 }

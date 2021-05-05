@@ -73,7 +73,7 @@
         <div class="d-flex justify-content-center">
             <div class="col" style='margin-bottom:10px;margin-top:8px;text-align: center'>
                 <img src="{{ asset(setting()->get('logo_header')) }}" width="40px" class="" alt="">
-                <h5 class="wrapword">{{ 'Klinik '.setting()->get('app_name') }}</h5>
+                <h5 class="wrapword">{{ strtoupper('Klinik '.$billing->klinik->nama_klinik) }}</h5>
                 <p>{{ setting()->get('address') }}</p>
             </div>
         </div>
