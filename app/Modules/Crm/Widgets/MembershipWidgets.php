@@ -33,13 +33,41 @@ class MembershipWidgets extends AbstractWidget
 
     public function membership()
     {
-        $data = CrmMembership::with('ms_membership')->get()
-            ->groupBy('ms_membership.name')
-            ->map(function ($item) {
-                // Return the number of persons with that age
-                return count($item);
-            });
-       
+//        $data = CrmMembership::with('ms_membership')->get()
+//            ->groupBy('ms_membership.name')
+//            ->map(function ($item) {
+//                // Return the number of persons with that age
+//                return count($item);
+//            });
+
+        $data = array(0,0,0,0);
+        $query = CrmMembership::all();
+        foreach ($query as $row) {
+
+            $totalAmmount = 0;
+            foreach ($row->invoice as $item) {
+                $totalAmmount += $item->total_ammount;
+            }
+
+            if($totalAmmount < 1000000) {
+                $data[0] += 1;
+            }
+
+            if($totalAmmount >= 1000000 && $totalAmmount < 3000000) {
+                $data[1] += 1;
+            }
+
+            if($totalAmmount >= 3000000 && $totalAmmount < 5000000) {
+                $data[2] += 1;
+            }
+
+            if($totalAmmount >= 5000000) {
+                $data[3] += 1;
+            }
+
+
+        }
+
         $colorSet = array(
             '#1abc9c',
             '#2ecc71',
@@ -56,13 +84,13 @@ class MembershipWidgets extends AbstractWidget
         // $color
         $warna = rcolor()->listColor(count($data));
         $chart = new MembershipCategories;
-        $chart->labels($data->keys());
+        $chart->labels(['< Rp 1.000.000','Rp 1.000.000 - Rp 3.000.000','Rp 3.000.000 - Rp 5.000.000','> Rp 5.000.000']);
         // $chart->title('siapp');
         // $chart->doughnut(50);
         $chart->minimalist(false);
         $chart->displayLegend(true);
         $chart->displayAxes(true);
-        $chart->dataset('Total', 'pie', $data->values())->color($warna);
+        $chart->dataset('Total', 'pie', $data)->color($warna);
         $chart->options([
             'plotOptions' => [
                 'pie'=> [
@@ -70,7 +98,8 @@ class MembershipWidgets extends AbstractWidget
                     'cursor'=> 'pointer',
                     'dataLabels'=> [
                         'enabled'=> true,
-                        'format'=> '<b>{point.name}</b>: {point.percentage:.1f} %',
+//                        'format'=> '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        'format'=> '<b>{point.name}</b>',
                         'connectorColor'=> 'silver'
                     ],
                     'showInLegend'=> false
@@ -110,7 +139,7 @@ class MembershipWidgets extends AbstractWidget
                         ->map(function ($item) {
                         return $item->sum('total_point');
                     });
-        
+
         $colorSet = array(
             '#1abc9c',
             '#2ecc71',

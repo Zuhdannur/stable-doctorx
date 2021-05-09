@@ -29,6 +29,7 @@ class CrmMembership extends Model
         'patient_id',
         'ms_membership_id',
         'total_point',
+        'id_grade'
     ];
 
     public function patient()
@@ -48,5 +49,9 @@ class CrmMembership extends Model
 
     public function invoice() {
         return $this->hasMany('App\Modules\Billing\Models\Billing','patient_id','patient_id')->where('status','1');
+    }
+
+    public function grade() {
+        return $this->hasOne('App\Grade','id_grade','id_grade');
     }
 }

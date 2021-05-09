@@ -40,7 +40,14 @@ class CrmMembershipController extends Controller
                 $btn .= $data->delete_membership_button;
                 return $btn;
             })
-            ->rawColumns(['total_amount','action'])
+            ->addColumn('grade',function ($data) {
+                if(!empty($data->id_grade)) {
+                    return '<span class="badge badge-primary">Grade '.$data->grade->nama_grade.'</span>';
+                } else {
+                    return '<span class="badge badge-primary">Tidak Ada Grade</span>';
+                }
+            })
+            ->rawColumns(['total_amount','action','grade'])
             ->make(true);
         }
         return view('crm::membership.index');
@@ -55,7 +62,15 @@ class CrmMembershipController extends Controller
             $patientList .= '<option value="'.$val->id.'">'.$val->patient_unique_id.' - '.$val->patient_name.'</option>';
         }
 
+        $grade = \App\Grade::all();
+        $gradeList = '<option></option>';
+        foreach ($grade as $item) {
+            $gradeList .= '<option value="'.$item->id_grade.'">'.$item->nama_grade.' - '.$item->keterangan.'</option>';
+        }
+
+
         return view('crm::membership.create')
+        ->withGrade($gradeList)
         ->withPatient($patientList)
         ->withMembership(CrmMsMembership::optionList());
     }
@@ -68,7 +83,18 @@ class CrmMembershipController extends Controller
             $patient = $patientData->patient_unique_id.' - '.$patientData->patient_name;
         }
 
+        $grade = \App\Grade::all();
+        $gradeList = '<option></option>';
+        foreach ($grade as $item) {
+            if(!empty($membership->id_grade) && $membership->id_grade == $item->id_grade) {
+                $gradeList .= '<option value="'.$item->id_grade.'" selected>'.$item->nama_grade.' - '.$item->keterangan.'</option>';
+            } else {
+                $gradeList .= '<option value="'.$item->id_grade.'">'.$item->nama_grade.' - '.$item->keterangan.'</option>';
+            }
+        }
+
         return view('crm::membership.edit')
+        ->withGrade($gradeList)
         ->withPatient($patient)
         ->withMembership($membership)
         ->withMembershipList(CrmMsMembership::optionList());
@@ -90,6 +116,8 @@ class CrmMembershipController extends Controller
                 $membership->patient_id = $request->patient;
                 $membership->ms_membership_id = $request->membership;
                 $membership->total_point = 0;
+                $membership->id_grade = $request->grade;
+                $membership->id_klinik = auth()->user()->id_klinik;
 
                 DB::beginTransaction();
 
@@ -119,7 +147,8 @@ class CrmMembershipController extends Controller
 
                 return response()->json(array('status' => $status, 'message' => $message));
 
-            }else if($request->isMethod('PATCH')){
+            }
+            else if($request->isMethod('PATCH')){
                 $membership = CrmMembership::find($request->id);
 
                 if(!$membership){
@@ -132,7 +161,8 @@ class CrmMembershipController extends Controller
                     }
 
                     $membership->ms_membership_id = $request->membership;
-                    $membership->total_point = $request->total_point;
+                    $membership->   total_point = $request->total_point;
+                    $membership->id_grade = $request->grade;
 
                     DB::beginTransaction();
                     try {

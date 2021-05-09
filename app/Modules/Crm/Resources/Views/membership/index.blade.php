@@ -25,6 +25,7 @@
                     <th>@lang('patient::labels.patient.table.phone_number')</th>
                     <th>@lang('patient::labels.patient.table.gender')</th>
                     <th>@lang('crm::labels.membership.table.membership')</th>
+                    <th>Grade</th>
                     <th>@lang('crm::labels.membership.table.point')</th>
                     <th>@lang('billing::labels.billing.table.total')</th>
                     <th class="text-center" style="width: 100px;">@lang('labels.general.actions')</th>
@@ -80,6 +81,10 @@
                     data: 'ms_membership.name',
                     name: 'ms_membership.name',
                     class: 'text-center',
+                },
+                {
+                    data: 'grade',
+                    name: 'grade',
                 },
                 {
                     data: 'total_point',

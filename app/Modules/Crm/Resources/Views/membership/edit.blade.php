@@ -40,6 +40,15 @@
                     </div>
 
                     <div class="form-group row">
+                        <label for="name" class="col-md-3 form-control-label">Pilih Grade</label>
+                        <div class="col-md-4">
+                            <select name="grade" id="grade" class="form-control select2" width="100%">
+                                {!! $grade !!}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="name" class="col-md-3 form-control-label">Jumlah Point</label>
                         <div class="col-md-4">
                            <input type="number" name="total_point" id="total_point" class="form-control required" value="{{ $membership->total_point}}">
@@ -53,7 +62,7 @@
                         <div class="col-md-6 text-right">
                             {{ form_submit(__('buttons.general.crud.update')) }}
                         </div>
-    
+
                     </div>
                 </div>
             </div>
@@ -136,7 +145,7 @@
 
                                         setTimeout(function(){
                                             window.location = '{{ route('admin.crm.membership.index') }}';
-                                        }, 2000); 
+                                        }, 2000);
                                     }else{
                                         $.alert({
                                             title: 'Error',
