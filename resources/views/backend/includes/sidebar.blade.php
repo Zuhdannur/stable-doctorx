@@ -32,7 +32,7 @@
                             <i class="fa fa-medkit text-success"></i>
                             <span class="font-size-xl text-primary">{{ setting()->get('app_name') }}</span>
                         </a> <br>
-                        {{ Auth()->user()->klinik->nama_klinik.' - '.Auth()->user()->klinik->status }}
+                        <span class="badge badge-info">{{ Auth()->user()->klinik->nama_klinik.' - '.Auth()->user()->klinik->status }} </span>
                     </div>
                     <!-- END Logo -->
                 </div>
@@ -234,7 +234,7 @@
 
                     {{-- accounting sidebar --}}
 {{--                    @if(!empty(""))--}}
-                    @include('backend.includes.partials.sidebar.accounting')
+{{--                    @include('backend.includes.partials.sidebar.accounting')--}}
 {{--                    @endif--}}
                     {{-- end of accounting sidebar --}}
 
