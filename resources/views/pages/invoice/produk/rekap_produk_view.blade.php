@@ -41,10 +41,10 @@
             <div class="d-flex justify-content-between">
                 <h3 class="block-title">Data Rekap Produk</h3>
                 &nbsp;&nbsp;
-                <select class="form-control" name="filter" id="filters">
-                    <option value="semua">Semua Produk</option>
-                    <option value="filter">Penjualan</option>
-                </select>
+{{--                <select class="form-control" name="filter" id="filters">--}}
+{{--                    <option value="semua">Semua Produk</option>--}}
+{{--                    <option value="filter">Penjualan</option>--}}
+{{--                </select>--}}
             </div>
             <div class="block-options">
                 <div class="btn-toolbar float-right" role="toolbar"
@@ -54,6 +54,26 @@
         </div>
 
         <div class="block-content block-content-full">
+            <div class="d-flex">
+                <div class="col-6">
+                    <label for="startdate">Kategori</label>
+                    <select class="form-control" name="category" id="category" >
+                        <option value="semua">Semua Kategori</option>
+                        @foreach(\App\Modules\Product\Models\ProductCategory::where('id_klinik',auth()->user()->id_klinik)->get() as $row)
+                        <option value="{{ $row->id }}">{{ "$row->name" }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label for="startdate">Tampilkan</label>
+                    <select class="form-control" name="filter" id="filters">
+                        <option value="semua">Semua Produk</option>
+                        <option value="filter">Penjualan</option>
+                    </select>
+                </div>
+            </div>
+
+            <br>
             <table id="table"
                    class="table table-sm table-hover table-striped table-vcenter js-dataTable-full-pagination"
                    width="100%">
@@ -104,6 +124,7 @@
                         data.awal = $("#date_1").val()
                         data.akhir = $("#date_2").val()
                         data.filter = $("#filters").val()
+                        data.category = $("#category").val()
                     }
                 },
                 language: {
@@ -179,6 +200,12 @@
             $("#filters").select2()
 
             $("#filters").on('change',function () {
+                dt.ajax.reload()
+            })
+
+            $("#category").select2()
+
+            $("#category").on('change',function () {
                 dt.ajax.reload()
             })
 

@@ -24,7 +24,7 @@ class SupplierController extends Controller
     {
         if ($datatables->getRequest()->ajax()) {
 
-            return $datatables->of($this->supplierRepository->get())
+            return $datatables->of($this->supplierRepository->where('id_klinik',auth()->user()->id_klinik)->get())
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
                 $button = $data->detail_button;
@@ -61,7 +61,7 @@ class SupplierController extends Controller
         }else{
         	$status = false;
 	        $message = trans('product::exceptions.supplier.create_error');
-	    }  
+	    }
 
         return response()->json(array('status' => $status, 'message' => $message));
     }
@@ -73,16 +73,16 @@ class SupplierController extends Controller
         }
 
         $update = $this->supplierRepository->update($request->input());
-        
-        
+
+
         if($update){
             $status = true;
 	        $message = __('product::alerts.supplier.updated');
         }else{
             $status = false;
 	        $message = trans('product::exceptions.supplier.updated_error');
-	    }  
-        
+	    }
+
         return response()->json(array('status' => $status, 'message' => $message));
     }
 

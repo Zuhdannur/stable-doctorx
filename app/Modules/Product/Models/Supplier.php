@@ -36,6 +36,7 @@ class Supplier extends Model
         'company_district_id',
         'company_village_id',
         'company_address',
+        'id_klinik'
     ];
 
     protected $dates = ['dob', 'created_at', 'updated_at'];
@@ -82,7 +83,7 @@ class Supplier extends Model
 	{
 	    return \Carbon\Carbon::parse($this->attributes['dob'])->age;
 	}
-    
+
     public function city()
     {
         return $this->hasOne('App\Modules\Indonesia\Models\City', 'id', 'company_city_id');

@@ -234,7 +234,7 @@
 
                     {{-- accounting sidebar --}}
 {{--                    @if(!empty(""))--}}
-{{--                    @include('backend.includes.partials.sidebar.accounting')--}}
+                    @include('backend.includes.partials.sidebar.accounting')
 {{--                    @endif--}}
                     {{-- end of accounting sidebar --}}
 

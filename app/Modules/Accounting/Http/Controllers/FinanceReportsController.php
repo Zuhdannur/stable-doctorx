@@ -27,13 +27,13 @@ class FinanceReportsController extends Controller
                 $date_1 = \Carbon\Carbon::createFromFormat('d/m/Y', $request->date_1)->format('Y-m-d');
                 $date['date_1'] = $request->input('date_1');
             }
-            
+
             if($request->input('date_2')){
                 $date_2 = \Carbon\Carbon::createFromFormat('d/m/Y', $request->date_2)->format('Y-m-d');
                 $date['date_2'] = $request->input('date_2');
             }
         }
-        
+
         // get account aktiva, kewajiban, dan modal
         $account = FinanceAccount::with('accountCategory')
         ->whereHas('accountCategory', function($q){
@@ -47,10 +47,15 @@ class FinanceReportsController extends Controller
             ->select(['balance', 'transaction_id'])
             ->with('transaction')
             ->whereHas('transaction', function($q) use($date_2) {
-                return $q->whereDate('trx_date', [$date_2]);
+                return $q->whereDate('trx_date', $date_2);
             })
-            ->orderBy('finance_journals.id', "desc")
+            ->orderBy('id', "desc")
             ->first();
+
+
+//            if(!empty($get_last_balance)) {
+//                dd($get_last_balance);
+//            }
 
             if($date_1 === $date_2) {
                 $get_first_balance = FinanceJournal::where('account_id', $val->id)
@@ -71,14 +76,14 @@ class FinanceReportsController extends Controller
                 ->orderBy('finance_journals.id', "asc")
                 ->first();
             }
-            
-            $last_balance = isset($get_first_balance['balance']) ? $get_last_balance['balance'] : 0;
-            $first_balance = isset($get_first_balance['balance']) && $get_first_balance['balance'] >= 0 ? $get_first_balance['balance'] : 0;
+
+            $last_balance = isset($get_first_balance['balance']) ? @$get_last_balance['balance'] : 0;
+            $first_balance = isset($get_first_balance['balance']) && @$get_first_balance['balance'] >= 0 ? @$get_first_balance['balance'] : 0;
 
             $get_balance = $last_balance - $first_balance;
 
             if($get_balance < 0) $get_balance = 0;
-           
+
             $neraca[$key] = array(
                 'account_name' => $val->account_name,
                 'account_code' => $val->account_code,
@@ -92,7 +97,7 @@ class FinanceReportsController extends Controller
                 'value' => $get_balance
             );
         }
-        
+
 
         // get pendapatan dan beban (4,5)
         $pendapatanBeban = FinanceAccount::with('accountCategory')
@@ -115,7 +120,7 @@ class FinanceReportsController extends Controller
             if($date_1 === $date_2) {
                 $get_first_balance = FinanceJournal::where('account_id', $val->id)
                 ->select(['balance', 'transaction_id'])
-                ->where('balance', '!=', $get_last_balance['balance'])
+                ->where('balance', '!=', @$get_last_balance['balance'])
                 ->with('transaction')
                 ->whereHas('transaction', function($q) use($date_1) {
                     return $q->whereDate('trx_date', '<', [$date_1]);
@@ -132,9 +137,9 @@ class FinanceReportsController extends Controller
                 ->orderBy('finance_journals.id', "asc")
                 ->first();
             }
-            
-            $last_balance = isset($get_first_balance['balance']) ? $get_last_balance['balance'] : 0;
-            $first_balance = isset($get_first_balance['balance']) && $get_first_balance['balance'] >= 0 ? $get_first_balance['balance'] : 0;
+
+            $last_balance = isset($get_first_balance['balance']) ? @$get_last_balance['balance'] : 0;
+            $first_balance = isset($get_first_balance['balance']) && @$get_first_balance['balance'] >= 0 ? @$get_first_balance['balance'] : 0;
 
             $get_balance = $last_balance - $first_balance;
 
@@ -182,7 +187,7 @@ class FinanceReportsController extends Controller
                 $date_1 = \Carbon\Carbon::createFromFormat('d/m/Y', $request->date_1)->format('Y-m-d');
                 $date['date_1'] = $request->input('date_1');
             }
-            
+
             if($request->input('date_2')){
                 $date_2 = \Carbon\Carbon::createFromFormat('d/m/Y', $request->date_2)->format('Y-m-d');
                 $date['date_2'] = $request->input('date_2');
@@ -198,7 +203,7 @@ class FinanceReportsController extends Controller
         })
         ->orderBy('account_code')
         ->get();
-        
+
         $report = array();
         foreach($account as $key => $val){
             $get_last_balance = FinanceJournal::where('account_id', $val->id)
@@ -212,7 +217,7 @@ class FinanceReportsController extends Controller
             if($date_1 === $date_2) {
                 $get_first_balance = FinanceJournal::where('account_id', $val->id)
                 ->select(['balance', 'transaction_id'])
-                ->where('balance', '!=', $get_last_balance['balance'])
+                ->where('balance', '!=', @$get_last_balance['balance'])
                 ->with('transaction')
                 ->whereHas('transaction', function($q) use($date_1) {
                     return $q->whereDate('trx_date', '<', [$date_1]);
@@ -229,14 +234,14 @@ class FinanceReportsController extends Controller
                 ->orderBy('finance_journals.id', "asc")
                 ->first();
             }
-            
-            $last_balance = isset($get_first_balance['balance']) ? $get_last_balance['balance'] : 0;
-            $first_balance = isset($get_first_balance['balance']) && $get_first_balance['balance'] >= 0 ? $get_first_balance['balance'] : 0;
+
+            $last_balance = isset($get_first_balance['balance']) ? @$get_last_balance['balance'] : 0;
+            $first_balance = isset($get_first_balance['balance']) && @$get_first_balance['balance'] >= 0 ? @$get_first_balance['balance'] : 0;
 
             $get_balance = $last_balance - $first_balance;
 
             if($get_balance < 0) $get_balance = 0;
-            
+
             $report[$key] = array(
                 'account_name' => $val->account_name,
                 'account_code' => $val->account_code,
@@ -260,11 +265,11 @@ class FinanceReportsController extends Controller
 
 
 /**
- * 
+ *
  * neraca
- * 
+ *
  * aktiva == kewajiban + modal
- * 
+ *
  * modal = total ekuitas - beban
- * 
+ *
  */

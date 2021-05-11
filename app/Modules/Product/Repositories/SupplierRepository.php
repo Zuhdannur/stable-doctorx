@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use App\Repositories\BaseRepository;
 
-class SupplierRepository extends BaseRepository 
+class SupplierRepository extends BaseRepository
 {
     /**
      * @return string
@@ -33,6 +33,7 @@ class SupplierRepository extends BaseRepository
                 'company_district_id'    => $data['company_district_id'],
                 'company_village_id'    => $data['company_village_id'],
                 'company_address'   => $data['company_address'],
+                'id_klinik' => auth()->user()->id_klinik
             ]);
 
             if($supplier){

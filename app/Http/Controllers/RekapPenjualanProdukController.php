@@ -26,7 +26,13 @@ class RekapPenjualanProdukController extends Controller
             $dateAwal = "";
             $dateAkhir = "";
         }
-        $model = Product::where('id_klinik',Auth()->user()->klinik->id_klinik)->orderBy('id');
+        $model = Product::where('id_klinik',Auth()->user()->klinik->id_klinik);
+
+        if(!empty($request->category) && $request->category != "semua") {
+            $model = $model->where('category_id',$request->category);
+        }
+
+        $model = $model->orderBy('id');
 
         $data = new Collection;
 
