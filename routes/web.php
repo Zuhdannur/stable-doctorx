@@ -79,6 +79,7 @@ Route::group(['middleware' => 'admin'], function () {
        Route::resource('/klinik','KlinikController');
         Route::group(['prefix' => 'klinik/data'],function () {
             Route::get('/getData','KlinikController@getData');
+            Route::get('/getReport','KlinikController@getReport');
             Route::post('/simpan','KlinikController@simpan');
         });
 

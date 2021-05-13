@@ -3,6 +3,7 @@
 namespace App\Modules\Product\Repositories;
 
 use App\Helpers\Auth\Auth;
+use App\Modules\Attribute\Models\LogActivity;
 use App\Modules\Product\Models\Product;
 use App\Modules\Accounting\Models\FinanceTransaction;
 use App\Modules\Accounting\Models\FinanceJournal;
@@ -139,10 +140,10 @@ class ProductRepository extends BaseRepository
         }
 
         return DB::transaction(function () use ($product, $data) {
-            $status = isset($data['is_active']) ? 1 : 0;
-            $is_min_stock = 0;
+            $data['is_active'] = isset($data['is_active']) ? 1 : 0;
+            $data['is_min_stock'] = 0;
             if($product->quantity < $data['min_stock']){
-                $is_min_stock = 1;
+                $data['is_min_stock'] = 1;
             }
 
         /*  $up_price = $product->percentage_price_sales / 100;
@@ -187,6 +188,8 @@ class ProductRepository extends BaseRepository
             }
         */
 
+            $tempObj = \App\Modules\Product\Models\Product::where('code',$product->code)->first();
+
             $product = $product->update([
                 'code'      => $data['code'],
                 'name'      => $data['name'],
@@ -197,11 +200,30 @@ class ProductRepository extends BaseRepository
                 'price' => currency()->digit($data['price']),
                 'sales_type' => null,
                 'min_stock' => $data['min_stock'],
-                'is_min_stock' => $is_min_stock,
-                'is_active' => $status
+                'is_min_stock' => $data['is_min_stock'],
+                'is_active' => $data['is_active']
             ]);
-
+            $updatedProduct = \App\Modules\Product\Models\Product::where('code',$data['code'])->first();
             if ($product) {
+                $descLog = "Produk $tempObj->code ";
+
+                foreach($tempObj->getAttributes() as $key => $value) {
+
+                    if($updatedProduct->getAttribute($key) != $value) {
+                        if($key != "created_at" || $key != "updated_at") {
+                            $descLog .= " Perubahan pada $key dari $value menjadi ".$updatedProduct->getAttribute($key).",";
+                        }
+                    }
+
+                }
+
+                $log = new LogActivity();
+                $log->module_id = config('my-modules.product');
+                $log->action = "Update Product";
+                $log->desc = $descLog;
+
+                $log->save();
+
                 return $product;
             }
 

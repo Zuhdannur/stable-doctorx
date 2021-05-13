@@ -50,7 +50,7 @@
                     </div>
                     <div class="block-content">
                         <p id="date"></p>
-                        <p id="status">Status : </p>
+                        <p >Status : <span class="badge badge-info" id="status"></span></p>
                         <p id="in_paid">Terbayar : </p>
                         <table id="detail" class="table table-striped ">
                             <tr>
@@ -127,7 +127,21 @@
                 var item = JSON.parse($(this).val())
                 $("#title").text("Log Aktivitas Invoice : "+item.invoice_no)
                 $("#date").text("Tanggal :" +item.date)
-                $("#status").text("Status : "+item.status)
+
+                var status = ""
+
+                switch (item.status) {
+                    case "0":
+                        status = "Unpaid"
+                        break;
+                    case "1":
+                        status = "Paid"
+                        break;
+                    default:
+                        status = "Partial Paid"
+                }
+
+                $("#status").text(status)
                 $("#in_paid").text("Terbayar : "+item.in_paid)
                 var index = 0;
 

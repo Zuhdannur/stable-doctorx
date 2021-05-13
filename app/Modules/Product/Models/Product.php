@@ -96,4 +96,8 @@ class Product extends Model
 
         return $option;
     }
+
+    public function currencyField() {
+        return ['purchase_price','purchase_price','price'];
+    }
 }
