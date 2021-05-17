@@ -58,8 +58,11 @@
                 <tr>
                     <th>#</th>
                     <th>Nama Product</th>
+                    <th>Qty</th>
+                    <th>Unit</th>
                     <th>Category</th>
-                    <th>Rata Rata Jual</th>
+                    <th>Harga Rata rata</th>
+                    <th>Harga Beli Terakhir</th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -103,12 +106,24 @@
                         name: 'name'
                     },
                     {
+                        data: 'qty',
+                        name: 'qty'
+                    },
+                    {
+                        data: 'unit',
+                        name: 'unit'
+                    },
+                    {
                         data: 'category',
                         name: 'category'
                     },
                     {
                         data: 'rata-rata',
                         name: 'rata-rata'
+                    },
+                    {
+                        data: 'last_buy',
+                        name: 'last_buy'
                     }
                 ],
                 initComplete: function () {
