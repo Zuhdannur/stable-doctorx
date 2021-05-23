@@ -59,7 +59,7 @@ class SettingModulController extends Controller
 
     public function store(Request $request) {
         $create = \App\Modul::create($request->all());
-        return redirect()->back()->with('success','Data Berhasil Di Masukkan');
+        return redirect()->action([SettingModulController::class,'index'])->with('flash_success','Data Berhasil Di Masukkan');
     }
 
 }

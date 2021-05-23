@@ -134,7 +134,7 @@
             $("body").on('click','.btnHapus',function () {
                 var form  = $(this).parent()
                 Swal.fire({
-                    title: 'Hapus Klinik?',
+                    title: 'Hapus Modul?',
                     text: 'You won\'t be able to revert this!',
                     showDenyButton: true,
                     showCancelButton: true,

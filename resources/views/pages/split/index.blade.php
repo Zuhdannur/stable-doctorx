@@ -11,7 +11,7 @@
     <div class="block" id="my-block">
         <div class="block-header">
             <div class="col-md-4">
-                <a class="block block-rounded block-bordered block-link-shadow" href="{{ route('admin.patient.index') }}">
+                <a class="block block-rounded block-bordered block-link-shadow">
                     <div class="block-content block-content-full block-recent">
                         <div class="py-20 text-center">
                             <div class="mb-10">
@@ -26,7 +26,7 @@
                 </a>
             </div>
             <div class="col-md-4">
-                <a class="block block-rounded block-bordered block-link-shadow" href="{{ route('admin.patient.index') }}">
+                <a class="block block-rounded block-bordered block-link-shadow">
                     <div class="block-content block-content-full block-recent">
                         <div class="py-20 text-center">
                             <div class="mb-10">
@@ -39,7 +39,7 @@
                 </a>
             </div>
             <div class="col-md-4">
-                <a class="block block-rounded block-bordered block-link-shadow" href="{{ route('admin.patient.index') }}">
+                <a class="block block-rounded block-bordered block-link-shadow">
                     <div class="block-content block-content-full block-recent">
                         <div class="py-20 text-center">
                             <div class="mb-10">

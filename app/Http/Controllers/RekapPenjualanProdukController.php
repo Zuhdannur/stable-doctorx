@@ -37,7 +37,7 @@ class RekapPenjualanProdukController extends Controller
         $data = new Collection;
 
         $start = $input['start'];
-
+        $totalRecap = 0;
         foreach ($model->get() as $row) {
             $sold = BillingDetail::whereBetween('created_at',[@$dateAwal,@$dateAkhir])
                 ->where('product_id',$row->id)
@@ -82,7 +82,21 @@ class RekapPenjualanProdukController extends Controller
                     "action" => $row->action_buttons
                 ]);
             }
+
+            $totalRecap += $total;
         }
+
+        $data->push([
+            "DT_RowIndex" => "",
+            "name" => "Total",
+            "qty_sold" => "",
+            "retur" => "",
+            "satuan" => "",
+            "total_sold" => currency()->rupiah($totalRecap, setting()->get('currency_symbol')),
+            "total_retur" => "",
+            "stok" => "",
+            "action" => ""
+        ]);
 
 
 //        return DataTables::eloquent($model)

@@ -445,6 +445,11 @@ $(document).ready(function() {
         calc_kembalian();
     });
 
+    $('body').on('change','.qty',function() {
+        calc_point();
+        calc();
+    })
+
 });
 
 function calc() {

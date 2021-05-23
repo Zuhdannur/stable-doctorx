@@ -1,11 +1,11 @@
 @extends('base.app')
 
-@section('title', __('product::labels.service.management') . ' | Form Modul ')
+@section('title',  'Doctorx | Form Modul ')
 
 @section('content')
     <div class="block">
         <div class="block-header block-header-default">
-            <h3 class="block-title">@lang('product::labels.service.management') <small class="text-muted">@lang('product::labels.service.create')</small></h3>
+            <h3 class="block-title">Modul</h3>
 
         </div>
         <div class="block-content">

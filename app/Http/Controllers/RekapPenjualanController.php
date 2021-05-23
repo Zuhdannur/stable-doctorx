@@ -43,6 +43,8 @@ class RekapPenjualanController extends Controller
                     break;
             }
             $total += $item->totalPrice;
+
+            $methode = @\App\Modules\Billing\Models\PaymentHistory::where('invoice_id',$item->id)->first()->account->account_name;
             $data->push([
                 "DT_RowIndex" => ++$start,
                 "invoice_no" => $item->invoice_no,
@@ -51,6 +53,7 @@ class RekapPenjualanController extends Controller
                 "status" => $status,
                 "note" => $item->note,
                 "total" => currency()->rupiah($item->totalPrice, setting()->get('currency_symbol')),
+                "methode" => $methode,
                 "action" => $item->action_buttons
             ]);
 
@@ -64,6 +67,7 @@ class RekapPenjualanController extends Controller
             "status" => "",
             "note" => "Total",
             "total" => currency()->rupiah($total, setting()->get('currency_symbol')),
+            "methode" => "",
             "action" => ""
         ]);
 

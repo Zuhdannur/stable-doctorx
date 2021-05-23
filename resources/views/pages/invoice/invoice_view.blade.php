@@ -62,6 +62,7 @@
                     <th>Qty</th>
                     <th>Status Hari ini</th>
                     <th>Note</th>
+                    <th>Metode Pembayaran</th>
                     <th>Total</th>
                     <th>Tindakan</th>
                 </tr>
@@ -132,6 +133,10 @@
                     {
                         data: 'note',
                         name: 'note'
+                    },
+                    {
+                        data: 'methode',
+                        name: 'methode'
                     },
                     {
                         data: 'total',
