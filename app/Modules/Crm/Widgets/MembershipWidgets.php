@@ -28,7 +28,7 @@ class MembershipWidgets extends AbstractWidget
      * @var array
      */
     protected $config = [
-
+        'grade' => 'semua'
     ];
 
     public function membership()
@@ -40,9 +40,16 @@ class MembershipWidgets extends AbstractWidget
 //                return count($item);
 //            });
 
-        $data = array(0,0,0,0);
-        $query = CrmMembership::all();
-        foreach ($query as $row) {
+        $data = [0];
+        $labels = [''];
+
+        $query = CrmMembership::where('id_klinik',auth()->user()->id_klinik);
+
+        if($this->config['grade'] != "semua") {
+            $query = $query->where('id_grade',$this->config['grade']);
+        }
+
+        foreach ($query->get() as $row) {
 
             $totalAmmount = 0;
             foreach ($row->invoice as $item) {
@@ -51,18 +58,22 @@ class MembershipWidgets extends AbstractWidget
 
             if($totalAmmount < 1000000) {
                 $data[0] += 1;
+                $labels[0] = '< Rp 1.000.000';
             }
 
             if($totalAmmount >= 1000000 && $totalAmmount < 3000000) {
                 $data[1] += 1;
+                $labels[1] = 'Rp 1.000.000 - Rp 3.000.000';
             }
 
             if($totalAmmount >= 3000000 && $totalAmmount < 5000000) {
                 $data[2] += 1;
+                $labels[2] = 'Rp 3.000.000 - Rp 5.000.000';
             }
 
             if($totalAmmount >= 5000000) {
                 $data[3] += 1;
+                $labels[3] = '> Rp 5.000.000';
             }
 
 
@@ -84,7 +95,7 @@ class MembershipWidgets extends AbstractWidget
         // $color
         $warna = rcolor()->listColor(count($data));
         $chart = new MembershipCategories;
-        $chart->labels(['< Rp 1.000.000','Rp 1.000.000 - Rp 3.000.000','Rp 3.000.000 - Rp 5.000.000','> Rp 5.000.000']);
+        $chart->labels($labels);
         // $chart->title('siapp');
         // $chart->doughnut(50);
         $chart->minimalist(false);

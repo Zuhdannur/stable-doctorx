@@ -17,13 +17,17 @@ use function foo\func;
 
 class CrmMembershipController extends Controller
 {
-    public function index(Request $request)
+    public function index($grade , Request $request)
     {
         if($request->ajax()){
             $model = CrmMembership::with(['patient', 'ms_membership','invoice'])
             ->orderBy('created_at', 'ASC');
 
 //            dd($model->get());
+
+            if(!empty($request->grade) && $request->grade != "semua") {
+                $model = $model->where('id_grade',$request->grade);
+            }
 
             return DataTables::eloquent($model)
             ->addIndexColumn()
@@ -50,7 +54,8 @@ class CrmMembershipController extends Controller
             ->rawColumns(['total_amount','action','grade'])
             ->make(true);
         }
-        return view('crm::membership.index');
+        $data['grade'] = $grade;
+        return view('crm::membership.index')->with($data);
     }
 
     public function create()

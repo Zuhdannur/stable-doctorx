@@ -16,6 +16,18 @@
     </div>
 
     <div class="block-content block-content-full">
+        <div class="d-flex">
+            <div class="col-6">
+                <label for="startdate">Grade</label>
+                <select class="form-control" name="grade" id="grade" >
+                    <option value="semua">Semua Grade</option>
+                    @foreach(\App\Grade::all() as $row)
+                        <option value="{{ $row->id_grade }}">{{ "$row->nama_grade - $row->keterangan" }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <br><br>
         <table id="table" class="table table-sm table-hover table-striped table-vcenter js-dataTable-full-pagination" width="100%">
             <thead class="thead-light">
                 <tr>
@@ -37,7 +49,9 @@
 
 
 </div>
-@widget('\App\Modules\Crm\Widgets\MembershipWidgets')
+<div id="widget">
+    {!! Widget::run('\App\Modules\Crm\Widgets\MembershipWidgets',['grade' => $grade]) !!}
+</div>
 
 <script>
     jQuery(function(){
@@ -47,7 +61,12 @@
             responsive: true,
             ordering: false,
             pageLength: 10,
-            ajax: '{!! route('admin.crm.membership.index') !!}',
+            ajax: {
+                url : '{!! url('admin/crm/membership/grade') !!}/'+$("#grade").val(),
+                data: function (data) {
+                    data.grade = $("#grade").val()
+                }
+            },
             language: {
                 url: "{!! URL::asset('js/plugins/datatables/i18n/'.str_replace('_', '-', app()->getLocale()).'.json') !!}"
             },
@@ -114,7 +133,13 @@
         }).on('draw.dt', function () {
             $('[data-toggle="tooltip"]').tooltip();
             addDeleteForms();
-        } );
+        } ).on('init');
+
+        $("#grade").select2()
+
+        $("#grade").on('change',function () {
+            window.location.replace('{!! url('admin/crm/membership/grade') !!}/'+$("#grade").val())
+        })
     })
 </script>
 @endsection

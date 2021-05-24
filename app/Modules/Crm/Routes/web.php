@@ -51,7 +51,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', '
          * Membership
          */
         Route::group(['prefix' => 'membership', 'as' => 'membership.'], function () {
-            Route::get('/', [CrmMembershipController::class, 'index'])->name('index');
+            Route::get('/grade/{grade}', [CrmMembershipController::class, 'index'])->name('index');
             Route::post('/', [CrmMembershipController::class, 'store'])->name('store');
             Route::patch('/', [CrmMembershipController::class, 'store'])->name('store');
             Route::delete('/{membership}', [CrmMembershipController::class, 'destroy'])->name('destroy');
@@ -109,10 +109,10 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', '
         });
 
         Route::group(['prefix' => 'birthday', 'as' => 'birthday.'], function () {
-           Route::get('/', [CrmBirthday::class, 'index'])->name('index'); 
-           Route::post('/sendWa', [CrmBirthday::class, 'sendWa'])->name('sendWa'); 
-           Route::get('{patient}/edit', [CrmBirthday::class, 'editNoWA'])->name('editNoWA'); 
-           Route::post('/store', [CrmBirthday::class, 'storeWa'])->name('storeWa'); 
+           Route::get('/', [CrmBirthday::class, 'index'])->name('index');
+           Route::post('/sendWa', [CrmBirthday::class, 'sendWa'])->name('sendWa');
+           Route::get('{patient}/edit', [CrmBirthday::class, 'editNoWA'])->name('editNoWA');
+           Route::post('/store', [CrmBirthday::class, 'storeWa'])->name('storeWa');
         });
 
         /**

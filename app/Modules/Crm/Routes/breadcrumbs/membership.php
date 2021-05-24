@@ -2,7 +2,7 @@
 
 Breadcrumbs::register('admin.crm.membership.index', function ($trail) {
     $trail->parent('admin.dashboard');
-    $trail->push(trans('crm::menus.membership'), route('admin.crm.membership.index'));
+    $trail->push(trans('crm::menus.membership'), route('admin.crm.membership.index',["grade" => "semua"]));
 });
 
 Breadcrumbs::register('admin.crm.membership.create', function ($trail) {
