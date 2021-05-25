@@ -32,7 +32,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'as' => 'admin.', '
 	    	Route::delete('/', [BillingController::class, 'destroy'])->name('destroy');
 
 	    	Route::get('pdf', [BillingController::class, 'pdf'])->name('print.pdf');
-	    	Route::get('html', [BillingController::class, 'html'])->name('print.html');
+	    	Route::post('html', [BillingController::class, 'html'])->name('print.html');
 	    });
 
 	    Route::get('printepson', [BillingController::class, 'textprint'])->name('printepson');

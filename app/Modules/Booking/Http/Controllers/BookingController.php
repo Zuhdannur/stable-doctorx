@@ -251,7 +251,6 @@ class BookingController extends Controller
 
         DB::beginTransaction();
         $save = $save->create($request->input());
-
         if($save){
             $save->status_id = 5;
             $save->save();

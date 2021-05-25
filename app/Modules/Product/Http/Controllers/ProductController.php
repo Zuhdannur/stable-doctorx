@@ -29,7 +29,24 @@ class ProductController extends Controller
     public function index(Datatables $datatables)
     {
     	if ($datatables->getRequest()->ajax()) {
-            return $datatables->of($this->productRepository->where('id_klinik',Auth()->user()->klinik->id_klinik)->get())
+
+    	    $input = $datatables->getRequest();
+
+    	    $model = $this->productRepository->where('id_klinik',Auth()->user()->klinik->id_klinik);
+
+    	    if($input->has('search') && !empty($input->search)) {
+    	        $model = $model->where(function ($query) use ($input) {
+    	          $query->where('name','like','%'.$input->search['value'].'%');
+    	          $query->orWhere('quantity','like','%'.$input->search['value'].'%');
+    	          $query->orWhere('code','like','%'.$input->search['value'].'%');
+                });
+            }
+
+    	    if($input->category != "semua") {
+    	        $model = $model->where('category_id',$input->category);
+            }
+
+            return $datatables->of($model->get())
             ->addIndexColumn()
             ->addColumn('category', function ($data) {
                 $category = $data->category;

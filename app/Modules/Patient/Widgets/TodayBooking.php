@@ -66,12 +66,11 @@ class TodayBooking extends AbstractWidget
     {
         // $data = Appointment::whereIn('status_id', [1, 2])->whereDate('date', \Carbon\Carbon::today())->orderBy('date', 'asc')->take(5)->get();
 
-        $data = Appointment::whereHas('patient',function ($query){
-            return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
-        })->leftJoin('rooms', 'rooms.id', '=', 'appointments.room_id')
+        $data = Appointment::leftJoin('rooms', 'rooms.id', '=', 'appointments.room_id')
         ->leftJoin('room_groups', 'room_groups.id', '=', 'rooms.room_group_id')
         ->leftJoin('floors', 'floors.id', '=', 'room_groups.floor_id')
         ->whereIn('status_id', [5])
+            ->where('appointments.id_klinik',auth()->user()->id_klinik)
         ->whereDate('date', \Carbon\Carbon::today())
         ->select('appointments.*', 'rooms.name as room_name', 'floors.name as floor_name')
         ->orderBy('date', 'asc')
@@ -83,12 +82,11 @@ class TodayBooking extends AbstractWidget
     public function bookTreatment()
     {
         // $data = Treatment::whereIn('status_id', [1, 2])->whereDate('date', \Carbon\Carbon::today())->orderBy('date', 'asc')->take(5)->get();
-        $data = Treatment::whereHas('patient',function ($query){
-            return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
-        })->leftJoin('rooms', 'rooms.id', '=', 'treatments.room_id')
+        $data = Treatment::leftJoin('rooms', 'rooms.id', '=', 'treatments.room_id')
         ->leftJoin('room_groups', 'room_groups.id', '=', 'rooms.room_group_id')
         ->leftJoin('floors', 'floors.id', '=', 'room_groups.floor_id')
         ->whereIn('status_id', [5])
+            ->where('treatments.id_klinik',auth()->user()->id_klinik)
         ->whereDate('date', \Carbon\Carbon::today())
         ->select('treatments.*', 'rooms.name as room_name', 'floors.name as floor_name')
         ->orderBy('date', 'asc')

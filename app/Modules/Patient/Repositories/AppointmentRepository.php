@@ -43,9 +43,12 @@ class AppointmentRepository extends BaseRepository
                 'id_klinik' => auth()->user()->klinik->id_klinik
             ]);
 
+
             if($appointment){
                 $code = 'APN'.$appointment->id;
+
                 $appointment->appointment_no = $code;
+                $appointment->status_id = 1;
                 $appointment->save();
 
                 $patientFlag = PatientFlag::where('name', $data['patient_flag_id'])->first();

@@ -383,9 +383,11 @@ class BillingController extends Controller
         return $pdf->stream();
     }
 
-    public function html(Billing $billing){
+    public function html(Billing $billing , Request $request){
         // return view('billing::billing.print.billing-html', compact('billing'));
-        return view('billing::billing.print.struk-html', compact('billing'));
+        $data['billing'] = $billing;
+        $data['message'] = $request->message;
+        return view('billing::billing.print.struk-html')->with($data);
     }
 
     public function print_receipt($id)

@@ -269,36 +269,51 @@ jQuery(function () {
         var url = '{{ route("admin.billing.print.html", ":id") }}';
         url = url.replace(':id', id);
 
-        $.ajax({
-            url: url,
-            type: 'GET',
-            beforeSend: function(xhr) {
-                Codebase.blocks('#my-block2', 'state_loading');
-            },
-            error: function(x, status, error) {
-                if (x.status == 403) {
-                    $.alert({
-                        title: 'Error',
-                        icon: 'fa fa-warning',
-                        type: 'red',
-                        content: "Error: " + x.status + "",
-                    });
-                } else {
-                    $.alert({
-                        title: 'Error',
-                        icon: 'fa fa-warning',
-                        type: 'red',
-                        content: "An error occurred: " + status + "nError: " + error,
-                    });
-                }
+        Swal.fire({
+            title: 'Tulisakan Pesan Pada Struk',
+            input: 'text',
+            inputValue: 'BARANG YANG SUDAH DI BELI TIDAK BISA DI TUKAR/ DI KEMBALIKAN',
+            inputPlaceholder: 'Tuliskan Pesan Manual',
+            confirmButtonText: 'Cetak Invoice',
+        }).then(function (isConfirm) {
+           if(isConfirm.value) {
+               $.ajax({
+                   url: url,
+                   type: 'POST',
+                   data: {
+                     message : isConfirm.value
+                   },
+                   beforeSend: function(xhr) {
+                       Codebase.blocks('#my-block2', 'state_loading');
+                   },
+                   error: function(x, status, error) {
+                       if (x.status == 403) {
+                           $.alert({
+                               title: 'Error',
+                               icon: 'fa fa-warning',
+                               type: 'red',
+                               content: "Error: " + x.status + "",
+                           });
+                       } else {
+                           $.alert({
+                               title: 'Error',
+                               icon: 'fa fa-warning',
+                               type: 'red',
+                               content: "An error occurred: " + status + "nError: " + error,
+                           });
+                       }
 
-                Codebase.blocks('#my-block2', 'state_normal');
-            },
-            success: function(response) {
-                Popup(response);
-                Codebase.blocks('#my-block2', 'state_normal');
-            },
+                       Codebase.blocks('#my-block2', 'state_normal');
+                   },
+                   success: function(response) {
+                       Popup(response);
+                       Codebase.blocks('#my-block2', 'state_normal');
+                   },
+               });
+           }
         });
+
+
     }
 
     $('body').on('input','.discount-item', function () {
