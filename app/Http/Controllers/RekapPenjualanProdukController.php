@@ -56,21 +56,23 @@ class RekapPenjualanProdukController extends Controller
                 $rata_rata = currency()->rupiah($total / $qty, setting()->get('currency_symbol'));
             }
 
-            if(!empty($request->filter) && $request->filter != "semua") {
-                if($rata_rata != "0")  {
-                    $data->push([
-                        "DT_RowIndex" => ++$start,
-                        "name" => $row->name,
-                        "qty_sold" => count($sold),
-                        "retur" => 0,
-                        "satuan" => "pcs",
-                        "total_sold" => currency()->rupiah($total, setting()->get('currency_symbol')),
-                        "total_retur" => 0,
-                        "stok" => $row->quantity,
-                        "action" => $row->action_buttons
-                    ]);
-                }
-            } else {
+//            if(!empty($request->filter) && $request->filter != "semua") {
+//
+//            } else {
+//                $data->push([
+//                    "DT_RowIndex" => ++$start,
+//                    "name" => $row->name,
+//                    "qty_sold" => count($sold),
+//                    "retur" => 0,
+//                    "satuan" => "pcs",
+//                    "total_sold" => currency()->rupiah($total, setting()->get('currency_symbol')),
+//                    "total_retur" => 0,
+//                    "stok" => $row->quantity,
+//                    "action" => $row->action_buttons
+//                ]);
+//            }
+
+            if($rata_rata != "0")  {
                 $data->push([
                     "DT_RowIndex" => ++$start,
                     "name" => $row->name,

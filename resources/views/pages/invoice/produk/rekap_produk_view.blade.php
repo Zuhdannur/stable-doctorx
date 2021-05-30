@@ -67,8 +67,7 @@
                 <div class="col-6">
                     <label for="startdate">Tampilkan</label>
                     <select class="form-control" name="filter" id="filters">
-                        <option value="semua">Semua Produk</option>
-                        <option value="filter">Penjualan</option>
+                        <option value="filter" selected>Penjualan</option>
                     </select>
                 </div>
             </div>
