@@ -2,6 +2,7 @@
 
 namespace App\Modules\Patient\Widgets;
 
+use App\Modules\Billing\Models\Billing;
 use Arrilot\Widgets\AbstractWidget;
 
 use App\Modules\Patient\Models\Patient;
@@ -59,14 +60,21 @@ class Statistics extends AbstractWidget
 
     public function info()
     {
+//        $data = [0,0];
+//        $labels = ['Pasien Lama','Pasien Baru'];
+
+//        $query = Billing::where('id_klinik',auth()->user()->id_klinik);
+
         if(!empty($this->config['start_date']) && !empty($this->config['end_date'])){
+//            $query = Billing::where('id_klinik',auth()->user()->id_klinik)->whereBetween('date',[$this->config['start_date'], $this->config['end_date']])->get();
             $data = Patient::where('id_klinik',Auth()->user()->klinik->id_klinik)->with('info')->whereBetween('created_at',[$this->config['start_date'], $this->config['end_date']])->get()
                 ->groupBy('info.name')
                 ->map(function ($item) {
                     // Return the number of persons with that age
                     return count($item);
                 });
-        }else{
+        }
+        else{
             $data = Patient::where('id_klinik',Auth()->user()->klinik->id_klinik)->with('info')->get()
                 ->groupBy('info.name')
                 ->map(function ($item) {
@@ -74,6 +82,14 @@ class Statistics extends AbstractWidget
                     return count($item);
                 });
         }
+
+//        foreach ($query->get() as $row) {
+//            if($row->patient->old_patient == 'y') {
+//                $data[0] += ($data[0] + 1);
+//            } else {
+//                $data[1] += ($data[1]  + 1);
+//            }
+//        }
 
         $colorSet = array(
             '#1abc9c',

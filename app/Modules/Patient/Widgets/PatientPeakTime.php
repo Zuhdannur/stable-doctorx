@@ -34,9 +34,7 @@ class PatientPeakTime extends AbstractWidget
 
         switch ($this->config['filter']) {
             case '1': //all
-                $data = Appointment::whereHas('patient',function ($query){
-                    return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
-                })->get()
+                $data = Appointment::where('id_klinik',auth()->user()->id_klinik)->get()
                 ->groupBy(function($data){
                     return \Carbon\Carbon::parse($data->date)->format('H');
                 })
@@ -45,9 +43,7 @@ class PatientPeakTime extends AbstractWidget
                 });
                 break;
             case '2': //today
-                $data = Appointment::whereHas('patient',function ($query){
-                    return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
-                })->whereDate('date', \Carbon\Carbon::now() )->get()
+                $data = Appointment::where('id_klinik',auth()->user()->id_klinik)->whereDate('date', \Carbon\Carbon::now() )->get()
                 ->groupBy(function($data){
                     return \Carbon\Carbon::parse($data->date)->format('H');
                 })
@@ -57,9 +53,7 @@ class PatientPeakTime extends AbstractWidget
 
                 break;
             case '3': //Yesterday
-                $data = Appointment::whereHas('patient',function ($query){
-                    return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
-                })->whereDate('date', \Carbon\Carbon::now()->subDay(1) )->get()
+                $data = Appointment::where('id_klinik',auth()->user()->id_klinik)->whereDate('date', \Carbon\Carbon::now()->subDay(1) )->get()
                 ->groupBy(function($data){
                     return \Carbon\Carbon::parse($data->date)->format('H');
                 })
@@ -69,9 +63,7 @@ class PatientPeakTime extends AbstractWidget
 
                 break;
             case '4': //This Week
-                $data = Appointment::whereHas('patient',function ($query){
-                    return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
-                })->whereBetween('date', [\Carbon\Carbon::now()->startOfWeek(), \Carbon\Carbon::now()->endOfWeek()] )->get()
+                $data = Appointment::where('id_klinik',auth()->user()->id_klinik)->whereBetween('date', [\Carbon\Carbon::now()->startOfWeek(), \Carbon\Carbon::now()->endOfWeek()] )->get()
                 ->groupBy(function($data){
                     return \Carbon\Carbon::parse($data->date)->format('H');
                 })
@@ -82,9 +74,7 @@ class PatientPeakTime extends AbstractWidget
                 break;
             case '5': //Last Week
                 $now = \Carbon\Carbon::now();
-                $data = Appointment::whereHas('patient',function ($query){
-                    return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
-                })->whereBetween('date', [$now->subDay($now->dayOfWeek  + 1), $now->endOfWeek()] )->get()
+                $data = Appointment::where('id_klinik',auth()->user()->id_klinik)->whereBetween('date', [$now->subDay($now->dayOfWeek  + 1), $now->endOfWeek()] )->get()
                 ->groupBy(function($data){
                     return \Carbon\Carbon::parse($data->date)->format('H');
                 })
@@ -94,9 +84,7 @@ class PatientPeakTime extends AbstractWidget
 
                 break;
             case '6': //This Month
-                $data = Appointment::whereHas('patient',function ($query){
-                    return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
-                })->whereMonth('date', \Carbon\Carbon::now())->get()
+                $data = Appointment::where('id_klinik',auth()->user()->id_klinik)->whereMonth('date', \Carbon\Carbon::now())->get()
                 ->groupBy(function($data){
                     return \Carbon\Carbon::parse($data->date)->format('H');
                 })
@@ -106,9 +94,7 @@ class PatientPeakTime extends AbstractWidget
 
                 break;
             case '7': //Last Month
-                $data = Appointment::whereHas('patient',function ($query){
-                    return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
-                })->whereMonth('date', \Carbon\Carbon::now()->subMonth(1))->get()
+                $data = Appointment::where('id_klinik',auth()->user()->id_klinik)->whereMonth('date', \Carbon\Carbon::now()->subMonth(1))->get()
                 ->groupBy(function($data){
                     return \Carbon\Carbon::parse($data->date)->format('H');
                 })
@@ -118,9 +104,7 @@ class PatientPeakTime extends AbstractWidget
 
                 break;
             case '8': //This Year
-                $data = Appointment::whereHas('patient',function ($query){
-                    return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
-                })->whereYear('date', \Carbon\Carbon::now())->get()
+                $data = Appointment::where('id_klinik',auth()->user()->id_klinik)->whereYear('date', \Carbon\Carbon::now())->get()
                 ->groupBy(function($data){
                     return \Carbon\Carbon::parse($data->date)->format('H');
                 })
@@ -129,9 +113,7 @@ class PatientPeakTime extends AbstractWidget
                 });
                 break;
             case '9': //Last Year
-                $data = Appointment::whereHas('patient',function ($query){
-                    return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
-                })->whereYear('date', \Carbon\Carbon::now()->subYear(1))->get()
+                $data = Appointment::where('id_klinik',auth()->user()->id_klinik)->whereYear('date', \Carbon\Carbon::now()->subYear(1))->get()
                 ->groupBy(function($data){
                     return \Carbon\Carbon::parse($data->date)->format('H');
                 })
@@ -148,9 +130,7 @@ class PatientPeakTime extends AbstractWidget
                     $this->config['end_date'] = \carbon\Carbon::now()->format('Y-m-d H:i:s');
                 }
 
-                $data = Appointment::whereHas('patient',function ($query){
-                    return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
-                })->whereBetween('date',[$this->config['start_date'], $this->config['end_date']])->get()
+                $data = Appointment::where('id_klinik',auth()->user()->id_klinik)->whereBetween('date',[$this->config['start_date'], $this->config['end_date']])->get()
                     ->groupBy(function($data){
                         return \Carbon\Carbon::parse($data->date)->format('H');
                     })
@@ -161,32 +141,31 @@ class PatientPeakTime extends AbstractWidget
         }
 
         $timeList = array(
-            '00' => '0',
-            '01' => '0',
-            '02' => '0',
-            '03' => '0',
-            '04' => '0',
-            '05' => '0',
-            '06' => '0',
-            '07' => '0',
-            '08' => '0',
-            '09' => '0',
-            '10' => '0',
-            '11' => '0',
-            '12' => '0',
-            '13' => '0',
-            '14' => '0',
-            '15' => '0',
-            '16' => '0',
-            '17' => '0',
-            '18' => '0',
-            '19' => '0',
-            '20' => '0',
-            '21' => '0',
-            '22' => '0',
-            '23' => '0',
+            '00' => 0,
+            '01' => 0,
+            '02' => 0,
+            '03' => 0,
+            '04' => 0,
+            '05' => 0,
+            '06' => 0,
+            '07' => 0,
+            '08' => 0,
+            '09' => 0,
+            '10' => 0,
+            '11' => 0,
+            '12' => 0,
+            '13' => 0,
+            '14' => 0,
+            '15' => 0,
+            '16' => 0,
+            '17' => 0,
+            '18' => 0,
+            '19' => 0,
+            '20' => 0,
+            '21' => 0,
+            '22' => 0,
+            '23' => 0,
         );
-
         foreach ($data as $key => $value) {
             $timeList[$key] = $value;
         }
@@ -204,8 +183,7 @@ class PatientPeakTime extends AbstractWidget
         }
         $charts = new PatientPeakTimeChart;
         $warna = rcolor()->listColor(count($data));
-
-        $charts->labels($data->keys());
+//        $charts->labels($data->keys());
         // $charts->minimalist(true);
         // $charts->displayLegend(true);
         // $charts->displayAxes(true);

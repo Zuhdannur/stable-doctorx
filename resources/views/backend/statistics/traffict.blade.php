@@ -7,11 +7,15 @@
     @include('backend.statistics.partial.full-filters')
 
     {{-- appointment peak time --}}
-    @widget('\App\Modules\Patient\Widgets\PatientPeakTime', [ 'filter' => $filter, 'start_date' => $dateWidget['start_date'], 'end_date' => $dateWidget['end_date'] ]) 
+    @widget('\App\Modules\Patient\Widgets\PatientPeakTime', [ 'filter' => $filter, 'start_date' => $dateWidget['start_date'], 'end_date' => $dateWidget['end_date'] ])
     {{-- End OF appointment peak time --}}
 
     {{-- peak time widget --}}
-    {{-- @widget('\App\Widgets\PeakTimeWidgets', ['type' => 5, 'filter' => $filter, 'start_date' => $dateWidget['start_date'], 'end_date' => $dateWidget['end_date']]) --}}
+{{--     @widget('\App\Widgets\PeakTimeWidgets', ['type' => 5, 'filter' => $filter, 'start_date' => $dateWidget['start_date'], 'end_date' => $dateWidget['end_date']])--}}
+    {{-- peak time widget --}}
+
+    {{-- peak time widget --}}
+         @widget('\App\Widgets\StatisticPatient', ['filter' => $filter, 'start_date' => $dateWidget['start_date'], 'end_date' => $dateWidget['end_date']])
     {{-- peak time widget --}}
 
 @endsection
