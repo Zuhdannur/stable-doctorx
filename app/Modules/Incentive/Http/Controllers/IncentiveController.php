@@ -24,7 +24,7 @@ class IncentiveController extends Controller
     public function index(Datatables $datatables)
     {
         if ($datatables->getRequest()->ajax()) {
-            return $datatables->of(Incentive::where('id_klinik')->get())
+            return $datatables->of(Incentive::where('id_klinik',auth()->user()->id_klinik)->get())
             ->addIndexColumn()
             ->addColumn('details_url', function($data) {
                 return route('admin.incentive.incentivedetail', $data->id);

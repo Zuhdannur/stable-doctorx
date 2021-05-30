@@ -41,6 +41,7 @@ class RekapPenjualanProdukController extends Controller
         foreach ($model->get() as $row) {
             $sold = BillingDetail::whereBetween('created_at',[@$dateAwal,@$dateAkhir])
                 ->where('product_id',$row->id)
+                ->where('type','product')
                 ->get();
 
             $total = 0;

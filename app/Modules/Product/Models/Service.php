@@ -56,7 +56,7 @@ class Service extends Model
 
     public function optionList()
     {
-        $data = self::get();
+        $data = self::where('id_klinik',auth()->user()->id_klinik)->get();
 
         $option = '<option></option>';
         if(!empty($data)){

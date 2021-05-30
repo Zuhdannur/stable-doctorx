@@ -9,7 +9,8 @@ trait AppointmentAttribute
      */
     public function getViewButtonAttribute()
     {
-        return '<a href="'.route('admin.patient.appointment.show', $this).'" class="btn btn-sm btn-secondary mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Lihat Data"><i class="fa fa-file-text-o"></i></a>';
+//        return '<a href="'.route('admin.patient.appointment.show', $this).'" class="btn btn-sm btn-secondary mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Lihat Data"><i class="fa fa-file-text-o"></i></a>';
+        return '<a href="'.route('admin.patient.show', $this->patient_id).'" class="btn btn-sm btn-secondary mr-5 mb-5" data-toggle="tooltip" data-placement="top" title="Lihat Data"><i class="fa fa-file-text-o"></i></a>';
     }
 
     /**

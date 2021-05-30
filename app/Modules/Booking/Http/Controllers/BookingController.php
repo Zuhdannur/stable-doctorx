@@ -17,6 +17,7 @@ use App\Modules\Patient\Repositories\TreatmentRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
+use function foo\func;
 
 class BookingController extends Controller
 {
@@ -98,7 +99,9 @@ class BookingController extends Controller
         $pid = 0;
         $flagpatient = 'green';
         $queueId = 0;
-        $therapistData = Staff::where('designation_id', 4)->get();
+        $therapistData = Staff::whereHas('user',function ($query) {
+            $query->where('id_klinik',auth()->user()->id_klinik);
+        })->where('designation_id', 4)->get();
 
         /** For Konsultasi */
         $therapist = array();
@@ -110,16 +113,20 @@ class BookingController extends Controller
         };
 
         $therapist = json_encode($therapist);
-        $staff = Staff::where('designation_id', 2)->get();
-        $roomList = Room::whereHas('group', function ($query) {
+        $staff = Staff::whereHas('user',function ($query) {
+            $query->where('id_klinik',auth()->user()->id_klinik);
+        })->where('designation_id', 2)->get();
+        $roomList = Room::where('id_klinik',auth()->user()->id_klinik)->whereHas('group', function ($query) {
             $query->where('room_groups.type', '=', 'APPOINTMENT');
         })->get();
 
         /** End For Konsultasi */
 
         //** For Treatment */
-        $staffTr = Staff::whereIn('designation_id', [2,4])->get();
-        $roomTr = Room::whereHas('group', function ($query) {
+        $staffTr = Staff::whereHas('user',function ($query) {
+            $query->where('id_klinik',auth()->user()->id_klinik);
+        })->whereIn('designation_id', [2,4])->get();
+        $roomTr = Room::where('id_klinik',auth()->user()->id_klinik)->whereHas('group', function ($query) {
                     $query->where('room_groups.type', '=', 'TREATMENT');
                 })->get();
 
@@ -149,7 +156,9 @@ class BookingController extends Controller
         $pid = 0;
         $flagpatient = 'green';
         $queueId = 0;
-        $docterData = Staff::where('designation_id', 2)->get();
+        $docterData = Staff::whereHas('user',function ($query) {
+            $query->where('id_klinik',auth()->user()->id_klinik);
+        })->where('designation_id', 2)->get();
 
         /** For Konsultasi */
         $docter = array();
@@ -161,16 +170,20 @@ class BookingController extends Controller
         };
 
         $docter = json_encode($docter);
-        $staff = Staff::where('designation_id', 2)->get();
-        $roomList = Room::whereHas('group', function ($query) {
+        $staff = Staff::whereHas('user',function ($query) {
+            $query->where('id_klinik',auth()->user()->id_klinik);
+        })->where('designation_id', 2)->get();
+        $roomList = Room::where('id_klinik',auth()->user()->id_klinik)->whereHas('group', function ($query) {
             $query->where('room_groups.type', '=', 'APPOINTMENT');
         })->get();
 
         /** End For Konsultasi */
 
         //** For Treatment */
-        $staffTr = Staff::whereIn('designation_id', [2,4])->get();
-        $roomTr = Room::whereHas('group', function ($query) {
+        $staffTr = Staff::whereHas('user',function ($query) {
+            $query->where('id_klinik',auth()->user()->id_klinik);
+        })->whereIn('designation_id', [2,4])->get();
+        $roomTr = Room::where('id_klinik',auth()->user()->id_klinik)->whereHas('group', function ($query) {
                     $query->where('room_groups.type', '=', 'TREATMENT');
                 })->get();
 
@@ -376,8 +389,8 @@ class BookingController extends Controller
     {
        if($request->ajax()){
 
-            $data_appointment = Appointment::whereBetween('date' ,[$request->start,$request->end])->get();
-            $data_treatment = Treatment::whereBetween('date' ,[$request->start,$request->end])->get();
+            $data_appointment = Appointment::where('id_klinik',auth()->user()->id_klinik)->whereBetween('date' ,[$request->start,$request->end])->get();
+            $data_treatment = Treatment::where('id_klinik',auth()->user()->id_klinik)->whereBetween('date' ,[$request->start,$request->end])->get();
             $resp = array();
             $url = '';
 
@@ -459,7 +472,7 @@ class BookingController extends Controller
     public function getEventByTherapist(Request $request)
     {
        if($request->ajax()){
-            $data = Treatment::whereBetween('date' ,[$request->start,$request->end])
+            $data = Treatment::where('id_klinik',auth()->user()->id_klinik)->whereBetween('date' ,[$request->start,$request->end])
                     ->get();
             $resp = array();
             $url = '';

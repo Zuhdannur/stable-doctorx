@@ -3,6 +3,7 @@
 namespace App\Modules\Patient\Repositories;
 
 use App\Models\Auth\User;
+use App\Modules\Booking\Models\Booking;
 use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use App\Repositories\BaseRepository;
@@ -37,10 +38,12 @@ use App\Modules\Billing\Repositories\BillingRepository;
 class PrescriptionRepository extends BaseRepository
 {
     protected $billingRepository;
+    protected $appointmentRepository;
 
-    public function __construct(BillingRepository $billingRepository)
+    public function __construct(BillingRepository $billingRepository , AppointmentRepository $appointmentRepository)
     {
         $this->billingRepository = $billingRepository;
+        $this->appointmentRepository = $appointmentRepository;
     }
 
     /**
@@ -318,6 +321,31 @@ class PrescriptionRepository extends BaseRepository
                         'next_appointment_notes' => $request->next_appointment_notes
                     ]
                 );
+
+                //#TODO NEW APOINTMENT
+
+                $newAppointmentParams = [];
+                $newAppointmentParams['qId'] = 0;
+                $newAppointmentParams['pid'] = $appointment->patient->patient_unique_id;
+                $newAppointmentParams['appointment_date'] = $request->next_appointment_date;
+                $newAppointmentParams['appointment_time'] = "08:00";
+                $newAppointmentParams['staff_id'] = $appointment->staff_id;
+                $newAppointmentParams['room_id'] = $appointment->room_id;
+                $newAppointmentParams['notes'] = $appointment->notes;
+                $newAppointmentParams['patient_flag_id'] = $appointment->patient->flag->name;
+
+                $newAppointment = $this->appointmentRepository->create($newAppointmentParams);
+
+                if($newAppointment) {
+                    $newAppointment->status_id = 5;
+                    $newAppointment->save();
+
+                    $booking = new Booking;
+                    $booking->code = $newAppointment->appointment_no;
+                    $booking->type = 'APN';
+                    $booking->date = $newAppointment->date;
+                    $booking->save();
+                }
             }
 
             DB::commit();
