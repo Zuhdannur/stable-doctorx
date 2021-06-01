@@ -25,7 +25,7 @@ class StaffIncentiveController extends Controller
             })->get())
             ->addIndexColumn()
             ->addColumn('staff_name', function($data) {
-                return $data->staff->user->id_klinik;
+                return $data->staff->user->full_name;
             })
             ->addColumn('incentive_name', function($data) {
                 return $data->incentive->name;
