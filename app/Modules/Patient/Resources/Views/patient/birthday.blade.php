@@ -64,7 +64,7 @@
 <script src="{{ URL::asset('js/plugins/moment/moment-with-locales.min.js') }}"></script>
 <script>
 
-    jQuery(function(){ 
+    jQuery(function(){
         var formatDate = "{{ setting()->get('date_format_js') }}";
         // Codebase.helpers(['datepicker']);
         $('.input-daterange').datepicker({
@@ -78,7 +78,7 @@
 
         var startdate = moment(new Date()).format(formatDate.toUpperCase());
         var enddate = moment(new Date()).format(formatDate.toUpperCase());
-        
+
         var dt = $('#table').DataTable({
             processing: true,
             serverSide: true,
@@ -99,7 +99,7 @@
                 // {
                 //     data: 'DT_RowIndex',
                 //     width: "5%",
-                //     orderable: false, 
+                //     orderable: false,
                 //     searchable: false
                 // },
                 {
@@ -132,7 +132,7 @@
                     name: 'action',
                     width: "8%",
                     className: 'text-right',
-                    orderable: false, 
+                    orderable: false,
                     searchable: false
                 }
             ]
@@ -208,8 +208,8 @@
                                 });
 
                                 // setTimeout(function(){
-                                //     window.location = '{{ route('admin.crm.membership.index') }}';
-                                // }, 2000); 
+                                //     window.location = '{{ url('admin/crm/membership/grade/semua') }}';
+                                // }, 2000);
                             }else{
                                 $.alert({
                                     title: 'Error',
