@@ -638,7 +638,7 @@
 
             $.ajax({
                 url: url,
-                type: 'GET',
+                type: 'POST',
                 beforeSend: function(xhr) {
                     Codebase.blocks('#my-block2', 'state_loading');
                 },

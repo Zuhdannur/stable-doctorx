@@ -386,7 +386,7 @@ class BillingController extends Controller
     public function html(Billing $billing , Request $request){
         // return view('billing::billing.print.billing-html', compact('billing'));
         $data['billing'] = $billing;
-        $data['message'] = $request->message;
+        $data['message'] = @$request->message;
         return view('billing::billing.print.struk-html')->with($data);
     }
 
