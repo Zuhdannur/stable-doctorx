@@ -3,9 +3,9 @@
 @section('title', app_name() . ' | '. __('booking::menus.calendar.jadwal-treatment'))
 
 @section('content')
-  
+
     @include('accounting::reports.partial.range-date')
-    
+
     <div class="clearfix"></div>
     <div class="clearfix"></div>
 
@@ -34,7 +34,7 @@
             </table>
         </div>
     </div>
-    
+
     <script>
          jQuery(function(){
             var dt = $('#table').DataTable({
@@ -58,7 +58,7 @@
                         data: 'DT_RowIndex',
                         name: 'id',
                         width: "5%",
-                        orderable: false, 
+                        orderable: false,
                         searchable: false
                     },
                     {
@@ -107,7 +107,7 @@
                         name: 'action',
                         width: "8%",
                         className: 'text-right',
-                        orderable: false, 
+                        orderable: false,
                         searchable: false
                     },
                 ]
@@ -179,8 +179,8 @@
 
                                     dt.ajax.reload();
                                     // setTimeout(function(){
-                                    //     window.location = '{{ route('admin.crm.membership.index') }}';
-                                    // }, 2000); 
+                                    //     window.location = '{{ url('admin/crm/membership/grade/semua') }}';
+                                    // }, 2000);
                                 }else{
                                     $.alert({
                                         title: 'Error',
