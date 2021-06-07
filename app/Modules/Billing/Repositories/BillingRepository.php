@@ -315,7 +315,7 @@ class BillingRepository extends BaseRepository
                     //update stock obat
                     if ($val->type == 'product') {
                         $_product = Product::find($val->product_id);
-                        $_product->quantity = $_product->quantity - $val->qty;
+                        $_product->quantity = $_product->quantity + $val->qty;
 
                         $_rev_point = $_rev_point + $_product->point;
                         if ($_product->quantity < $_product->min_stock) {
