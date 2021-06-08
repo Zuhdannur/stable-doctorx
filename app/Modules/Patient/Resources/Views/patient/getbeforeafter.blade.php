@@ -7,14 +7,14 @@
 				        </div>
 				        <div class="block-content">
 				        	<div class="row items-push" id="imageGrid">
-                                
+
                     		</div>
 				        	<div class="row items-push js-gallery img-fluid-100 js-gallery-enabled">
 							    <div class="col-md-8 animated fadeIn" id="beforeImage">
-							        
+
 							    </div>
 							</div>
-				            <div class="row items-push">
+				            <div class="row items-push tag-before">
 				            	@if(isset($patient->beforeafter))
 					            	@foreach($patient->beforeafter->where('type', 'before') as $item)
 								    <div class="col-md-6 col-lg-4 col-xl-3 animated fadeIn">
@@ -36,6 +36,9 @@
 									</div>
 									@endforeach
 								@endif
+                                <div class="custom-image col-md-6 col-lg-4 col-xl-3 animated fadeIn">
+
+                                </div>
 							</div>
 				        </div>
 				    </div>
@@ -48,10 +51,10 @@
 				        <div class="block-content">
 				        	<div class="row items-push js-gallery img-fluid-100 js-gallery-enabled">
 							    <div class="col-md-8 animated fadeIn" id="afterImage">
-							        
+
 							    </div>
 							</div>
-				            <div class="row items-push js-gallery img-fluid-100 js-gallery-enabled">
+				            <div class="row items-push js-gallery img-fluid-100 js-gallery-enabled tag-after">
 							    @if(isset($patient->beforeafter))
 					            	@foreach($patient->beforeafter->where('type', 'after') as $item)
 								    <div class="col-md-6 col-lg-4 col-xl-3 animated fadeIn">
@@ -73,6 +76,9 @@
 									</div>
 									@endforeach
 								@endif
+                                    <div class="custom-image col-md-6 col-lg-4 col-xl-3 animated fadeIn">
+
+                                    </div>
 							</div>
 				        </div>
 				    </div>

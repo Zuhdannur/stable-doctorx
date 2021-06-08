@@ -163,6 +163,14 @@
                                 <span>{{ setting()->get('copyright_link') }}</span>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <span class="font-w600">Pesan Print Out Invoice</span>
+                            </td>
+                            <td class="text-right">
+                                <span>{{ setting()->get('print_out') ?? 'TES'}}</span>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 </div>
@@ -280,6 +288,13 @@
                                     <div class="col-6">
                                         <label>Copyright Link</label>
                                         <input type="text" class="form-control" id="copyright_link" name="copyright_link" value="{{ setting()->get('copyright_link') }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-6">
+                                        <label>Pesan Print out Struk</label>
+                                        <input type="text" class="form-control" id="print_out" name="print_out" value="{{ setting()->get('print_out') }}">
                                     </div>
                                 </div>
 			                </div>

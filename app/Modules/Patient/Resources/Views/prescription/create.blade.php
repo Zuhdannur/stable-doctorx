@@ -1260,13 +1260,13 @@
                     '    </div>' +
                     '<div class="row ml-sm-1"> ' +
                     '<input name="tipe[]" hidden>' +
-                    '<button type="button" class="btn btn-sm btn-success mr-5 mb-5 btnBefore"  name="btnbefore">\n' +
+                    '<button type="button" class="btn btn-sm btn-success mr-5 mb-5 btnBefore" value="'+image+'"  name="btnbefore">\n' +
                     '                            <i class="fa fa-plus mr-5"></i>Before\n' +
                     '                        </button>' +
-                    '<button type="button" class="btn btn-sm btn-danger mr-5 mb-5 btnAfter" name="btnafter">\n' +
+                    '<button type="button" class="btn btn-sm btn-danger mr-5 mb-5 btnAfter" value="'+image+'" name="btnafter">\n' +
                     '                            <i class="fa fa-plus mr-5"></i>After\n' +
                     '                        </button>' +
-                    '<button type="button" class="btn btn-sm btn-danger mr-5 mb-5 btnCancel" name="btncancel" style="display: none;">\n' +
+                    '<button type="button" class="btn btn-sm btn-danger mr-5 mb-5 btnCancel" value="'+image+'" name="btncancel" style="display: none;">\n' +
                     '                            <i class="fa fa-plus mr-5"></i>Batalkan Dari \n' +
                     '                        </button>' +
                     ' </div>'
@@ -1282,6 +1282,11 @@
                         cls[index].click();
                     }
                 })
+
+
+                // $('.tag-before').find('.custom-image').append('<div class="options-container fx-item-zoom-in fx-overlay-zoom-out">\n' +
+                //     '                                        <img class="img-fluid options-item" data-zoom-image="'+image+'"/ src="'+image+'" alt="">' +
+                //     '                                    </div>')
 
             }
 
@@ -1638,6 +1643,20 @@
                 btnBefore.css('display', 'none');
 
                 parent.find('input').val("after")
+
+                $('.tag-after').find('.custom-image').append('<div class="options-container fx-item-zoom-in fx-overlay-zoom-out">\n' +
+                    '                                        <img class="img-fluid options-item" data-zoom-image="'+$(this).val()+'"/ src="'+$(this).val()+'" alt="">' +
+                    '<div class="options-overlay bg-black-op">\n' +
+                    '            <div class="options-overlay-content">\n' +
+                    '                <h6 class="h6 text-white mb-5">Image</h6>\n' +
+                    '                <h6 class="h6 text-white-op mb-15">More Details</h6>\n' +
+                    '                <a class="btn btn-sm btn-rounded btn-alt-primary min-width-75 viewAfter" data-pict="'+$(this).val() +'" href="javascript:void(0)">\n' +
+                    '                    <i class="fa fa-pencil"></i> Lihat\n' +
+                    '                </a>\n' +
+
+                    '            </div>\n' +
+                    '        </div>'+
+                    '                                    </div>')
             })
 
             $('body').on('click', '.btnCancel', function (e) {
@@ -1651,6 +1670,33 @@
 
                 var btnAfter = parent.find('button[name=btnafter]');
                 btnAfter.css('display', 'inline-block');
+
+                var parentOfbeforeAfter;
+                if(parent.find('input').val() === "after") {
+
+                    if($("#afterImage").find('img').length) {
+                        if($("#afterImage").find('img').attr('src') == $(this).val())
+                            $("#afterImage").empty()
+                    }
+
+                    parentOfbeforeAfter = $('.tag-after').find('.custom-image').find('div');
+                } else if(parent.find('input').val() === "before") {
+
+                    if($("#beforeImage").find('img').length) {
+                        if($("#beforeImage").find('img').attr('src') == $(this).val())
+                            $("#beforeImage").empty()
+                    }
+
+                    parentOfbeforeAfter = $('.tag-before').find('.custom-image').find('div');
+                }
+
+                var imageValue = $(this).val()
+                $.each(parentOfbeforeAfter,function (index,value) {
+                    if($(value).find('img').attr('src') === imageValue) {
+                        $(value).empty()
+                    }
+                })
+
 
                 parent.find('input').val("")
 
@@ -1676,7 +1722,21 @@
                 var btnAfter = parent.find('button[name=btnafter]');
                 btnAfter.css('display', 'none');
 
-                parent.find('input').val("before")
+                parent.find('input').val("before");
+
+                $('.tag-before').find('.custom-image').append('<div class="options-container fx-item-zoom-in fx-overlay-zoom-out">\n' +
+                    '                                        <img class="img-fluid options-item" data-zoom-image="'+$(this).val()+'"/ src="'+$(this).val()+'" alt="">' +
+                    '<div class="options-overlay bg-black-op">\n' +
+                    '            <div class="options-overlay-content">\n' +
+                    '                <h6 class="h6 text-white mb-5">Image</h6>\n' +
+                    '                <h6 class="h6 text-white-op mb-15">More Details</h6>\n' +
+                    '                <a class="btn btn-sm btn-rounded btn-alt-primary min-width-75 viewBefore" data-pict="'+$(this).val() +'" href="javascript:void(0)">\n' +
+                    '                    <i class="fa fa-pencil"></i> Lihat\n' +
+                    '                </a>\n' +
+
+                    '            </div>\n' +
+                    '        </div>'+
+                    '                                    </div>')
             })
 
 

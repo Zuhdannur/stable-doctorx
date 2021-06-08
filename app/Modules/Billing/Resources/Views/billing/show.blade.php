@@ -447,14 +447,14 @@
             var url = '{{ route("admin.billing.print.html", ":id") }}';
             url = url.replace(':id', id);
 
-            Swal.fire({
-                title: 'Tulisakan Pesan Pada Struk',
-                input: 'text',
-                inputValue: 'BARANG YANG SUDAH DI BELI TIDAK BISA DI TUKAR/ DI KEMBALIKAN',
-                inputPlaceholder: 'Tuliskan Pesan Manual',
-                confirmButtonText: 'Cetak Invoice',
-            }).then(function (isConfirm) {
-               if(isConfirm.value) {
+            // Swal.fire({
+            //     title: 'Tulisakan Pesan Pada Struk',
+            //     input: 'text',
+            //     inputValue: 'BARANG YANG SUDAH DI BELI TIDAK BISA DI TUKAR/ DI KEMBALIKAN',
+            //     inputPlaceholder: 'Tuliskan Pesan Manual',
+            //     confirmButtonText: 'Cetak Invoice',
+            // }).then(function (isConfirm) {
+            //    if(isConfirm.value) {
                    $.ajax({
                        url: url,
                        type: 'POST',
@@ -488,8 +488,8 @@
                            Codebase.blocks('#my-block2', 'state_normal');
                        },
                    });
-               }
-            });
+            //    }
+            // });
 
 
         }

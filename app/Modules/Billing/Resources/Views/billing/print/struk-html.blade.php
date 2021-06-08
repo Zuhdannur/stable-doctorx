@@ -301,7 +301,7 @@
             <hr style='width:66mm;border-bottom : 1.5px dashed #2a2929;border-top: none;margin-bottom:3px;'>
             <p class="wrapword">Powered By {{ app_name() }}</p>
 {{--            <p class="wrapword">BARANG YANG SUDAH DI BELI TIDAK BISA DI TUKAR/ DI KEMBALIKAN</p>--}}
-            <p class="wrapword">{{ @$message }}</p>
+            <p class="wrapword">{{ setting()->get('print_out') ?? 'BARANG YANG SUDAH DI BELI TIDAK BISA DI TUKAR/ DI KEMBALIKAN' }}</p>
             <hr style='width:66mm;border-bottom : 1.5px dashed #2a2929;border-top: none;margin-top:3px;'>
         </div>
     </div>

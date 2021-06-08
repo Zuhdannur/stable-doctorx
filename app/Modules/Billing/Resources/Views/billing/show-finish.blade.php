@@ -147,20 +147,20 @@ jQuery(function () {
     });
 
     $(document).on('click', '.printInv', function() {
-        Swal.fire({
-            title: 'Tulisakan Pesan Pada Struk',
-            input: 'text',
-            inputValue: 'BARANG YANG SUDAH DI BELI TIDAK BISA DI TUKAR/ DI KEMBALIKAN',
-            inputPlaceholder: 'Tuliskan Pesan Manual',
-            confirmButtonText: 'Cetak Invoice',
-            showCancelButton: true,
-        }).then(function (isConfirm) {
-            if(isConfirm.value) {
+        // Swal.fire({
+        //     title: 'Tulisakan Pesan Pada Struk',
+        //     input: 'text',
+        //     inputValue: 'BARANG YANG SUDAH DI BELI TIDAK BISA DI TUKAR/ DI KEMBALIKAN',
+        //     inputPlaceholder: 'Tuliskan Pesan Manual',
+        //     confirmButtonText: 'Cetak Invoice',
+        //     showCancelButton: true,
+        // }).then(function (isConfirm) {
+        //     if(isConfirm.value) {
                 $.ajax({
                     url: "{{ route('admin.billing.print.html', $billing->id) }}",
                     type: 'POST',
                     data: {
-                        message : isConfirm.value
+                        // message : isConfirm.value
                     },
                     beforeSend: function(xhr) {
                         Codebase.blocks('#my-block2', 'state_loading');
@@ -189,10 +189,10 @@ jQuery(function () {
                         Codebase.blocks('#my-block2', 'state_normal');
                     },
                 });
-            } else {
-                return;
-            }
-        })
+        //     } else {
+        //         return;
+        //     }
+        // })
 
     });
 
