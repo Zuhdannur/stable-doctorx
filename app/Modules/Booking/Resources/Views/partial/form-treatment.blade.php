@@ -2,15 +2,15 @@
     <form class="formTreatment form-vertical" method="post" action="{{ route('admin.booking.store-treatment') }}" id="formTreatment" autocomplete="off">
         @csrf
         @method('POST')
-        <input type="hidden" name="qId" id="qId" value="{{ $qid }}">
+        <input type="hidden" name="qId" id="qId" value="{{ @$qid }}">
         <div class="form-row">
             <div class="form-group col-md-12">
                 <label>Pasien</label>
                 <select class="form-control required" id="pid_tr" name="pid" data-parsley-required="true" data-placeholder="Pilih" style="width: 100%">
                     <option></option>
                     @foreach ($patient as $patients)
-                    <option value="{{ $patients->patient_unique_id }}"> {{ $patients->patient_unique_id }} - {{ $patients->patient_name }} </option>
-                    @endforeach    
+                    <option value="{{ @$patients->patient_unique_id }}"> {{ @$patients->patient_unique_id }} - {{ @$patients->patient_name }} </option>
+                    @endforeach
                 </select>
             </div>
             <div class="form-group col-md-6">
@@ -30,7 +30,7 @@
                 <select class="form-control" id="staff_id_tr" name="staff_id" style="width: 100%" data-placeholder="Pilih">
                     <option></option>
                     @foreach ($staffTr as $person)
-                    <option value="{{ $person->id }}" {{ ( $person->id == old('staff_id')) ? 'selected' : '' }}> {{ $person->user->full_name }} </option>
+                    <option value="{{ $person->id }}" {{ ( $person->id == old('staff_id')) ? 'selected' : '' }}> {{ @$person->user->full_name }} </option>
                     @endforeach
                 </select>
             </div>
@@ -39,7 +39,7 @@
                 <select class="form-control" id="room_id_tr" name="room_id" style="width: 100%" data-placeholder="Pilih">
                     <option></option>
                     @foreach ($roomTr as $item)
-                    <option value="{{ $item->id }}" {{ ( $item->id == old('room_id')) ? 'selected' : '' }}> {{ $item->name }} - {{ $item->group->floor->name }}</option>
+                    <option value="{{ @$item->id }}" {{ ( @$item->id == old('room_id')) ? 'selected' : '' }}> {{ @$item->name }} - {{ @$item->group->floor->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -128,7 +128,7 @@
                         }else{
                             alert('data empty!');
                         }
-                        
+
                         Codebase.blocks('#my-block', 'state_normal');
                     },
                     type: 'GET'
@@ -203,7 +203,7 @@
                 }
             });
             /** End Of Submit Handler */
-            
+
             /** table logic handler **/
             var k = 1;
             function updateIds3() {
@@ -229,7 +229,7 @@
                 html3 += '<td><input type="text" name="servicenotes['+(k+1)+']" class="form-control servicenotes" /></td>';
 
                 html3 += '</tr>';
-                
+
                 $('#tab_logic3 > tbody').append(html3);
 
                 $('#service'+(k+1)+'').select2({
