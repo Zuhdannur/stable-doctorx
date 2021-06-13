@@ -131,6 +131,7 @@
 
                 var status = ""
 
+
                 switch (item.status) {
                     case "0":
                         status = "Unpaid"
@@ -146,11 +147,12 @@
                 $("#in_paid").text("Terbayar : "+item.in_paid)
                 var index = 0;
 
-                $.each(item.inv_detail , function (key,value) {
+                $.each(item.invDetail , function (key,value) {
                     index++;
+                    console.log(value)
                     $('#detail tr:last').after('<tr>' +
-                        '<td>'+ index + '</td>' +
-                        '<td>'+ value.product_id + '</td>' +
+                        '<td>'+ (key + 1) + '</td>' +
+                        '<td>'+ value.product_detail.name + '</td>' +
                         '<td>'+ value.qty + '</td>' +
                         '<td>'+ value.price + '</td>' +
                         '</tr>');

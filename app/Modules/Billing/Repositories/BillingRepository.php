@@ -271,10 +271,28 @@ class BillingRepository extends BaseRepository
 
                     $data_log = Billing::with('invDetail')->find($createBilling->id);
 
+                    $data_log = $data_log->invDetail->map(function ($data_log) {
+                        $type = $data_log['type'];
+                        $id = $data_log['product_id'];
+
+                        if($type == 'product'){
+                            $source = Product::find($id);
+                        }elseif($type == 'service'){
+                            $source = Service::find($id);
+                        }
+                        $data_log['product_detail'] = $source;
+                        return $data_log;
+                    });
+
+                    $query = Billing::find($createBilling->id);
+
+                    $query['invDetail'] = $data_log;
+
+
                     $log = new LogActivity();
                     $log->module_id = config('my-modules.billing');
                     $log->action = "Create Billing";
-                    $log->desc = "$data_log";
+                    $log->desc = "$query";
 
                     $log->save();
 
