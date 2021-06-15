@@ -97,7 +97,7 @@ class Media extends AbstractWidget
 
                 break;
             case '5': //Last Week
-                $now = \Carbon\Carbon::now(); 
+                $now = \Carbon\Carbon::now();
                 $data = Patient::whereBetween('created_at', [$now->subDay($now->dayOfWeek  + 1), $now->endOfWeek()] )->get()
                     ->groupBy('info.name')
                     ->map(function ($item) {
@@ -113,7 +113,7 @@ class Media extends AbstractWidget
                         // Return the number of persons with that age
                         return count($item);
                     });
-              
+
                 break;
             case '7': //Last Month
                 $data = Patient::whereMonth('created_at', \Carbon\Carbon::now()->subMonth(1))->get()
@@ -144,11 +144,11 @@ class Media extends AbstractWidget
                 if($this->config['start_date'] == '' ){
                     $this->config['start_date'] = \carbon\Carbon::now()->format('Y-m-d H:i:s');
                 }
-        
+
                 if($this->config['end_date'] == '' ){
                     $this->config['end_date'] = \carbon\Carbon::now()->format('Y-m-d H:i:s');
                 }
-        
+
                 $data = Patient::with('district')->whereBetween('created_at',[ $this->config['start_date'], $this->config['end_date'] ] )
                     ->get()
                     ->groupBy('info.name')
@@ -210,8 +210,8 @@ class Media extends AbstractWidget
                 break;
             case '2': //today
                 $data = PatientMediaInfo::with(['medianame', 'patient'])
-                ->whereHas('patient', function($q){
-                    return $q->Patient::whereDate('created_at', \Carbon\Carbon::now() );
+                ->whereHas('patient', function($q) {
+                    return $q->whereDate('created_at', \Carbon\Carbon::now() );
                 })
                 ->get()
                 ->groupBy('medianame.name')
@@ -219,7 +219,6 @@ class Media extends AbstractWidget
                     // Return the number of persons with that age
                     return count($item);
                 });
-
                 break;
             case '3': //Yesterday
                 $data = PatientMediaInfo::with(['medianame', 'patient'])
@@ -248,9 +247,9 @@ class Media extends AbstractWidget
 
                 break;
             case '5': //Last Week
-                $now = \Carbon\Carbon::now(); 
+                $now = \Carbon\Carbon::now();
                 $data = PatientMediaInfo::with(['medianame', 'patient'])
-                ->whereHas('patient', function($q){
+                ->whereHas('patient', function($q) use ($now) {
                     return $q->whereBetween('created_at', [$now->subDay($now->dayOfWeek  + 1), $now->endOfWeek()] );
                 })
                 ->get()
@@ -259,7 +258,7 @@ class Media extends AbstractWidget
                     // Return the number of persons with that age
                     return count($item);
                 });
-                
+
                 break;
             case '6': //This Month
                 $data = PatientMediaInfo::with(['medianame', 'patient'])
@@ -272,7 +271,7 @@ class Media extends AbstractWidget
                     // Return the number of persons with that age
                     return count($item);
                 });
-                
+
                 break;
             case '7': //Last Month
                 $data = PatientMediaInfo::with(['medianame', 'patient'])
@@ -316,11 +315,11 @@ class Media extends AbstractWidget
                 if($this->config['start_date'] == '' ){
                     $this->config['start_date'] = \carbon\Carbon::now()->format('Y-m-d H:i:s');
                 }
-        
+
                 if($this->config['end_date'] == '' ){
                     $this->config['end_date'] = \carbon\Carbon::now()->format('Y-m-d H:i:s');
                 }
-        
+
                 $data = PatientMediaInfo::with(['medianame', 'patient'])
                 ->whereHas('patient', function($q){
                     return $q->whereBetween('created_at', [ $this->config['start_date'], $this->config['end_date'] ]);
@@ -426,7 +425,7 @@ class Media extends AbstractWidget
 
                 break;
             case '5': //Last Week
-                $now = \Carbon\Carbon::now(); 
+                $now = \Carbon\Carbon::now();
                 $data = Billing::with('marketing')
                 ->whereBetween('created_at', [$now->subDay($now->dayOfWeek  + 1), $now->endOfWeek()] )
                 ->whereNotNull ('marketing_id')
@@ -437,7 +436,7 @@ class Media extends AbstractWidget
                     // Return the number of persons with that age
                     return count($item);
                 });
-                
+
                 break;
             case '6': //This Month
                 $data = Billing::with('marketing')
@@ -450,7 +449,7 @@ class Media extends AbstractWidget
                     // Return the number of persons with that age
                     return count($item);
                 });
-                
+
                 break;
             case '7': //Last Month
                 $data = Billing::with('marketing')
@@ -494,11 +493,11 @@ class Media extends AbstractWidget
                 if($this->config['start_date'] == '' ){
                     $this->config['start_date'] = \carbon\Carbon::now()->format('Y-m-d H:i:s');
                 }
-        
+
                 if($this->config['end_date'] == '' ){
                     $this->config['end_date'] = \carbon\Carbon::now()->format('Y-m-d H:i:s');
                 }
-        
+
                 $data = Billing::with('marketing')
                 ->whereBetween('created_at', [ $this->config['start_date'], $this->config['end_date'] ])
                 ->whereNotNull ('marketing_id')
