@@ -40,8 +40,8 @@ class MembershipWidgets extends AbstractWidget
 //                return count($item);
 //            });
 
-        $data = [0];
-        $labels = [''];
+        $data = [0,0,0,0];
+        $labels = ['','','',''];
 
         $query = CrmMembership::where('id_klinik',auth()->user()->id_klinik);
 
