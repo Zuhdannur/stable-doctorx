@@ -65,11 +65,9 @@ class RecentNews extends AbstractWidget
     public function appointment()
     {
         $data = new \stdClass();
-        $data->total_appointment = Appointment::whereHas('patient',function ($query) {
-            return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
+        $data->total_appointment = Appointment::where('id_klinik', auth()->user()->klinik->id_klinik)->whereHas('patient',function ($query) {
         })->count();
-        $data->total_appointment_today = Appointment::whereHas('patient',function ($query) {
-        return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
+        $data->total_appointment_today = Appointment::where('id_klinik', auth()->user()->klinik->id_klinik)->whereHas('patient',function ($query) {
     })->whereDate('date', \Carbon\Carbon::today())->count();
 
         return $data;
@@ -78,11 +76,9 @@ class RecentNews extends AbstractWidget
     public function treatment()
     {
         $data = new \stdClass();
-        $data->total_treatment = Treatment::whereHas('patient',function ($query) {
-            return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
+        $data->total_treatment = Treatment::where('id_klinik', auth()->user()->klinik->id_klinik)->whereHas('patient',function ($query) {
         })->count();
-        $data->total_treatment_today = Treatment::whereHas('patient',function ($query) {
-            return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
+        $data->total_treatment_today = Treatment::where('id_klinik', auth()->user()->klinik->id_klinik)->whereHas('patient',function ($query) {
         })->whereDate('date', \Carbon\Carbon::today())->count();
 
         return $data;
@@ -94,33 +90,29 @@ class RecentNews extends AbstractWidget
         // $data->total_patient = Patient::count();
         // $data->total_patient_today = Patient::whereDate('created_at', \Carbon\Carbon::today())->count();
         $today = \Carbon\Carbon::today();
-        $treatmentPasienLama = Treatment::whereHas('patient',function ($query) {
-            return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
+        $treatmentPasienLama = Treatment::where('id_klinik', auth()->user()->klinik->id_klinik)->whereHas('patient',function ($query) {
         })->whereDate('date', $today)
                         ->whereHas('patient', function($q) use($today)  {
                             return $q->whereDate('created_at', '!=', $today);
                         })
                         ->count();
 
-        $appointmentPasienLama = Appointment::whereHas('patient',function ($query) {
-            return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
+        $appointmentPasienLama = Appointment::where('id_klinik', auth()->user()->klinik->id_klinik)->whereHas('patient',function ($query) {
         })->whereDate('date', $today)
                         ->whereHas('patient', function($q) use($today) {
                             return $q->whereDate('created_at', '!=', $today);
                         })
                         ->count();
 
-        $treatmentPasienBaru = Treatment::
+        $treatmentPasienBaru = Treatment::where('id_klinik', auth()->user()->klinik->id_klinik)->
         whereHas('patient',function ($query) {
-            return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
         })->whereDate('date', $today)
                         ->whereHas('patient', function($q) use($today) {
                             return $q->whereDate('created_at', $today);
                         })
                         ->count();
 
-        $appointmentPasienBaru = Appointment::whereHas('patient',function ($query) {
-                            return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
+        $appointmentPasienBaru = Appointment::where('id_klinik', auth()->user()->klinik->id_klinik)->whereHas('patient',function ($query) {
                     })->whereDate('date', $today)
                         ->whereHas('patient', function($q) use($today) {
                             return $q->whereDate('created_at', $today);
@@ -139,7 +131,7 @@ class RecentNews extends AbstractWidget
      */
     public function run()
     {
-        return view('patient::widgets.recent_news', [
+            return view('patient::widgets.recent_news', [
             'config' => $this->config,
             'appointment' => $this->appointment(),
             'treatment' => $this->treatment(),

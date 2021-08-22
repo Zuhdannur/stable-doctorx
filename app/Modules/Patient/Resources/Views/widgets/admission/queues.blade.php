@@ -1,4 +1,4 @@
-<div class="row"> 
+<div class="row">
     @foreach($types as $type)
         <div class="col-sm-4">
             <div class="block block-rounded block-bordered">
@@ -25,7 +25,7 @@
                                     @foreach($arrayData[$type->id] as $key => $data)
                                     @php
                                         if($key == 8) break;
-                                        
+
                                         $route = $type->route ? route($type->route, [$data->patient->id, $data->id]) : 'javascript:void(0)';
                                     @endphp
                                     <tr class="{{ ($data->status_id == 1) ? 'table-info' : 'table-danger' }}">
@@ -50,16 +50,16 @@
                                 @else
                                 <tr class="table-danger text-center">
                                     <td colspan="10">
-                                        <br /> 
+                                        <br />
                                         <br />
                                         <img src='{{ url("media/addnewitem.svg") }}' width='150'><br /><br />
-                                        <i class='fa fa-list-ol'></i> No data available in table 
+                                        <i class='fa fa-list-ol'></i> No data available in table
                                         <br />
                                         <br />
                                     </td>
                                 </tr>
                                 @endif
-                                
+
                             </tbody>
                         </table>
                     </div>

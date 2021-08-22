@@ -113,6 +113,7 @@ class AppointmentController extends Controller
 
     public function create($patientId, $queueId)
     {
+
         $pid = 0;
         $flagpatient = 'green';
         if($patientId){

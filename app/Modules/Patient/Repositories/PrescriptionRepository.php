@@ -206,6 +206,20 @@ class PrescriptionRepository extends BaseRepository
                     $admission = PatientAdmission::create($admissionData);
                 }
 
+                if($saveObat == true) {
+                    $admissionData = [
+                        'patient_id' => $appointment->patient_id,
+                        'admission_type_id' => config('admission.admission_medicine'),
+                        'admission_no' => PatientAdmission::generateQueue(config('admission.admission_medicine')),
+                        'status_id' => config('admission.admission_waiting'),
+                        'reference_id' => $appointment->appointment_no,
+                        'created_by' => auth()->user()->id,
+                        'notes' => 'Referensi #' . $appointment->appointment_no
+                    ];
+
+                    $admission = PatientAdmission::create($admissionData);
+                }
+
                 /* Start Create Billing */
                 $dataProduct = array(
                     'product' => array_merge($billProduct, $billService),

@@ -50,7 +50,7 @@
 
                     <div class="form-group row">
                         <div class="col-md-1">
-                            {{ form_cancel(route('admin.crm.settings.membership'), __('buttons.general.cancel')) }}
+                            {{ form_cancel(url('admin/crm/membership/grade/semua'), __('buttons.general.cancel')) }}
                         </div>
                         <div class="col-md-6 text-right">
                             {{ form_submit(__('buttons.general.crud.create')) }}
@@ -138,7 +138,7 @@
                                         });
 
                                         setTimeout(function(){
-                                            window.location = '{{ route('admin.crm.membership.index') }}';
+                                            window.location = '{{ url('admin/crm/membership/grade/semua') }}';
                                         }, 2000);
                                     }else{
                                         $.alert({

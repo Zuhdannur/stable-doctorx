@@ -22,14 +22,14 @@ class DashboardController extends Controller
      */
     public function statistik(Request $request)
     {
-        
+
         if($request->isMethod('GET')){
 
             $date_widget = array(
                 'start_date' => \Carbon\Carbon::now()->startOfMonth()->format('Y-m-d'),
                 'end_date' => \Carbon\Carbon::now()->format('Y-m-d'),
             );
-    
+
             $date = array(
                 'date_1' => \Carbon\Carbon::now()->startOfMonth()->format('d/m/Y'),
                 'date_2' => \Carbon\Carbon::now()->format('d/m/Y'),

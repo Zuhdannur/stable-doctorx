@@ -57,7 +57,7 @@ class RecentQueues extends AbstractWidget
      * @var array
      */
     protected $config = [
-        
+
     ];
 
     public function latest()
@@ -92,6 +92,6 @@ class RecentQueues extends AbstractWidget
             'today' => $this->today(),
             'types' => $this->types(),
         ]);
-        
+
     }
 }

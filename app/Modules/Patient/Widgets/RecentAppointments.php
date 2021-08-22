@@ -48,18 +48,14 @@ class RecentAppointments extends AbstractWidget
 
     public function latest()
     {
-        $data = Appointment::whereHas('patient',function ($query){
-            return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
-        })->orderBy('date', 'desc')->take(5)->get();
+        $data = Appointment::where('id_klinik', auth()->user()->klinik->id_klinik)->orderBy('date', 'desc')->take(5)->get();
 
         return $data;
     }
 
     public function today()
     {
-        $data = Appointment::whereHas('patient',function ($query){
-            return $query->where('id_klinik',Auth()->user()->klinik->id_klinik);
-        })->whereDate('date', \Carbon\Carbon::today())->orderBy('date', 'asc')->take(5)->get();
+        $data = Appointment::where('id_klinik', auth()->user()->klinik->id_klinik)->whereDate('date', \Carbon\Carbon::today())->orderBy('date', 'asc')->take(5)->get();
         return $data;
     }
 

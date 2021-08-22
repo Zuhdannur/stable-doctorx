@@ -44,7 +44,7 @@ class MembershipWidgets extends AbstractWidget
         $labels = ['','','',''];
 
         $query = CrmMembership::where('id_klinik',auth()->user()->id_klinik);
-
+    
         if($this->config['grade'] != "semua") {
             $query = $query->where('id_grade',$this->config['grade']);
         }
